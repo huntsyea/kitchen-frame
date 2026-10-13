@@ -1,3 +1,3 @@
 # Files
 
-- [Build, deploy and configuration](build-deploy-and-configuration.md) - How to run the dashboard locally, build and deploy it to Cloudflare Workers, what each binding, variable and secret is for, how the frame picks up a new build, expected Cloudflare usage, and how this wiki is kept up to date.
+- [Build, deploy and configuration](build-deploy-and-configuration.md) - How to build, test, deploy, and configure the dashboard and Worker, including secrets, bindings, Cloudflare usage and cost boundaries, and how this wiki is kept up to date.

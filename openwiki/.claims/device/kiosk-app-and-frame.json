@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6190347bb4c0d0775683d139c0be8a782b230e987add47da456286595326e7c3",
+  "pageVersion": "sha256:9d868c32f37dbac908c178d8ee4a2e762b3bf23ebe40953242ec0c6d5df54d14",
   "claims": [
     {
       "id": "claim_abd5dc23e14b4102a7964b7e81071730",
@@ -139,10 +139,20 @@
           "version": "repo-lines-v1:sha256:3330166a489243657bae1eab88fbea485453bc63c3d495568311819fe12a3747:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2NmQwNGZhNzkyMDQxYWEwNGMxY2ZmYjZkN2IxNWFkYTc1N2UxZGU4OTFlNDY2MzFmYmZmYzU2YTFhZThmNjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_b55f1e8f7a6c45a4b5681477923e0f84",
+      "statement": "Changes made to the frame are recorded with exact undo commands: vendor and Rockchip updaters disabled, Frameo disabled, and the kiosk installed and set as the Home activity; nothing under /system was written.",
+      "evidence": [
+        {
+          "resource": "repo://docs/frame.md#L30-L40",
+          "version": "repo-lines-v1:sha256:211166309ec2f9cec659ed815ba40c1f71d64d4e78480afdbf1c2355aa9b9e6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzOGJkMjc0MGUwNjQ4ZjhhZmM1ZmNhZTA1OGZlZjgxMTBhNjZkYjk4N2MxYzMyZTZmYTNmMTI2MzYxY2Y4MzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzkxMzkyMTQwMjc5MWJmYzYwNzViMmViY2FlNDlhZTMxNmRiYTI3NTYzODA3ODk3NjBkZWZmMzZkNDU2ODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMGIzNGYyNTViMDFhYjMzZTFlZmI1YjBiMzVjY2U4YTQ5MmVhNzFiZGNhN2Q2MTY1MTM0NWRmYjgzYjI0MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkMDNkNTE5ZmYxZDZmZGNmZTIxMWM2ODI5NjIwOWM1NTEyM2IxM2YzM2VhYWY1ZDIxODFlNGFjNjc0YjAzNTcifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T14:37:10.456Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

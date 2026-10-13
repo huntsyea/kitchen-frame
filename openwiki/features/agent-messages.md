@@ -3,6 +3,9 @@ type: feature
 title: Agent messages (live push)
 description: How AI agents post full-screen messages to the frame and how they arrive in about 0.1 s through a hibernating Cloudflare Durable Object (MessageRoom) and a WebSocket, including dismissal, expiry, fallback polling and read-aloud through Home Assistant.
 tags: [messages, durable-objects, websocket, hibernation, agents, tts]
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-262fee19998c22821ad4184a
     resource: repo://dashboard/src/App.svelte
@@ -23,9 +26,6 @@ sources:
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
 generated: { by: "claude-code", at: "2026-10-13T14:37:10.456Z" }
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T14:37:10.456Z
 ---
 
 # Agent messages (live push)

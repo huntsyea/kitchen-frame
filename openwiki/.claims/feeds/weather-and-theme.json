@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:25787e8b8abaf79efed41e0b0f8b077f95fe6761ca8b35ad94ee03cfa4c9801b",
+  "pageVersion": "sha256:47713e4bdb844b52fb82082885ad375c51584f9000b231a91defa301036af33d",
   "claims": [
     {
       "id": "claim_828c9a30582f4347a705dffd270c4f13",
-      "statement": "The weather endpoint calls Open-Meteo for WEATHER_LAT/WEATHER_LON with Fahrenheit by default (or WEATHER_UNIT=celsius), requests five forecast days in the location's time zone, edge-caches the upstream response for 10 minutes, and returns an error object when coordinates are missing.",
+      "statement": "The weather endpoint calls Open-Meteo for WEATHER_LAT/WEATHER_LON with Fahrenheit by default (or WEATHER_UNIT=celsius), requests current temperature, feels-like, weather code and day flag plus five daily forecasts (high/low, rain probability, weather code, sunrise, sunset) with timezone: auto, edge-caches the upstream response via Cloudflare for 10 minutes, and returns an error object when coordinates are missing.",
       "evidence": [
         {
-          "resource": "repo://dashboard/worker/weather.js#L1-L19",
-          "version": "repo-lines-v1:sha256:080b8f36652bff15fa31852eca37357eb7ef6a9d6dc620e457bf344c5e9bfdb3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwYzM0OGFhOTE2YTNjOWJhMjFlNmY3ODIxNjgwNDU4NGQwNGMxNDJlNjMwYmY2MGI1Y2MzOTRkMTQ3OTYyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNjU4M2NmN2NkNzllZmExODZiMjQyY2MyZTI3YWY2MzkzOWE1MWJiNDJmOWY0NGM0ZjBlNWM1YjFiMWJkNDcifQ"
+          "resource": "repo://dashboard/worker/weather.js#L3-L18",
+          "version": "repo-lines-v1:sha256:cd79b953894b4d09b7e6f1ef7bc07653d7d92686b2a12406c13f58913051c31a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkNDIwY2UzNGVhMmNlYThkNGY5NGEzMzliZWRmOTc1OTE5MTVmYzRlMTcyY2ZlNjY5NDE1ZjE4Zjk2ODBiZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyZTdjZTY5ZjIzNTNlNDE4NzUyZTIwY2VhOWIyMmVjN2JiYzZhZjA3ZWVlOGQ3MzA4NjdlNzRlZjEyNDBmNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzOTZkZGNjMzFkNTU1NmU3MmY5NmE2ZTcxYzJiYzFlYThiMzU1OTNhYWFkYzIyZTkwNDZiZmI5ZWY2Njc4MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmZmRkNmNjZDU3OWYzZDNjM2JiMzBiM2NhN2FiMWZkMTBjMzdiNTg5Y2E4MWJjNTQ1NmVhZTM2NzRhODhiZjgifQ"
         }
       ]
     },
     {
       "id": "claim_6a5ce2d63df14a3d9185b60853496843",
-      "statement": "shape() reduces the Open-Meteo response to unit, current temperature, feels-like, weather code, day flag, and per-day high/low, rain probability, code, and local sunrise/sunset times.",
+      "statement": "shape() reduces the Open-Meteo response to unit, current temperature, feels-like, weather code, day flag, and per-day high/low, rain probability (defaulting to 0), code, and local sunrise/sunset wall-clock strings.",
       "evidence": [
         {
           "resource": "repo://dashboard/worker/api.test.js#L99-L108",
@@ -41,7 +41,7 @@
       "statement": "In auto mode the theme is dark before today's sunrise or from sunset, falling back to 7:00 and 19:00 until weather has loaded; a pinned light or dark preference overrides it, and the result is applied as the data-theme attribute on the root element.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L262-L276",
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L272-L286",
           "version": "repo-lines-v1:sha256:770b02fe2a6b68d246f1182261d721b46046386e2d0467871fcf7241b476f885:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0NjcyYTQ0ODFkNDBmYjU4ZDIzNDQxMTlkYTJkZWZkMGYwYzUxNTQ4MmU5ZGUwM2I1OTZmMzgxMGRiODUyOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDRjOGE2N2YzZTEwNTQzYWMxMjM5OGJjNjc5NjBlODI3YzU1YjkyYWQzNDhhMzYyYTAyOTU1OTFhZmNlOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3ZDljYWVhOThiOWYzZTNlNjdhYmQ4MzVlMTIwYTVhNTA5OTQ1NGM3MWVmY2E0NTY1YzMxNDc3ZGIyZGY3YjYifQ"
         },
         {
@@ -55,23 +55,27 @@
       "statement": "The theme is re-evaluated on every minute-aligned clock tick, when the weather response changes, and when the preference changes; a ?theme= URL parameter also sets the preference.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L108-L108",
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L111-L111",
           "version": "repo-lines-v1:sha256:11e0a36de2cb92af6d295c266d32de18cf61e1e54105d845a1c340e65adf1897:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFlMGEzNmRlMmNiOTJhZjZkMjk1YzI2NmQzMmRlMThjZjYxZTFlNTQxMDVkODQ1YTFjMzQwZTY1YWRmMTg5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFlMGEzNmRlMmNiOTJhZjZkMjk1YzI2NmQzMmRlMThjZjYxZTFlNTQxMDVkODQ1YTFjMzQwZTY1YWRmMTg5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDAzMzNlOGVhOTA3NmJmN2MwMTNmMmNlYmI2NTJjNzg0OThkMGI3ZjgwMjhhYjQ2ZGViY2Y3ZTI3N2RkNzY2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWE0MmM1MTY1YjI5ZTBhZjFlNTNlNmFhMzBlZWE5M2E4YTE0NjgwM2I1ZWUzMGUxYmVjZTcyZDRhN2JiZWJkYiJ9"
         },
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L259-L260",
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L269-L270",
           "version": "repo-lines-v1:sha256:90bc8e2da91f802994546a7d5295f4328fed31fa334b0a66acf70580a62bf64a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzE3MDA0N2I4M2U3OTQyZDA4ODA0NGM2YzNkYjI3MGRhYWQ5YjA2ZDBjMDUwZGNlMTZhYmFlYzU4Mjg1YWRjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU5OGJhODJkMzcyNjQ0NmIyNzU1NDAzNjM2MGI0ODQ4MmY5YzQ3NWQ3YzY0NzAwNWU0ZTE5Y2U5MjBmYTk5MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTliODdjZTc0YTdjNTU1OTAzN2MyM2Q3Mjk1NzlkMjk3YjhmNzQ2ZmMzYjZkNzQxMTQ2ODJjZjkyYzJmM2FhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg3MTcwMzAzZmY2MTQwZTg1MTAwNDA4N2I2NDBkMTYzN2M5ZTIzM2EyMGUxMmNhNGFlMDcxMGJmNDMwYzJlYiJ9"
         },
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L280-L286",
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L290-L296",
           "version": "repo-lines-v1:sha256:1eb07aea75713f349fcc2aab129fac79855dd261546e51b39193a4831dbabf4c:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzFlMDA3ZDBkODczYzA2MWRhMzA5YTEwNzFhMTJmYzEzN2ExMjU3ZWIxYmEwNzVjMTNhYTRjMDg0NTRmMGQ3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWRkZjBmMmZlZTRmNzllMTkwOGE5OGNjNTRiNjU3NTkwYjdkZjU4YmZiOGQ3ZGM3Mzc4YTEyYWQyNzkxYTllOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjdkOWNhZWE5OGI5ZjNlM2U2N2FiZDgzNWUxMjBhNWE1MDk5NDU0YzcxZWZjYTQ1NjVjMzE0NzdkYjJkZjdiNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmY4YWQ5MWMyNTVjODQ1NzdmZWEwNTNhNDU1YzE5YTdiNTUwMjk3YmViZTFmNjg2MDhkODcwNDgxM2U1NjNjMCJ9"
         }
       ]
     },
     {
       "id": "claim_fe973320443e47c18195c74172500679",
-      "statement": "On the clock screen, night (the dark theme) dims the clock text to 70% and photos to 45%.",
+      "statement": "On the clock screen, night (the dark theme) dims the clock text to 70% and photos to 45%, and the slideshow is hidden at night unless Settings → Photos at night is enabled.",
       "evidence": [
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L130-L130",
+          "version": "repo-lines-v1:sha256:4829ecb7c2c4e9bdd23a8786dcef481b49fcaf7bbb5f3ce623d254efeb809cf9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDgyOWVjYjdjMmM0ZTliZGQyM2E4Nzg2ZGNlZjQ4MWI0OWZjYWY3YmJiNWYzY2U2MjNkMjU0ZWZlYjgwOWNmOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDgyOWVjYjdjMmM0ZTliZGQyM2E4Nzg2ZGNlZjQ4MWI0OWZjYWY3YmJiNWYzY2U2MjNkMjU0ZWZlYjgwOWNmOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2IxZGM1MDY5OGU0ZTk1NWNlMjc0MDMyYjBhZWZlZmZhOWYxMmUwMDliYWFhZDE4MTk0YWM0NDNlZmY5NzJmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJjMTU4ZmFmNmJjYWMwMDdkODljYzdjNjE3YmJhZjk3N2I3NDMyZGEzYTBiZmVlMWE5MzQ4Mzg2N2Y4YzJjZiJ9"
+        },
         {
           "resource": "repo://dashboard/src/views/Ambient.svelte#L17-L17",
           "version": "repo-lines-v1:sha256:0843c28de187034c955c0525a8bc3e7242c4b30574549b23d09f85461f282d1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDg0M2MyOGRlMTg3MDM0Yzk1NWMwNTI1YThiYzNlNzI0MmM0YjMwNTc0NTQ5YjIzZDA5Zjg1NDYxZjI4MmQxZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDg0M2MyOGRlMTg3MDM0Yzk1NWMwNTI1YThiYzNlNzI0MmM0YjMwNTc0NTQ5YjIzZDA5Zjg1NDYxZjI4MmQxZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM3YTczYWZiNGFiOWRmZDlhNjllNGVjMWUxYzg3YzliNDE0OTJjMzNlNjRkNWVmZTRjNTc5NmRkNDUyM2YxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmUyMzRmN2ZmZDFkNWZmMjhiMThkZGZhMDM1ODYyNWZlMTQ0OGIzYTRkNzViMWMyMmUyYzA4MzIxYjZjYzQwNiJ9"
@@ -81,10 +85,38 @@
           "version": "repo-lines-v1:sha256:5da73d54b144f43b5e41793d7b53f93b67b127cbb5e6cc34a8e7320c87b159f1:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjMzNjYwZmUwZDUwZTg2MmIzMGFjMWQwNGU3ODM2MGQwYjk5YTRkM2FhNzlmMmJmN2ViYWEzZTk3NTE5MTlkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTI4NmM2ZDAzZGY5Njc5NzM4YWRmYWY2ZTYyYTczZDZiNmJlY2UzOWNlYTY4YjM1NGRmOTkwM2U3MTMyMmVlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWE0ODJhYTE2Mzc5YWRlMjI4OTBlZTI4MDM1MWNlNTJlY2FmNzJkNDJhYTNjMjU1NmY1ZDhlYjQwMzBhMmY0MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzVjZTBiZDY0NzgwNTI0NmJiNzYyODY4ZmI0ZGFmNDQ1NGEwMzFlMTRmNzQ0YWJlN2Q0NjEyMjNiNDM5ODY2NyJ9"
         }
       ]
+    },
+    {
+      "id": "claim_6ef9655d6e914910987a9135e9cebe7f",
+      "statement": "loadWeather() polls every 15 minutes, deduplicates concurrent requests with single(), only updates weather.data when changed('weather', w) reports a difference, and persists the last good response to localStorage under frame-weather so the frame boots with weather data offline.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/lib/api.js#L36-L43",
+          "version": "repo-lines-v1:sha256:c6c513008300e984bdbe1f790192c7ddcf0784417425ea9ab004e268bd86a5e0:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQ2MWFjODBjMDc0ZmViODYyMDNkMTI2NDRjNjNjNTU4NGM3NTE0YWYxYTZjOWIzNzQzYzRlZWZkZjJhYWJjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzdkMTZiNjAyNjVmMDE3YjViODA0YTA4NzI0ODI2YzhlYzI5YjllMzczODVkNjk0OGE4YTFkNjllMmU2M2QxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmZjY2MzNThkYmYxYWE1MmQxZDQ0ZDI3MjE3NTNmZDFlZDhiYjdkNTA1MDYwMDRiNjFiNGFjMDEwYThjZGJiOSJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L106-L117",
+          "version": "repo-lines-v1:sha256:f87aa349753d17c2fe2bc34569c9e4a77628ebf39db3f0fc540ccee2636c70ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3OWRiYTQ3Y2UxZDU5ODA3MmZmOGEzZGFkZTFjMjRhMjVlYWU5Y2FhZDhmZGUyNzU2YjAyZTAyODEwMDJkNTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjYjcwODk0OTg0NjYxZDkxZDRlZTYwMzgyYzgyNzAwMmIzZDcwZGMwODE2ZTc4MTA5YjI5NzNlNzZmZDQ4NTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2aec1cb3ad4742e08b40d6a1c6fde451",
+      "statement": "The light and dark palettes are defined entirely in CSS under [data-theme='light'] and [data-theme='dark'] in src/style.css, so switching theme is a single attribute change on the root element with no Svelte component re-render.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L272-L286",
+          "version": "repo-lines-v1:sha256:770b02fe2a6b68d246f1182261d721b46046386e2d0467871fcf7241b476f885:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0NjcyYTQ0ODFkNDBmYjU4ZDIzNDQxMTlkYTJkZWZkMGYwYzUxNTQ4MmU5ZGUwM2I1OTZmMzgxMGRiODUyOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDRjOGE2N2YzZTEwNTQzYWMxMjM5OGJjNjc5NjBlODI3YzU1YjkyYWQzNDhhMzYyYTAyOTU1OTFhZmNlOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3ZDljYWVhOThiOWYzZTNlNjdhYmQ4MzVlMTIwYTVhNTA5OTQ1NGM3MWVmY2E0NTY1YzMxNDc3ZGIyZGY3YjYifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/style.css#L1-L50",
+          "version": "repo-lines-v1:sha256:8b517c645ddef097faaef6e0332df936fadaa8cd3a83ec7eefa9a6b04fa87565:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYjc0OTM0MWJkZmNkN2FhYjNkZjNlZWQxNjhlNWZhYzI5ZTA2ZTMzZDc3MjMxNjViNmZjZjFkNDM4ZTQxMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiZDY2MjIyNjYwOGUwMWVjM2M0NjE2MTM5ZDNjODQzZTcyYzNiMDA5NWViZjliZjk3NWM0MjEyNDhlZjNiM2QifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

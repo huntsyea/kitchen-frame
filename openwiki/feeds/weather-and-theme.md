@@ -5,8 +5,10 @@ description: The Open-Meteo weather proxy and its compact response, and how the 
 tags: [weather, open-meteo, theme, dark-mode, sunrise, sunset]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T05:27:36.156Z
+    at: 2026-10-13T17:09:19.129Z
 sources:
+  - id: openwiki-source-136e4998beec00d02c60296f
+    resource: repo://dashboard/src/lib/api.js
   - id: openwiki-source-e12fdae11ea7713285efd699
     resource: repo://dashboard/src/lib/format.js
   - id: openwiki-source-3a4039a222339b2ae26827c1
@@ -19,22 +21,26 @@ sources:
     resource: repo://dashboard/worker/api.test.js
   - id: openwiki-source-cb5a2109e8a56015671f5cae
     resource: repo://dashboard/worker/weather.js
-generated: { by: "claude-code", at: "2026-10-13T05:27:36.156Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
 ---
 
 # Weather and day/night theme
 
-Weather appears in the top bar, on Home and on the idle clock screen. Its sunrise and sunset times
-also drive the dashboard's light/dark theme.
+Weather appears in the top bar, on Home and on the idle clock screen. Its sunrise and sunset times also drive the dashboard's light/dark theme.
 
 ## Worker (`dashboard/worker/weather.js`)
 
-`GET /api/weather` calls [Open-Meteo](https://open-meteo.com) (free, no key) for the configured
-location: `WEATHER_LAT`, `WEATHER_LON` (secrets in this deployment; rounded coordinates) and
-optional `WEATHER_UNIT` (`fahrenheit` by default, or `celsius`). Without coordinates it returns
-`{error: 'Set WEATHER_LAT and WEATHER_LON'}`. The upstream request is edge-cached for 10 minutes.
+`GET /api/weather` calls [Open-Meteo](https://open-meteo.com) (free, no key) for the configured location: `WEATHER_LAT`, `WEATHER_LON` (secrets in this deployment; rounded coordinates) and optional `WEATHER_UNIT` (`fahrenheit` by default, or `celsius`). Without coordinates it returns `{error: 'Set WEATHER_LAT and WEATHER_LON'}`.
 
-`shape()` reduces Open-Meteo's response to what the screen shows:
+The upstream request asks for:
+
+- current: `temperature_2m`, `apparent_temperature`, `weather_code`, `is_day`;
+- daily: `temperature_2m_max`, `temperature_2m_min`, `precipitation_probability_max`, `weather_code`, `sunrise`, `sunset`;
+- five forecast days with `timezone: auto` and the chosen temperature unit.
+
+It is edge-cached for 10 minutes (`cf: { cacheTtl: 600, cacheEverything: true }`) so every frame poll does not hit Open-Meteo.
+
+`shape()` reduces the response to what the screen shows:
 
 ```json
 { "unit": "F", "temp": 66, "feels": 65, "code": 0, "day": false,
@@ -43,39 +49,35 @@ optional `WEATHER_UNIT` (`fahrenheit` by default, or `celsius`). Without coordin
   "updated": "…" }
 ```
 
-Five forecast days are requested with `timezone: auto`, so dates and sunrise/sunset are local
-wall-clock times. `weatherInfo(code, day)` in `src/lib/format.js` maps WMO weather codes to a label,
-a Lucide icon name and a tint (sun yellow or rain blue), with night variants for clear and partly
-cloudy.
+Dates and sunrise/sunset are local wall-clock strings (`YYYY-MM-DDTHH:MM`). The daily precipitation probability defaults to `0` when Open-Meteo does not provide it.
 
-## Polling (`src/lib/state.svelte.js`)
+## Rendering weather
 
-`loadWeather()` runs every 15 minutes, keeps the last good copy in localStorage, and only updates
-state (and re-applies the theme) when the response changed. See
-[app shell](../frontend/app-shell-state-and-polling.md).
+`weatherInfo(code, day)` in `src/lib/format.js` maps WMO weather codes to a label, a Lucide icon name and a tint (`sun` yellow or `rain` blue), with night variants for clear and partly cloudy. The top bar (`App.svelte`), Home and the Ambient clock screen all call it with the current `day` flag from `weather.data`; the four-day forecast strip on Home omits the `day` argument and therefore defaults to daytime icons.
+
+Home shows the current temperature and condition, today's high/low, and the next four days with rain probability and highs/lows. Ambient and the top bar show only the current temperature and icon.
+
+## Polling and caching (`src/lib/state.svelte.js`)
+
+`loadWeather()` runs every 15 minutes, deduplicates concurrent requests through `single('weather', …)`, and only updates `weather.data` (and re-applies the theme) when `changed('weather', w)` reports a difference. `changed()` also writes the last good response to localStorage as `frame-weather`, so the frame boots with data even when offline. See [app shell](../frontend/app-shell-state-and-polling.md).
 
 ## Theme switching
 
-`ui.themePref` is `auto`, `light` or `dark` (Settings → Appearance, stored as `frame-theme`; a
-`?theme=` URL parameter also sets it, for setup over ADB). `applyTheme()`:
+`ui.themePref` is `auto`, `light` or `dark` (Settings → Appearance, stored as `frame-theme`). A `?theme=light|dark|auto` URL parameter also sets and persists it, which is useful for setup over ADB.
+
+`applyTheme()`:
 
 - with `light` or `dark`, uses that;
-- with `auto`, is dark before today's sunrise or from sunset on, using the forecast day matching
-  the local date, falling back to 7:00 and 19:00 until weather has loaded.
+- with `auto`, is dark before today's sunrise or from sunset on, using the forecast day whose `date` matches the local date, falling back to 7:00 and 19:00 until weather has loaded.
 
-It sets `ui.theme` and the `data-theme` attribute on `<html>`. It runs every minute from the clock
-tick (aligned to the minute boundary), when weather changes, and when the preference changes.
-`src/style.css` defines the two palettes under `[data-theme="light"]` and `[data-theme="dark"]`
-(iOS system colours), so a switch is a single attribute change with no re-render (see
-[design system](../frontend/views-components-and-design-system.md)).
+It writes `ui.theme` and sets the `data-theme` attribute on the root element. The minute-aligned clock tick calls it every minute; it also runs when the weather response changes and when the preference changes.
+
+`src/style.css` defines the two palettes under `:root, [data-theme="light"]` and `[data-theme="dark"]`, using iOS system colours. Switching theme is therefore a single attribute repaint with no component re-render (see [design system](../frontend/views-components-and-design-system.md)).
 
 ## Night on the clock screen
 
-`Ambient.svelte` treats `ui.theme === 'dark'` as night: the clock text (in the Settings clock
-colour) drops to 70% opacity and photos to 45%, and photos only show at night when Settings →
-Photos at night is on (`photosVisible()`). See [photos and slideshow](./photos-and-slideshow.md).
+`Ambient.svelte` treats `ui.theme === 'dark'` as night: the clock text drops to 70% opacity and the photo slideshow to 45%, so the kitchen is not lit up after sunset. Photos are only shown at night when Settings → Photos at night is set to Dimmed (`ui.nightPhotos`), as decided by `photosVisible()`. See [photos and slideshow](./photos-and-slideshow.md).
 
 ## Tests
 
-`worker/api.test.js` checks that `shape()` reduces an Open-Meteo response to the fields the screen
-uses. See [tests](../testing/tests-and-verification.md).
+`worker/api.test.js` checks that `shape()` reduces an Open-Meteo response to the fields the screen uses. See [tests](../testing/tests-and-verification.md).

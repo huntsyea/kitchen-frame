@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:704fb53d6aa079055f2e223cde44e6dde477401b877187d15cd70ec2fa6d4bc4",
+  "pageVersion": "sha256:224de126276455205264aec34e1c13caf5b3707e7003fb306d547b5ca65f621b",
   "claims": [
     {
       "id": "claim_0eb699c6eb754973b1731df4bb0d335e",
@@ -95,10 +95,82 @@
           "version": "repo-lines-v1:sha256:bf3440e26952265ccda8819b2b99d5e811ddea972f36c015d3d679fa82b0ecab:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2YxNGEzMjEyMGMwMzRlYWZjNzZkNDEzODE2NmJlYjhjN2E5NjhhMzYzM2EwMDA4ZTc0ZjQwNmRkOWQyMTI2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2QwNTcxMjhkYmJkYWE2NWRiZmNiMDY3OGY4NGZjOWZmYTc5NmUzMmQwYTllZjU0M2YzNmRhMTA3YzQ4OWEwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjliZDU5YWY3OGU2MTVlYjVkN2YyNjU1Y2M4ZjE3NDIyNjFjY2UyN2ZlMjhhZTE4N2VlZDU3ZmNiYmYwMTZhMCJ9"
         }
       ]
+    },
+    {
+      "id": "claim_7b351d6886aa4e80af57384a01c218c4",
+      "statement": "App.svelte mounts only the active tab's view and removes all dashboard views while the idle clock screen is shown, so hidden views do no per-minute work.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/App.svelte#L17-L25",
+          "version": "repo-lines-v1:sha256:ee8921f5938dcf64f8c773640a843537b9b04e0edb4f4a6444e9aec7b411177d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmRkM2Q2ZDIxNDNiNWE1YzU5NjMyMmVmNGYxYWI0MzMwYWRhODYzZDc3MjdmMmY1ZDIyZTdlZmIwZGYwYmVlYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQwMTkwYTMwNThkOWIxZTc2YjNjNTUzN2U3MjdiNWJjMzZkYjA1NTRiODcxZTUwZGJiOGRjOTViODY5ODI2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTkwNjFhZWRhMDlmM2FlZDU5ZDU2ODA3NGUxZjFiMTE5NGE4NmQ1OTc0OWVmMTY5OTM4MTgxMWRmNjNjM2JmNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2FlYmJiZTM2MTUxYWNhMWQxNjBiZjYwM2EzODI2MjJiMTg4YmRkOTAzM2FkZGRiMThjYTgwZGFjNTJjOTdlNyJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/App.svelte#L58-L74",
+          "version": "repo-lines-v1:sha256:0343a60182a2ab0e8d3a7f7ec5bb75f60a507f5cb6bd1e38982ba469707f1765:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3YTMwZWE3ZWRkMzg1ZWU4MDg3NmNmNmU2NjYwMGJiYWNlOTRlNWY1YjQ1ZTA4NjJjYzRhMDJiMDQ5NzU5MDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3YzRlODM4OTcyZWQ0ZTdhNGE1MDM3N2EyOTM3NjdkODE1YmMwZjIzMjdiOTA2Yjc3NzE4YjMxZjU3ZTJiNmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNDY4YzRiMzc4ZTk4ODlhYjA5MjQ0NGY1YTZhMTVkY2Y4OWEzMGM3ZjgxYTU2MjA3YmJmYjE1N2NiYTAzNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MWE2YWYzZGVjYjVlODI4ODZhNGI1YzcwMmM3ZDI1NzYyMGM5NzkwZmVmZjVkZmUzODU2YTNmYzI0ZjdmZmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_77982cb057fc4166834341b6d3cef71f",
+      "statement": "The Week view uses a single sheet divided into seven equal columns, each with its own scrollable event list; Month is a 2-column layout with an iPhone-style dot grid and a selected-day list.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/views/Month.svelte#L63-L81",
+          "version": "repo-lines-v1:sha256:59aa11b5897abe5352aca49c754878e237d3d72a2637fffe53d5a0e54d59388d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MzIwMDJjZjE2NTEzYThmNWFiNmI5NTBkM2M4ZWE3Yzg3NTc0MTE2ZDFlYzlmOGM3OTcwYThhMGI2NWM4NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1MzUzODFiZjEwNGUxYzIzM2Y0NzcyZDRiMWI3ZDM0N2IyYzAxOWFlYTY0Njg5MWE0ZGNmYmIxMGFmYjFiNTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwZWU1YWJlMjRmMDUzMWFlNzI4M2QyYmMzM2VhOTIwZTNiZTZmNzc0OTRhOWVlMzRjOTIwM2IyNzUyNjM5YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1NDNjMGJlMjU0NDQxOGYxZjEyZDM0ZTkxMmY5ZjM5N2QyYjQyZDE1NTZiNTg5NGYxMDk5NTQ3ODI0N2JjMjEifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/views/Week.svelte#L96-L104",
+          "version": "repo-lines-v1:sha256:83ef9a0993e0a311c1a14048c50bd0515ce829130593ab20e904dbb2b9714521:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWRmYTc4YjAxMGFjYjBkODhjMzU4NWVhNmE5NGViZWQ4NzUzYWE2Yzk5N2UyYTc2NDFkNGNhOWVkYjFiZGE4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTU1NzM1YmZlOTAyNWM1ZWM2MDg5MGQ5NmY3ZTQ0OTNhYzdiMDYyM2I5ZTU0MzhiNjZkZGVlNDA4ZDBlZDc3OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRmZTQ3NzY5YTFiZmMxYTg4NjUwYTg5YjAwNTgxOWYwYjQ0ZDMyNGEyNmQyM2IwNzc0MDIwY2E4ZTA5ZGFlYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWY0ZmJkZmY4NzUzM2ZkNTcxMjUzNGY4MTQxYjFlYWQyZjgxMzBhZDcwYmQ4ZmY3NTc4M2M0MGIwYjIxMGViNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6eab075b9944a8983fc8f34659b1a38",
+      "statement": "TaskRow shows a completion ring, item text, a small supporting line with due date/section/note, and an optional Avatar; the ring fills first and the row is removed after a short delay.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/components/TaskRow.svelte#L1-L46",
+          "version": "repo-lines-v1:sha256:f003599ac1182c57f6c88cce01889baf3f55b77039fe1c61e6fef3bda25d3534:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmMTRhMzIxMjBjMDM0ZWFmYzc2ZDQxMzgxNjZiZWI4YzdhOTY4YTM2MzNhMDAwOGU3NGY0MDZkZDlkMjEyNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTAwNDUxNGRkOGJiNTI4N2I1OGUzODVhZTM4NzJiYjllZTdjODllNjFjMGM1ZmUxYWI4NTBmZWE1NjVhNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_49d14e40e5084cad8752f462677b9f07",
+      "statement": "Recipes keeps its Explore and Saved panes in the DOM with visibility: hidden while a recipe page is open, preserving scroll position and decoded images.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/views/Recipes.svelte#L149-L154",
+          "version": "repo-lines-v1:sha256:72c8e823a09d6f9718cbd55aebbbd41f37c335c472b72240ea95c6ab332f8314:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYzMjAwMmNmMTY1MTNhOGY1YWI2Yjk1MGQzYzhlYTdjODc1NzQxMTZkMWVjOWY4Yzc5NzBhOGEwYjY1Yzg0YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTkyZDhlOGJlZTYzYjIwY2VhMTA3MDBiNzJiZDc3YjJjM2ExNDJhZGI3MjgyOGVkNzJhMTFhOWJkZTBlZGY2ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMThiMDRkYzZlZWI0Njk0NGUyYTg1ZDVhOTYwM2ZhNDRjNzMwMWViNmE1OWMxMWYyNTU2NGIxYTEzYzBhYjQ1ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjZjMmYxZGMzODA4YWMzYmRkYjc0MDY0NzVhOTcyNWVmYzFiODdiNWNiMjVlMGQ4YWY0OTJjN2I3Y2MwY2JmMSJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/views/Recipes.svelte#L29-L38",
+          "version": "repo-lines-v1:sha256:bebb80847e52fb9a9c1c12bb639747a3176694adaf2485e6cadf3ec6f378b448:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZWMyNzdhZWZmODVmMjBlNjM2MWRhMGE5ZDBjYzQ5MzQwYWI3NDdhZjYxMzQxZTg2MzM3YmM0ZmE2MDE1YmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEyODk4ZmZkZjMwYzYyZDg5YTE5MTIwN2QyZGUyMzRhNzBkYTYzMzdkMWRmOTdlODQ1NDEwMzZhNmMxMGExZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMmM3N2MyYmVmZjU5MGYyNzE2Nzg4NzhmMzY5NmFlNjZhYmI3Mjk2Zjg5ZGI3OTdiNDQwM2ZhMzZjY2E4YjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_de8fa53a96c64185b7fa8b397581e651",
+      "statement": "Ambient is a full-screen black stage that shows a large clock, date, weather, next event and now playing; when photos are visible it aligns content to the bottom over a gradient scrim with a cross-fade between slides.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/views/Ambient.svelte#L45-L104",
+          "version": "repo-lines-v1:sha256:3f0309638856518ac71feba1b29fec5ea5f62c87f41c784634d2d701cad93a79:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNjA0YWUxZWMwZDUxMTU0NTRhNDlhMDM4NGJkMjMyNWNjYjc4OTNlNjFmMjNmZWFkMTAxODg1Mjc4MWZmMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTAwNDUxNGRkOGJiNTI4N2I1OGUzODVhZTM4NzJiYjllZTdjODllNjFjMGM1ZmUxYWI4NTBmZWE1NjVhNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5YjgwOTg1NDBiNzcwZWU5NjFlZGU3ZDFhOTdkNjAzYmEyMDg0ZTU1OTZhMjRjNDI3Nzc5MDA1YmQzYWUzOTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3589d7ba73ef4c319b5636e69483d929",
+      "statement": "Global typography uses the system font stack at 18px, with tabular numerals via .num, and selection/focus styles use the blue calendar tint.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/style.css#L52-L67",
+          "version": "repo-lines-v1:sha256:e7f9fc1018d3f52160365c20acb8f145c38e76298fd2ead6cceb852c0312be6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzM2FlNzZlZWU5YTljYWYyNzQ4ZmE1MDFhZDk1OWU3MTQxNzA4ZmU4N2NjYzRiNmMxZDBmNWJkOTgxMWMzMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyMTZlMzkwODBmMDA2MDE1MjVhM2I2ZDk5MGI5ZGVkYmYwNmM4MTk0OTk5ZDZiMjY2ZTJmZTJkZjg5NjQwNzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmOWI5NjljOGU5NWFiYjE3YzZkOWFhODA2M2UzZWUzMDk0ZTk1MGVlYTdiZDRmMTM2MGE4ZGJiNzM0OTdiYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVkYWFiZWFmZWQ1ZDIxZjhlYzZjY2U2OTk1Y2M2MzQ2ODhmNzdmZWUwZmNhZDdjNGNkNjI5NGEyYzExNWRjMWMifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

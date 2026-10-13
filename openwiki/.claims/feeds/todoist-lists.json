@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:08c7a6ac6b6a92e586e300b11fdcccbefb9480efa5a0be0e66094221c657354d",
+  "pageVersion": "sha256:ad8f632e13739cb6064049adada934ad18c2ea114f18b4afdf4bf1b5569a3c07",
   "claims": [
     {
       "id": "claim_70282ed54898498c8426a49239d6aee9",
@@ -57,6 +57,10 @@
         {
           "resource": "repo://dashboard/worker/index.js#L96-L114",
           "version": "repo-lines-v1:sha256:2674347f7db44f3e3e6a5413e170ffd62938e1103a44740f6715eb4d39501b3f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3ZTk0MzU3OWI3OTEwYjQwODhjZTBiMTY5NGMzN2ZjYTJlYmQxNDU4Zjg0NDJjZGYwNTdjNzYyNGY3OGU1ODIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyNWMxNTQwZTdhYzdmMGZkNGMyOWUyZWUxMmFkYWYyNjRkNDIxZTI3ZDE3OTE2NjE0ZjVhMTBjOTUyOGNmN2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFiZGNiMjIzNDYyN2Q3ZjA4MTU3MTA2MWM3NzdjODgzZTMyNWUzM2QzNmViNjE5ZTBiNDAwOTFhNDU1MDEyNGIifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L99-L99",
+          "version": "repo-lines-v1:sha256:f8c61bf6beefaf909bad6d7028e361c188514c0b2405c3d2996423fe046df360:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhjNjFiZjZiZWVmYWY5MDliYWQ2ZDcwMjhlMzYxYzE4ODUxNGMwYjI0MDVjM2QyOTk2NDIzZmUwNDZkZjM2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhjNjFiZjZiZWVmYWY5MDliYWQ2ZDcwMjhlMzYxYzE4ODUxNGMwYjI0MDVjM2QyOTk2NDIzZmUwNDZkZjM2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTNhMWQ4Y2Q5Y2NhOGFlZjQzMjEyYmFhZjFkZmU2NmNjYWZmNTU1N2E2MWJkNTk0NDQ0NTA5N2VhNDdlZmM0MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E5MDY1ZjRlOTk5OWQzMjA3YTg1MDMwY2ViN2IzYzM1NGYxYzE5ZmJjMDQyMDg3ZGQ1NTI2MmFkZWE3ODMxMCJ9"
         }
       ]
     },
@@ -65,32 +69,44 @@
       "statement": "loadList replaces list items or metadata only when the fetched content changed, through the shared in-flight guard, and demo mode serves local demo lists.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L199-L217",
+          "resource": "repo://dashboard/src/lib/api.js#L36-L43",
+          "version": "repo-lines-v1:sha256:c6c513008300e984bdbe1f790192c7ddcf0784417425ea9ab004e268bd86a5e0:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQ2MWFjODBjMDc0ZmViODYyMDNkMTI2NDRjNjNjNTU4NGM3NTE0YWYxYTZjOWIzNzQzYzRlZWZkZjJhYWJjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzdkMTZiNjAyNjVmMDE3YjViODA0YTA4NzI0ODI2YzhlYzI5YjllMzczODVkNjk0OGE4YTFkNjllMmU2M2QxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmZjY2MzNThkYmYxYWE1MmQxZDQ0ZDI3MjE3NTNmZDFlZDhiYjdkNTA1MDYwMDRiNjFiNGFjMDEwYThjZGJiOSJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L209-L227",
           "version": "repo-lines-v1:sha256:425a182c8dadb520f2ecd0a6ff7815dab0c88c9cf254d4b0d3ecdd0b374562c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxN2MyMjY0NGJiZDZjNDE3ZjI2ZjljYWJiNTFiZTQzNmZkODQ4YjFiNWFlOTk2ZmM5YTlhYjc5YWUwZGE2OTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1YzI5ZjY2ODg4MGE4NzkxMTQ2YTRiY2UyNDJmNmI3NjM2MDQ1NjMwMGNjZTMxYzM0ZWQ5YWU5Y2M2NWU5OTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5YjExY2E0NjE3ZDg4YjEyZDVlYzk0YjQ4YTdhMWQ3YjUxZTU1OWJhNjM3MzgzMmI0MjZlN2ZkNDcyMDhmMzAifQ"
         }
       ]
     },
     {
       "id": "claim_6ffcfdb5389d4111b5ae0c4f35c7c823",
-      "statement": "Tasks are polled every minute while the dashboard is up, Groceries only while its tab is open, and a list loads immediately when its tab opens.",
+      "statement": "Tasks are polled every minute while the dashboard is up, Groceries only while its tab is open, a list loads immediately when its tab opens, and waking from the clock screen reloads Tasks.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/App.svelte#L40-L40",
-          "version": "repo-lines-v1:sha256:1afccd608d7e1d8b610c37ba4cb85a571b9eca7b5a7c0f38a86f05c130142273:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWFmY2NkNjA4ZDdlMWQ4YjYxMGMzN2JhNGNiODVhNTcxYjllY2E3YjVhN2MwZjM4YTg2ZjA1YzEzMDE0MjI3MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWFmY2NkNjA4ZDdlMWQ4YjYxMGMzN2JhNGNiODVhNTcxYjllY2E3YjVhN2MwZjM4YTg2ZjA1YzEzMDE0MjI3MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDQwODVkYjQ3ZGQ1ZTA1OTRlMGYyZGNlYzQ1ZDZjM2FkMmQzY2Y2YzMxM2I3OWFjYzc3ODk4MGIzZWE0MWI2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJiNDMxMmY2OTg2ODhlOGI5YTgzNGU5MTQwYmFmZWVkNjJhYzUxNjYwZGM1NzEyYmExYTUxY2FmNDllNWY1MSJ9"
+          "resource": "repo://dashboard/src/App.svelte#L39-L40",
+          "version": "repo-lines-v1:sha256:8d9b2ca05dd0289ffb808661e6232d3d42fc5ca585675c9db6b12bed150e7aaf:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjEzYjNmOTJkYTRjZWMwMWQ4ZmQ3YTcwYmUwNmI3ODM1ZmZmMGMxOWIyMjg0MWMzZjhiNWUzMGE1MzdmMGI5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWFmY2NkNjA4ZDdlMWQ4YjYxMGMzN2JhNGNiODVhNTcxYjllY2E3YjVhN2MwZjM4YTg2ZjA1YzEzMDE0MjI3MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzE3MGVmYjFhN2Q0MzEyZGY5OGM0NGU5Yjk1ZDQ5MmNjZGVkMmVkMWFjZTIzNTg0MzlmOGJmNTE1YzRjYzIyMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJiNDMxMmY2OTg2ODhlOGI5YTgzNGU5MTQwYmFmZWVkNjJhYzUxNjYwZGM1NzEyYmExYTUxY2FmNDllNWY1MSJ9"
         },
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L288-L289",
-          "version": "repo-lines-v1:sha256:1c68ae94bec83bec41f3769deb814c47a72bd3e802542799aac90f43f7b71c47:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2IxNmFiMWQ5YWQwMWQzZWNkOGFmMzVlYjE2NDUwMTU5OTBkZmM0MTY0NDZlOWI4YjQzMDg1YTQ2MzQ4ZThlZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM4NWIxNDRkZDNiMmUzZGJlOGMyYTcxZjNhZDU1NjUyOTUwODM1NmUxNDVkNTA1YWYyNTUxMjBlZDNiMWI0YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTc1MTUzZDdjYjE0ZDczNGIzMWM2MDFhMGQzYmM2ZDg5Y2Y3MzY2MTUxNTkyY2E0NzQ1MGJmN2QzYjRmZDg5MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWE5MWQyMGIwYThiZTVhYTlmZWFiMjBmOWE4YTBhOGIzMTgwMmVhMDVlMThiYzJkOGRhYjFlZjk1MTQ2ZDcxZCJ9"
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L288-L299",
+          "version": "repo-lines-v1:sha256:56a67acc521871aeaeb5456d016cab359cf473de199ad3d191b8f7bf6b9319f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzYmNkYTVkNGVjYzczYmI0NGY1Y2FmMTllYzM2OTA4MzRhZWVhYmNlMzdiZDJmMjU4MWQxMTNjZDk1MzA5NDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjODViMTQ0ZGQzYjJlM2RiZThjMmE3MWYzYWQ1NTY1Mjk1MDgzNTZlMTQ1ZDUwNWFmMjU1MTIwZWQzYjFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhZjI0YzhhODMwMjNhMTRhOWY3YWFjYjUyMmMzN2ZlYjY1NGFhMTQwNzAyMGRlOTA4MTgyOTNkYjdhMmM2MjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhOTFkMjBiMGE4YmU1YWE5ZmVhYjIwZjlhOGEwYThiMzE4MDJlYTA1ZTE4YmMyZDhkYWIxZWY5NTE0NmQ3MWQifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L327-L330",
+          "version": "repo-lines-v1:sha256:27704a1b37a808990b462acab8799e1f9d1e9c3f8c506da71110227c7ba4fddc:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE2ZmNlM2ZlYTY3M2ZlYWM3OWRmNGFkZDQ3ZmZkY2ZlNzVjNTUyODc4Y2U2NWY1ZDZkYzU3YmYyYjE1YTdjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmEyMDU3ZWY4Y2IxYTRjOTU2MGMwZmNiNGIyODY4OWI0NGMwZTJmZWQyNDhmOTUxY2I4Y2U3M2MwNDRhMzViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         }
       ]
     },
     {
       "id": "claim_4d57ca99727a4439961da3766ba1346b",
-      "statement": "Completing an item removes it immediately and restores it with an error if Todoist refuses; demo mode never calls Todoist.",
+      "statement": "Completing an item removes it immediately and restores it with an error if Todoist refuses; add appends the returned item; bulk add from recipes appends returned items with notes; demo mode never calls Todoist.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L219-L231",
-          "version": "repo-lines-v1:sha256:d32d5b15e1fee8e6e008fa9876b8ce77a963706f502d1f4f088044c8b27a57ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5YTYzMmRhOWE4ZWMxYzYyYzM5ZGFiN2VmMGM1NjJmNDlkZDdkNmJlMjEzODBhODg3MGY5NTg5ZjkxYjQ4Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxMjRmOThmZjYyYzViYTEzYjU0YjljYjBjMmNjMDhhOTBkMTg4Njg3NjU2Y2NkNTRkNDJjZWRiMGVjMDIzZTkifQ"
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L229-L255",
+          "version": "repo-lines-v1:sha256:8db3289119020f55202a834a2dbecc95fef752cb1c9f54fb7d0313495c365ba6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5YTYzMmRhOWE4ZWMxYzYyYzM5ZGFiN2VmMGM1NjJmNDlkZDdkNmJlMjEzODBhODg3MGY5NTg5ZjkxYjQ4Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg2M2FmYjg2MWU5M2UzMDdkN2E2ZmI4NGVkN2YyNGE5Mzc1YmM3NDRlYzcxOWE2MDE3MzkxNmIyNWRkN2RhZDcifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L74-L82",
+          "version": "repo-lines-v1:sha256:df934e4549f72222cdd798b8eef163de8d917561d51a654ed7b718a38f042ce9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOThhMDYwYjMzYTBhMWE4Mjk0ZjhiMDZhY2JjMjFmODExNzEwMjk4ZjFjODRjZmVmMDdiNGYzNGZlYTVjZjQ5YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM1ZWU1NTUzNDEwMTRlMzRhZDdlMmIwZjE5ZGIwNjExNzkzMTA3YjcyOGFiYzIxNGI3ODMyOTFlYTc2OWYxYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmQ3MTU5NDZlMjdiZTVhOTdjNmEzNTMyN2ZkZDU4MjIzOTNmNTkyMTg2MGE4MWMwZWIyMGYxZWI0MWU3MzA2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWU0MzA4NTk2MjFhMzA4OWY2MzU4MGM2OTdkYzJhMDJmNjE4NDU1OGEwNmYwYWFmODViMjg5OGQ3YzFhMDg4NCJ9"
         }
       ]
     },
@@ -117,6 +133,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

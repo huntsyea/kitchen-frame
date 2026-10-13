@@ -1,20 +1,28 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3091ffa215c37765af58f4783eeb314478ef4cede6aeb98850bf20e19ee935c1",
+  "pageVersion": "sha256:854c07d1c8ea330caa61b5291aa1f64ed1bdc0e41799c3b05546c8391abd7366",
   "claims": [
     {
       "id": "claim_68b59aac840745c08a8360e1022dd4d0",
-      "statement": "The Worker proxies all album images because the frame's Android 8.1 trust store lacks the root CA used by Apple's photo servers; the album is listed through the anonymous CloudKit calls the public album web page uses.",
+      "statement": "The Worker proxies all album images because the frame's Android 8.1 trust store lacks the root CA used by Apple's photo servers. The album is listed through the same anonymous CloudKit calls the public album web page makes: resolve the share token to obtain a short-lived publicAccessAuthToken and databasePartition, then page through CPLAssetAndMasterByAssetDateWithoutHiddenOrDeleted records in the shared zone.",
       "evidence": [
+        {
+          "resource": "repo://dashboard/worker/index.js#L73-L77",
+          "version": "repo-lines-v1:sha256:41fbf45cf6add0995fea537623634e65c41345d0b55910b7b5ea8b93d23de1df:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWYxNWRkNDM1N2RjNDQzNzc5ZDYwYWE5MDE3NzYxMzhmMzkzN2FmYmMzYmZjZDdkYWQ0YzhmNjQ3ZmYzZTYwZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTk4YTk2MDE5ZTg4NTMwNTY3YTYyMmMzODEwODNkZjRiODI3YjJiYWIxOTBiMTY4YTNjYjdlMjk4YjgzZjIzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzcyOTVjOGU2NDhlZTFhOGI0MGE0MjNkNmE5OTcxYTA3YmQ2OTk3N2Y2NGNmODU3NWU3ZjdmOGQzZmRmMDhjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDdhZGE0YjhlZTljYjhhZDg1NjQ4NTI1ZTllMGEzYzFhNTNjMTQxZGZlMmNmZDM2YmNlYjg0MTEzYTE0Y2U3YSJ9"
+        },
         {
           "resource": "repo://dashboard/worker/photos.js#L1-L9",
           "version": "repo-lines-v1:sha256:9ea1538a83e994a353ecbd55db4defa098c9010143c3d35349b1ca0a0f1f64aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWZiNTE4Yzg3MjQ1MTVkZGM3YzQ4NTY0MWU0MzE2Zjg3YWRlNWUxOTljNjBiNzdkYTJjNDcwMTJhNmQxMjMyNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2E3MDliNjZhNzMyNjljZTgwOWY1YTlhNTBjYWMxNTNhMzBhZGE0YTI4MWEyODY5YjA2NTZhODNiZjM2MjI2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2RiYTE3ZjVjZjY1ZWFlNTkxNmY2ZmE2Zjc0YTkxZDQ0NjY0YmJkN2Q5ODhhOGYyYmE0MjgxM2I3NjkwZTc3ZCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/photos.js#L35-L60",
+          "version": "repo-lines-v1:sha256:e7d2a38d6393c62d03f80d70f837371148eaae2081a3a5f4e969404a6a510fdb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2NTlhNTRjMzJlY2ZlOTI5NWU5MzFiMjU4M2RjMmNmZGYzYTUyZTQxNGNiYjkwOGQ2MThiOTQ5MDg3YWExMjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwMTY0ZWY2OGEzMzg0MjM1YzA3Nzg5NmMyOGMwMDQ4NWY1Y2I3YzQxNzE3OTQ2NzFmM2EyYWM0ZmY3NWE1OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNzBlMjRjNTA4MmZjYzA0NmRjNzBhODk3MjljZWNmYzY2ZmM0YjBiYjVmNjIzZjgzOWI5YjlhNjQ3MDQ3YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwNzFlZTk1ODU0MWUxN2QyOTg3ZDRkNDc5YTU0ZTViMzc3NTMxMGUyYTAwOTNiODM5NTljM2ZmY2YyZDcwNmUifQ"
         }
       ]
     },
     {
       "id": "claim_041ad679f53f496d8571963aff94a436",
-      "statement": "toPhotos chooses one JPEG per asset (edited rendition, else master medium JPEG, else an original of at most 2560 px), skips videos and HEIC-only originals, builds ids from the record name plus a file fingerprint, and caps the list at 500.",
+      "statement": "toPhotos chooses one JPEG per asset (edited rendition on the asset, then the master's medium JPEG, then a JPEG original no larger than 2560 px), skips videos and HEIC-only originals, builds ids from the record name plus a 12-character file fingerprint, and caps the list at 500.",
       "evidence": [
         {
           "resource": "repo://dashboard/worker/api.test.js#L174-L185",
@@ -28,7 +36,7 @@
     },
     {
       "id": "claim_31bdf32f4c1f48f199400abe4b061624",
-      "statement": "The album list is cached in KV for 30 minutes; a stale copy is returned immediately while one background re-list per isolate refreshes it, and a failed listing falls back to the last good list with an error.",
+      "statement": "The album list is cached in KV key 'photos' for 30 minutes; a stale copy is returned immediately while one background relist per isolate refreshes it via ctx.waitUntil, a force refresh can be requested, and a failed listing falls back to the last good list with an error.",
       "evidence": [
         {
           "resource": "repo://dashboard/worker/photos.js#L14-L17",
@@ -52,7 +60,7 @@
     },
     {
       "id": "claim_f9f11f49a2224071946357efbdc4e9bb",
-      "statement": "Image requests are served from KV when cached; otherwise the signed URL is fetched, with one forced album re-list on failure, the image is resized once (1920 px for landscape, 960 px for portrait, originals over 250 KB) and stored in KV for 30 days, and responses are privately cacheable for a week as immutable.",
+      "statement": "Image requests are served from KV 'photo:<id>' when cached; otherwise the signed URL is fetched, with one forced album relist on failure, the image is resized once via the Cloudflare Images binding (1920 px for landscape, 960 px for portrait, originals over 250 KB) and stored in KV for 30 days, and responses are privately cacheable for a week as immutable.",
       "evidence": [
         {
           "resource": "repo://dashboard/worker/images.js#L1-L16",
@@ -66,17 +74,17 @@
     },
     {
       "id": "claim_7a2db3b6a9f3497089c13802498fad9a",
-      "statement": "The slide queue puts newly added album photos first and drops removed ones, pairs portraits side by side and shows landscapes alone.",
+      "statement": "The slide queue puts newly added album photos at the front and drops removed ones, shuffles the full album when the queue empties, pairs portrait photos side by side, and shows landscapes alone.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/slides.js#L19-L37",
-          "version": "repo-lines-v1:sha256:c3f05e260fa50f829d5598770cd86d20011dc03fae8bb1cde224a81f516730a9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNjdlOGIzNDZkMmM5MThlODFiMDBjZjY5M2IzODcwZTExOWI3YzYzZTQwOGEzMmMwZTc5MTIwNjQ2ZDAxNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiYTc3YTNmY2Q1ZDI2NmIxNTU4NmJjNTczNGJkYTdhNmRjMmFjMzlhMTZlOWQwZDdiZmVjMjljZjBmYzIxM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiZDllZDVmMzZjYzZmOWUxNjYxOGU3N2NmMzVjZDgxYjU4MTFkMzhhNzc5ODQwMTIyY2ZhMTQ0ZDdkYjhhOTAifQ"
+          "resource": "repo://dashboard/src/lib/slides.js#L9-L37",
+          "version": "repo-lines-v1:sha256:3298f5ddcf1392336c6c43b2668e39fa963e9256a95b21cae7b613ede13671ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4NzQ5NDBhZGY4N2NiZWFkMTJjMTc4MTc2Zjk2MDIxNjUyYjZmOWM4YWI1ZTdjZjY2MWQ2NjE5ZjNiNTQ5MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MTVlNzg5YTliOGVlMWQwYTA2OTI5NDc2NTJmOGU0ZTNkM2Y3OWMzMmQ5MGI1MWE4MDA2NTQyY2MwODEzNzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiZDllZDVmMzZjYzZmOWUxNjYxOGU3N2NmMzVjZDgxYjU4MTFkMzhhNzc5ODQwMTIyY2ZhMTQ0ZDdkYjhhOTAifQ"
         }
       ]
     },
     {
       "id": "claim_1ca7bff1cf1e478e9ec1d3b34da8ca45",
-      "statement": "The next slide is downloaded and decoded ahead of time, with one preload in flight; the app starts background preloading only 15 seconds after boot, outside demo mode, and only when photos would be shown.",
+      "statement": "The next slide is downloaded and decoded ahead of time by prepare(), with one preload in flight; takeSlide() returns the ready slide and starts preparing the next. Background preloading begins only 15 seconds after boot, outside demo mode, and only when photos would be shown.",
       "evidence": [
         {
           "resource": "repo://dashboard/src/App.svelte#L30-L37",
@@ -90,35 +98,39 @@
     },
     {
       "id": "claim_a487533789324cee93ec5267029f2622",
-      "statement": "The photo list is polled every 5 minutes only while the clock screen is up and photos are visible (after one load at start), and photos are visible by day or at night only when night photos are enabled.",
+      "statement": "The photo list is polled once at startup and then every 5 minutes only while the clock screen is up and photos are visible; it is also refreshed on entering idle and on the play button. Photos are visible by day, or at night only when the nightPhotos setting is enabled.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L127-L127",
-          "version": "repo-lines-v1:sha256:4829ecb7c2c4e9bdd23a8786dcef481b49fcaf7bbb5f3ce623d254efeb809cf9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDgyOWVjYjdjMmM0ZTliZGQyM2E4Nzg2ZGNlZjQ4MWI0OWZjYWY3YmJiNWYzY2U2MjNkMjU0ZWZlYjgwOWNmOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDgyOWVjYjdjMmM0ZTliZGQyM2E4Nzg2ZGNlZjQ4MWI0OWZjYWY3YmJiNWYzY2U2MjNkMjU0ZWZlYjgwOWNmOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2IxZGM1MDY5OGU0ZTk1NWNlMjc0MDMyYjBhZWZlZmZhOWYxMmUwMDliYWFhZDE4MTk0YWM0NDNlZmY5NzJmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJjMTU4ZmFmNmJjYWMwMDdkODljYzdjNjE3YmJhZjk3N2I3NDMyZGEzYTBiZmVlMWE5MzQ4Mzg2N2Y4YzJjZiJ9"
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L119-L131",
+          "version": "repo-lines-v1:sha256:a9a99358d4bfea15303a70ac3836e6798e33f55e90d3f8e81aee00afc2d82465:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MGEwNDBmZGI4M2EzNGM5YmZhMTM3YjczNmYwMzRmYjQ2MjkxMWFiOGRhMzJlZWY1NzYxY2JjM2FlOTkzM2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2YTk1YjkyNzZmNTEzMWU1ZGJmNzczZWRlZjg1ZDRjMGJhNDVmM2Q3NzdlMDQ1ZDNkNzI1ZGNmMmFjYmFmNDgifQ"
         },
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L290-L292",
-          "version": "repo-lines-v1:sha256:9a91d20b0a8be5aa9feab20f9a8a0a8b31802ea05e18bc2d8dab1ef95146d71d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDg5YTJhNzQzNzJiNDljYzEyMzI2ZWQ2ZjBlYzZlOWYwMmJhOGNmY2M0YmMwMzUzNGMzNjliMGFiODAwOTQwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJiYjJkNjFkOWE3ZGFkNTQ4YjVkYjdjMGJiZjQzNWJiY2E0NmUyNWEwYzU1MjM5YzUwZTMyOTJmMmVhYjA5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmY4YWQ5MWMyNTVjODQ1NzdmZWEwNTNhNDU1YzE5YTdiNTUwMjk3YmViZTFmNjg2MDhkODcwNDgxM2U1NjNjMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGFjYzFhM2NjZWE5MTc4NzJlOGNjZTNiYTEzMjUwMTU5M2YxYjdiYjFjMjVmYTlmOGVjMzllMzFiNjAzZThhNSJ9"
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L290-L303",
+          "version": "repo-lines-v1:sha256:735a1ff6a16b33697acf699e3aba1bcc235504ab1b23a82ace118858d1781602:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxZTAwN2QwZDg3M2MwNjFkYTMwOWExMDcxYTEyZmMxMzdhMTI1N2ViMWJhMDc1YzEzYWE0YzA4NDU0ZjBkNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjYjdlMDRmODNmNmQyYjZmY2UyMjYwOWRiNWVjYzE3NGU1NzM4YTQxOTNmZmZhZjZmZjdjNDM0YTYzNjA3OGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3ZDljYWVhOThiOWYzZTNlNjdhYmQ4MzVlMTIwYTVhNTA5OTQ1NGM3MWVmY2E0NTY1YzMxNDc3ZGIyZGY3YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1ZDU4ZTE4MzI4Mjk0ZDMyYTM2MjY4NDIwYTFmZjViNjM0ZjU3MDY5Y2RlMDc5Y2QzMDY2OTQ2ZjU4ZWZiODUifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L316-L325",
+          "version": "repo-lines-v1:sha256:01abdaa0e926196367669468dbb43370bf7370a37ada7535ff4393c87a8892b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzMjUwNjNmYTBhYjMxNDdkNGVhYmUwZTVkOTM4MmE4NmMxODM2YWRhMzhkMmFhY2UzNWIwMmJiMWM0MzhjYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiY2Q1YWVhYTNjYWVhMTJhMWNhYTU5MGNlMWMxNDc4MDZlNjc0YjgyN2RiZDA5YzFjYmU0Njg0NmNhZjdjNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3OWRkYmUzMDNjYTUyZmM0MTA3NzBmYTRjMTFjOTY0NTIwM2EyODVmM2IwZWFjM2FiODkxZWRmYmUzYzgxYmMifQ"
         }
       ]
     },
     {
       "id": "claim_dad9acca8f754077a954845e8a16fd38",
-      "statement": "The idle screen cross-fades slides every 30 seconds with at most two layers, hides photos when they shouldn't show or a message covers the screen, and the dashboard views are unmounted while idle.",
+      "statement": "The idle screen cross-fades slides every 30 seconds with at most two layers, hides photos when they shouldn't show or a message covers the screen, dims text and photos at night, and unmounts the dashboard views while idle.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/App.svelte#L61-L72",
-          "version": "repo-lines-v1:sha256:95f232b9ddbc764fdbfd2eb9d6539262c019eaed26a89a9788ab976a5f9b385f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjNzZlYmRjOTRjZTZkMjY2ODIwOTdlMGVmODk0OTYwYzkxYjU0MzQ4ZDlkYjEyNGZjMTlhMjZjNzIxZDY3MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxYjNjNGU2OTNmNzQ4YTU2MmRlMTE3ZDM1ZjAxYjMyZDBlMTU0YWFlMmUzMTRmMGFiZDlmYmEwMjI0MmNkNWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmN2UxYjQ1ZmE4ZGVhNDgzZmFlMzBhOTA0OTE5ZWY1MDI5ZmEzZTY0MTZkN2MzNjkyYjFmM2NlZmFhNDQ2YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjNWIwNTNiMDBlZDEwMDgyYjE1MzEwMGVmZDZkNzgzMTlmZjE4MDczNTIwMWFiYjE0ZTllNWMyMDJiMmQ2MTEifQ"
+          "resource": "repo://dashboard/src/App.svelte#L58-L74",
+          "version": "repo-lines-v1:sha256:0343a60182a2ab0e8d3a7f7ec5bb75f60a507f5cb6bd1e38982ba469707f1765:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3YTMwZWE3ZWRkMzg1ZWU4MDg3NmNmNmU2NjYwMGJiYWNlOTRlNWY1YjQ1ZTA4NjJjYzRhMDJiMDQ5NzU5MDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3YzRlODM4OTcyZWQ0ZTdhNGE1MDM3N2EyOTM3NjdkODE1YmMwZjIzMjdiOTA2Yjc3NzE4YjMxZjU3ZTJiNmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNDY4YzRiMzc4ZTk4ODlhYjA5MjQ0NGY1YTZhMTVkY2Y4OWEzMGM3ZjgxYTU2MjA3YmJmYjE1N2NiYTAzNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MWE2YWYzZGVjYjVlODI4ODZhNGI1YzcwMmM3ZDI1NzYyMGM5NzkwZmVmZjVkZmUzODU2YTNmYzI0ZjdmZmMifQ"
         },
         {
-          "resource": "repo://dashboard/src/views/Ambient.svelte#L8-L42",
-          "version": "repo-lines-v1:sha256:b0b11b8d99587852be9d5bf2bd1285b9fa516e8cc0f03f3a3e76584b70468d5e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NmU3OTkxM2Q4Y2JmZDQ5YzQ3ZTZjNjBhMDc3YWVkNzFhMDc0NmQ4ZWZjOTIxMTk5NDE4NGYzNjhiOWE0ZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0M2JlZDU1NTA0ZWMxOGRhMDhhZTg0YjJlOWZmMzk5ZmY3MTZjZWFjNTYyYTY0Yjk3NDNlMzViNDgxYjllYmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZjA2MGQyNmU0YjNmYWU5MjhiOTIzM2M1MGZkYjg0ZGJhZmUzMzM0MDA3MTYwNjA5ZGQ4NmJkYTQ1NTVlOGIifQ"
+          "resource": "repo://dashboard/src/views/Ambient.svelte#L1-L103",
+          "version": "repo-lines-v1:sha256:ea95f83d5c2f739b3613ed38f9a4edbb0983de563e6f126d033e0d371a9c14db:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjZjE0YTMyMTIwYzAzNGVhZmM3NmQ0MTM4MTY2YmViOGM3YTk2OGEzNjMzYTAwMDhlNzRmNDA2ZGQ5ZDIxMjZkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiNjllMjQwNjRiYTA1ZTQ5YWY4MjBkOWM1NDU5M2MyMDJmMGY3ZTk4ZjFlOTNhNjY2OWNlYzc1YmI0ZWJiY2VkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0YjkwMDQ1MTRkZDhiYjUyODdiNThlMzg1YWUzODcyYmI5ZWU3Yzg5ZTYxYzBjNWZlMWFiODUwZmVhNTY1YTU3In0"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

@@ -5,7 +5,7 @@ description: The Pastigio FRAME156 photo frame the dashboard runs on, and the sm
 tags: [kiosk, android, webview, device, adb, frame156]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T14:37:10.456Z
+    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -19,7 +19,7 @@ sources:
     resource: repo://kiosk/build.sh
   - id: openwiki-source-b73a7f32e78736cbd3e31ddc
     resource: repo://kiosk/src/com/huntsyea/frame/MainActivity.java
-generated: { by: "claude-code", at: "2026-10-13T14:37:10.456Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
 ---
 
 # Kiosk app and the frame device
@@ -50,16 +50,48 @@ occasionally, so commands should be retried rather than assumed failed.
 
 ## The kiosk app
 
-`kiosk/` is a single activity, `MainActivity`, built without Gradle by `kiosk/build.sh`
-(`aapt2` link → `javac` → `d8` → `zipalign` → `apksigner` with the debug keystore, min SDK 23,
-target 27). The script checks the SDK tools exist first and works from paths containing spaces;
-CI builds the same APK on every pull request. Install with `adb install -r kiosk/build/frame.apk`.
+`kiosk/` is a single activity, `MainActivity`, built without Gradle by `kiosk/build.sh`.
+
+### Build requirements
+
+`kiosk/build.sh` expects:
+
+- JDK 17
+- Android SDK command-line tools
+- `build-tools;34.0.0`
+- `platforms;android-34`
+
+On macOS the script's defaults point at Homebrew locations, but it also respects `$ANDROID_HOME` and
+`$JAVA_HOME`. The script checks that `aapt2`, `d8`, `zipalign`, `apksigner` and `android.jar` exist
+before it starts, and it uses paths relative to the script so spaces in the project directory are
+harmless.
+
+### Build steps
+
+The script runs the plain SDK toolchain in order:
+
+1. `aapt2 link` turns `AndroidManifest.xml` and `android.jar` into an unsigned APK skeleton.
+2. `javac --release 8` compiles every `.java` under `src/` to `build/classes/`.
+3. `d8 --min-api 23` converts the classes to `classes.dex` and injects it into the APK.
+4. `zipalign -f 4` produces `aligned.apk`.
+5. `apksigner sign` signs it with `~/.android/debug.keystore`, creating `kiosk/build/frame.apk`.
+
+The resulting APK targets SDK 27 with min SDK 23, version name 1.3, version code 4. CI builds the
+same APK on every pull request and every push to `main` and uploads it as an artifact
+(`frame-apk`).
+
+### Install
+
+```bash
+adb install -r kiosk/build/frame.apk
+```
 
 ### Boot and URL
 
 The manifest registers the activity for `MAIN` with the `LAUNCHER`, `HOME` and `DEFAULT`
-categories, `singleTask`, so after `set-home-activity` the frame boots into it and pressing Back
-does nothing (`onBackPressed` is empty: a Home app has nowhere to go back to).
+categories, `singleTask`, so after `cmd package set-home-activity com.huntsyea.frame/.MainActivity`
+the frame boots into it and pressing Back does nothing (`onBackPressed` is empty: a Home app has
+nowhere to go back to).
 
 The dashboard URL (including `?key=<DASHBOARD_KEY>`) is set once over ADB with
 `am start -n com.huntsyea.frame/.MainActivity -d '<url>'`. `handleIntent` saves it to the `kiosk`
@@ -103,6 +135,39 @@ Remote debugging (`chrome://inspect`) is enabled only when the activity is launc
 `--ez debug true`; any normal launch turns it off again. Holding two fingers still on the screen
 for 2 s opens a dialog with "Reload dashboard" and "Android settings"; every touch still reaches
 the page. `adb logcat -s FrameKiosk` shows loads, retries and SSL/network errors.
+
+## Device change log and undo commands
+
+The changes recorded in `docs/frame.md` are:
+
+| Change | Command | Undo |
+| --- | --- | --- |
+| Vendor OTA updater off | `pm disable-user --user 0 com.muxintu.app.mxota` | `pm enable com.muxintu.app.mxota` |
+| Rockchip updater off | `pm disable-user --user 0 android.rockchip.update.service` | `pm enable android.rockchip.update.service` |
+| Kiosk installed (`com.huntsyea.frame`, 1.3) | `adb install -r kiosk/build/frame.apk` | `adb uninstall com.huntsyea.frame` |
+| Frameo photo app off | `pm disable-user --user 0 net.frameo.frame` | `pm enable net.frameo.frame` |
+| Kiosk set as Home app | `cmd package set-home-activity com.huntsyea.frame/.MainActivity` | `cmd package set-home-activity net.frameo.frame/.ui.activities.AWaitForDeferredInitCompleted` (after re-enabling Frameo) |
+
+Nothing under `/system` or any flash partition has been written. No backup was taken (owner's choice).
+
+## Day-to-day ops
+
+- **Dashboard:** `https://photo-frame-dashboard.<your-subdomain>.workers.dev/?key=<DASHBOARD_KEY>` (key in `dashboard/.prod.vars`, gitignored).
+- **Change the URL:** `adb shell am start -n com.huntsyea.frame/.MainActivity -d '<url>'` (remembered across reboots).
+- **Reload after a deploy:** Settings → Reload in the web app, or hold two fingers for 2 s and choose "Reload dashboard".
+- **Logs:** `adb logcat -s FrameKiosk` shows loads, retries and SSL/network errors.
+- **Remote debugging:** launch with `--ez debug true`; any normal launch disables it.
+- **Brightness:** Settings → Brightness calls `window.FrameKiosk.setBrightness(0.05–1)`; the kiosk saves it and applies it at start. `setBrightness(-1)` hands control back to Android.
+- **Demo mode (Settings):** sample calendar and lists, no photos; ticks and additions stay on the frame and never reach Todoist.
+
+## Security warning
+
+The frame is root-accessible to any app with no prompt. The Home Assistant long-lived token is stored
+in the frame's localStorage (`frame-ha-token`) and pushed over ADB/DevTools from the gitignored
+`dashboard/.frame.vars`; it is not in the deployed site or in Cloudflare. The current token belongs
+to an admin HA account (owner's choice). Recommended: create a dedicated, limited "Kitchen Frame"
+user, put its token in `.frame.vars`, push it to the frame, and delete the old admin token in HA
+(Profile → Security). Keep the token secret and treat the frame as a trusted device.
 
 ## Operating rules
 

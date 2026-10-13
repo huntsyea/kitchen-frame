@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:43587c04e63c3c4770e5874ef43ad4aa85dbaf51ddaccb8fe149d8f64c076dad",
+  "pageVersion": "sha256:aeece803fea29e96e9e45477656b1cbf8a69d731446c823012dcb4df408c4ecc",
   "claims": [
     {
       "id": "claim_6a5c184cfd6b4261abedc253177595ca",
@@ -83,10 +83,190 @@
           "version": "repo-lines-v1:sha256:65986f0975c9aa48d42ed643c03ed43c191bea487b0514160084e1994b11b811:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDcwMWIwY2Y4OGM4OGVlMDZmODU5MDA0MTQ5Zjk3MjgzODJkNjk0ODFmNTA3ZjUxZDFlYjQwNTQ5ODQ0ZDVjMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTA1NDRiODc4N2ZjOTNhMGJhYTFiNWE4YzE3NmU2YTZhM2ZmZjgwMDg0MDMxYzQ4ZDY4MDk2OWRkYzAzNzliNCJ9"
         }
       ]
+    },
+    {
+      "id": "claim_0aa72546761240febb800e6885d25bba",
+      "statement": "`dashboard/worker/index.js` is the single Worker entry point that exports `fetch`, `scheduled`, and re-exports the `MessageRoom` Durable Object class.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/index.js#L122-L126",
+          "version": "repo-lines-v1:sha256:65986f0975c9aa48d42ed643c03ed43c191bea487b0514160084e1994b11b811:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDcwMWIwY2Y4OGM4OGVlMDZmODU5MDA0MTQ5Zjk3MjgzODJkNjk0ODFmNTA3ZjUxZDFlYjQwNTQ5ODQ0ZDVjMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTA1NDRiODc4N2ZjOTNhMGJhYTFiNWE4YzE3NmU2YTZhM2ZmZjgwMDg0MDMxYzQ4ZDY4MDk2OWRkYzAzNzliNCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L23-L50",
+          "version": "repo-lines-v1:sha256:e4088ca8d974532f062180a8caf8fa13c188b1ae4ce6097f16affd7604cf14ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZGJjNTVlZjk3OGVlMmY2NDIyNDdhZjFmYjhlMDAwYjE2Yjk5NTU2YjkxNmQ3NGZiODAzYjEzODNjMjk3NDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFmYWY1NzdhOTU0OGFjMzcyNTQ3NDhjYWIzYTZhMTU1MmIyZjNlNTVjYmY2NmYwYjhiMjlkZjAxM2VkZDNlMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4OWJkY2JlMjE3YTAzZTE2YTM3ODQ3ZTZiMDA0NjE0NGY2ODlhOThiMmI5MTI3NTY2NjY0NmNmNDNlMDMxMWUifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L28-L28",
+          "version": "repo-lines-v1:sha256:9fca5c05f53de73384c366733a293bb29460511d2f50e9e7fef2dbedcb43fedf:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWZjYTVjMDVmNTNkZTczMzg0YzM2NjczM2EyOTNiYjI5NDYwNTExZDJmNTBlOWU3ZmVmMmRiZWRjYjQzZmVkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWZjYTVjMDVmNTNkZTczMzg0YzM2NjczM2EyOTNiYjI5NDYwNTExZDJmNTBlOWU3ZmVmMmRiZWRjYjQzZmVkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzEzMjI2MTY4ZmJlOGQ1NzM4OTNhYjhlYzczNTM0ODVhMjgzMzFhZTE3ZGM2ZTBkZTM3YjVlOTA0NTY2NWU1ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTUzMTdmYTYzMTVhYWY2OWVlZmRjMjA3YTk5NWEwMzhkMjJkZGFiY2MyOWQ2NmUyOWVlZmM1NThiNWNiODBjNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_274e8a6be43a4bf1816d89ef910b5177",
+      "statement": "Non-API requests are served from the static asset binding; `run_worker_first` for `/` and `/index.html` lets the Worker mark HTML responses with `Cache-Control: no-store`, while hashed `/assets/*` files are immutable and cached for a year via `public/_headers`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/public/_headers#L2-L3",
+          "version": "repo-lines-v1:sha256:97c465063299ec4303b7e9d50a3a48a001a038ef85271d11df753b1c9fb93b81:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTM5Zjg4M2RmMTcwNjRlMTMxNGNjMjAwZDg1ZmIzMTc1MmQzNWVkNDg1ZTNjMmVlODEwODRlNDY3N2MwNDg2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmRjNDFhYTZlYjkwODg0MWZhMjFlODkxZTVhMzJjMjQ2YTRiM2U0OTMwZWQ0ZDhiYTdmZmE2NjM4ZGJjNWZkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjEsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmM4YTVhNmUyYmUxNmZjZTYwOTBlODI1YTZhZjMyOTQ1NTQ3MjA5ZDY2YzdjZjBmY2RiYzk1YTdmMzAwZWJlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L43-L49",
+          "version": "repo-lines-v1:sha256:ac7d0893be10d1dee23ea7a6c2e193d9386451db24cd361b458364657a1b0321:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJjNWIzYzcwZTI5Y2FmYzQ2ZTAyMTM4OTYwMjEyNDA3YjE2YjM4YzAzYWRkYTBjODQ4YmU1NDQ3OWEwMDk4NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDRkM2ZlZDg4OWY0ZGJlZGYwMjEyODE3ZWUxYmRlOTdlNmRiMzY0YmVjMzAwODJjNzZlYmMxZWM5MmY1ZmE4MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDAwYTUyNWIzYzQ4ZTQ3ZDk5NDlmODQxZTExZTU2ZTk2NzMzYmE2OTcwMTI3Y2Q4YmZjMzRjMDRmMTBiM2IwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzQyMmEwMDU1MzZmYjU2MjdlZGY2ODk3MzU3YTRlOTEzZTYwOThhOGFhMzVkZDRkNzYwZTMyMzMwMzc0MThkNiJ9"
+        },
+        {
+          "resource": "repo://dashboard/wrangler.jsonc#L8-L8",
+          "version": "repo-lines-v1:sha256:8d8a377f2722827a69597e7d95e8445ff7bbb74f304936dfdf901f310bb0f312:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ4YTM3N2YyNzIyODI3YTY5NTk3ZTdkOTVlODQ0NWZmN2JiYjc0ZjMwNDkzNmRmZGY5MDFmMzEwYmIwZjMxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ4YTM3N2YyNzIyODI3YTY5NTk3ZTdkOTVlODQ0NWZmN2JiYjc0ZjMwNDkzNmRmZGY5MDFmMzEwYmIwZjMxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTQ0YTIyZDgzN2M4ODczOGNhZTc0MzU0NzhhZTcxNmJmMTZjZWMyN2I5NjM0Njk4OWJkY2E4OTRhYjc0Mzg2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJlZDkwNGJiYjVlZmIyMGEyOTMyY2QxMzRiZTQyZjMyNjUxMTVmYjFjZDdkNTdhYzI4YmI0OWFjMmMxMzYyNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_92e89ae4a2404a10812a2781600f86c0",
+      "statement": "The `AGENT_TOKEN` opens only `POST /api/messages` and `POST /api/recipes`; it is checked before the dashboard key and the frame key is rejected on the message post route.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L188-L216",
+          "version": "repo-lines-v1:sha256:31b3111985c624f44e98722bff72c5632ad339fd8ec4110a465d5d3a0b0641ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhZTM3YjUxMTZhOTliZWUwYWMwZjg1ZmFiY2NiNjIyZWYxYWExZjczMjU4NTY2ZGRkNGM2NjZlYTFjMDRlZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViMWIzZjkxYzZjZWMyYzQxZmMyMzdhNTEzNmViYjk1YWE4OTJkNGYwYzI0NGIzNjkwNTU3NjBjOGU4M2Y1ZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzOTIzZGJmYTE4NDM5ZWNjY2Q3OGVjNzFkODViY2U0OTIwN2UxN2MwOThmYTRjNGE0YjMwZDBhNjZjNzY1MzkifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L52-L61",
+          "version": "repo-lines-v1:sha256:c1ae41d0c24ae007e44d1deaacae09649f57e0e6a86492e5b0b8881b1c732259:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkNjQ1MWFlNmI4MDU2ZDVlMzQxNTJjNDdkYjRhOWJkZWZiZWZhYTMyZGIyMTIyMmY0NDkyYjAwOGVlMGVmZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjNjhhODU0NjY1NjgxYzJkODI2Yjc5MzkwMGRhODhhMWFmMWFkNDA0YmQxMGUxODFiMmFlMDg1MzRhMmU1YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5ODRmOTU1MzRjMzYzOTM2ZmFiYzVhYzdjYjcxZDc4OGRmM2JiNDE2OTE0ZDZjZDdlZmE5NDdiNDlhMjZmYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0458392b3ac842d18506c94e00bcdf73",
+      "statement": "`DASHBOARD_KEY` is required on all other API routes via `Authorization: Bearer`, and may be passed as `?key=` on GET only for routes an `<img>` or WebSocket must reach: `/api/photos/:id`, `/api/recipes/:id/image`, and `/api/messages/live`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L156-L162",
+          "version": "repo-lines-v1:sha256:311de73a3527ec62bedcb527577ecbe1dde199b70b43be8fdc0a8e42988d57b3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk5MDJjMjRmYjI4YTFkZGY4MjJiMDJkYmRkZDc0NDMwMDJjNzRjMTZiOTcyNWNmY2E1ZWMwNjY1MTdhZDUxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFhZmMwYmJiMzVmZGQ1NDhlYjhjOWQ3ZWY1N2EyN2IwOGI5MmNjYmQzOGMwYzliZTU1NjRhZjM3NGQxMjVlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTQ3MGE3NjVmYjBkOTJkNWNhZDYxOTkxMTk3ZGQ5MWU3MDA3MTZlYmQzZDk0MTNjMTk3YTU3Y2IyNzZkZWJiMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmE2NzEyY2M4Y2ZhYmMxNjZhNWU1MzcwMDAzZGMwNGMzNmNhZjRhZTA4OTJjMTcxOWVmYmVmMjJlODIyYWUyZCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L264-L267",
+          "version": "repo-lines-v1:sha256:cc6a807da2ae93e345d3c3c0c15a7089dfdd7d0bbf555dec958f62f121c50f29:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWY5NjM4OWEwZDAxMTU3ZDBiMjc5ODg3ZjgxN2FmYTUyODY4YzMwYTk0NzA1YTRmZGVhZGYzN2JhZTljZDQxYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTM2MWNmNzBiYTgwYmM3OTMyZWFiMTg5YzA2OTA3ZTcyNDM3ZGZlOTY3ZWQ0NDczODY5YzFjMjg1OTQwOTIzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWI2YzkzMmRkYTdmNjAxM2VkMTZkYzQ4OWVjMWIxZjQ1NTBiOWFhNTc2MjdiZTE5YWU0YTM3OWIwNWJhZWQwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDlhNTM0NTQ4OTBhODQ4MDY5ODRjYzFmMzlmNmEzNDVlY2RhMDhiMzA3YTk1MGM4NDE4YjBhOThlNTNhZjQxZCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L334-L335",
+          "version": "repo-lines-v1:sha256:44687c3d794b9b75391e1d309cc1b7039f4fa2aa5727ff17aec20276e5588021:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2I4ZDJlZWFiMDMwNzdhODY4ODZiZDI4N2JiZjRkM2I2NmI5ZjQ0MTRhMGU3MzAzNTU5NmExNzA2ODg4ODRmNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTE4NTQ2ODcyMDIzYWQ5MTJlNzgxYjhlOWRiYWZlYzNjNzBlNzg1M2Q4OWE5MjRiNzE1MmY2ZTc4ZTk3MjZhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjIxYTZkNmU4YmVmYjQzNjQyMmM0YjBhZmIyZTkxZjdhMDA3ZWYxZDRhNjU5NWE3OGZiMDVkYjYzMDZkMGJjOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L164-L171",
+          "version": "repo-lines-v1:sha256:4188f32e1ecd36e99241e4b6ea780538666fb7c476b85b7c65bc183012638d69:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTlhMTE5ODQ1MjY2MDYzNTQ1NDEwNTc2OTcxOGNiNzY2OTBlYzc4NTg4ZTI0ZDg5NGJiYTQ3ZDM5ZTAwOGEyNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGE2NjYzOGI2OTBlMGI5NTZmMjIyNGUyMjQzZDgzNWEyMjVlYmZiNmJiMzI1NDQ2NWEzNjM0NzJiNzUwYjYzOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2UxZTdmMjYyZDliMTFjN2I2MTllOTYzMGY1ZWQ3ZmQzODgwM2EwMjI0OTI4ZTFlY2U1Zjg3ZjZlZmU3ZmRkYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bcd10db0650d48f98da5b92cb76d8719",
+      "statement": "The Worker dispatches every `/api` route to a feature module: calendar to `calendar.js`, weather to `weather.js`, lists to `todoist.js`, photos to `photos.js`, messages to `messages.js`/`MessageRoom`, and recipes to `recipes.js`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/index.js#L65-L115",
+          "version": "repo-lines-v1:sha256:5d0fde719d4274768d8b41d2e76f051db8c388da5031a04a25b1df4ec46779f1:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0NDc2MWE0MGMyOWNjMzEyMDVkYzcwZGNlMDJiYTc0NWNjOWQ5ZjFkMDI2NmQ4NzgxNDE4MTQwNjg2NjNmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ODRmOTU1MzRjMzYzOTM2ZmFiYzVhYzdjYjcxZDc4OGRmM2JiNDE2OTE0ZDZjZDdlZmE5NDdiNDlhMjZmYmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1ZWE0NmE0MTVmOWE2MTgwODdkN2QyNDZmYjczYjM1OGU3MzM3YzczM2E2NmI5MmEwMmMyNTcxMDA2MDczMzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3068b5cafdbb45feb5d9422ae589f57f",
+      "statement": "KV key `calendar` holds the merged iCal feed; the cron writes it every 10 minutes only if events/errors changed or hourly heartbeat passes, and stale requests are served immediately while refreshed in the background.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L110-L121",
+          "version": "repo-lines-v1:sha256:7e601ef3dfff54e028c900bb64f1f5eb4f903382c6887a0dc4ce4ad446c51509:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3NTBjZDYyMTAxYjQyNDdmOTMxZDE4MmFlYzA4YjYzODRmNjJmZmU5MGUxZGQ3YTg4ZTFhYzNiNGEyMjVkMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUzODc4ZWJlZWY4Mjk5ODg4ZDEzOGU4OTIyMmYxM2E4OWRiNDA4N2ViZjg2NTM5ZWE3OTg2YTFjYzhiYTJiNTIifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L305-L319",
+          "version": "repo-lines-v1:sha256:1874cb1cca8d24e9f392c07a571e6a9b4ae321f9ef4dbf8544780f9057ab2967:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOWVkYjhkNzljYTljZDcwMjZhZGM1OGI3MTM1NmNkZjZkMjI0YWE0MWMzNTZkOTYwMmE3MmJiNzUyN2E5NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzMTc5ZTYyZGQwYjYzYmFjN2NlZmUxNTBjYWRjOWQ4MTM1NzVjYzE2YjkwOWY0ZWRlMTZiOWYzZTlhMWQwMmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5YzYzODAxMzQ2ODhjNDlkNmQ1MGJmMzJmNjU3ZTA3ODE4OGIzNDlhZjQwMzQzMGFjMjU3MDcyMGVlZTdlMGMifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L123-L135",
+          "version": "repo-lines-v1:sha256:efb7dc3548b12cd5c8ac8260f05f079987f995d19571e93d18cf2e4ed1da6ac0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdiNzFjMjNlMDE1ZTQ1ZWFhOTUzMGJjN2JkOWI4ODhiNzUxOGNjYTI3NzE2MWYzYzY2Yzk1ZGUyMGUzMjdkZDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiODlhZDA5ZDQwYzNkZTQwMWY3Yjg3ZGNmNjk0ODQ3Njc0OWE5MmMzYjIxNmRhMDA2OTQwMDJmZWNmNGEwZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5ZGNhZTA0NTg2OTdlNWQzZTEwODAwODM0YzgxMmU3MTZlNDJjM2FkOTIzNjMzMDY2NGJhMjRjZTZlNWRlNzgifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L31-L39",
+          "version": "repo-lines-v1:sha256:9e54008f839ed6cfc65262ed92eb08f81f9d2f85ddc24df0643f4ceafa508232:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjIwMDBiMTg0YzIwODRhNzFmNTVlYzA3OWQxMTVkYTEwMWU4YmE4NDQxZjJkOWFmZmZhYmRjYjE2OWI3NGYxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzZhZDdiOWU1YTllMWViMzVjNTI4M2QwNTkwOTM1ZGFjY2Y2MTVlZWU2MTU0YTgzNDY0OGYxM2FiM2M4YmNkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDAwYTUyNWIzYzQ4ZTQ3ZDk5NDlmODQxZTExZTU2ZTk2NzMzYmE2OTcwMTI3Y2Q4YmZjMzRjMDRmMTBiM2IwYyJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L65-L70",
+          "version": "repo-lines-v1:sha256:c65e776340196f823c46ca6fcf96e4f7f4b6c3ff21418a5dd0f303cf386548dd:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQ0NzYxYTQwYzI5Y2MzMTIwNWRjNzBkY2UwMmJhNzQ1Y2M5ZDlmMWQwMjY2ZDg3ODE0MTgxNDA2ODY2M2YyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2M4ZGNjYTU1YjcyMTZlMGE2ZTllYWZmYzJlYWQ2ZWNlMGExZWRmZDMxNjU2ZmIyNDhkMWVlMTljNDBmY2Q0NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDk4NGY5NTUzNGMzNjM5MzZmYWJjNWFjN2NiNzFkNzg4ZGYzYmI0MTY5MTRkNmNkN2VmYTk0N2I0OWEyNmZiYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjM1M2Q1ZDVmNGQ2MmEyZTZiZmVhNTllNTcwZGEwNDcwNzlmM2E2ZTRlNWYxZDgzMWJiZTZiZGI1ZmE1NDA4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b2c05721effc447491dd2fd8768611a2",
+      "statement": "KV key `photos` caches the iCloud album list for 30 minutes and KV keys `photo:<id>` store resized image bytes for 30 days; both list and image responses are served with `private, max-age=604800, immutable`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L123-L172",
+          "version": "repo-lines-v1:sha256:84cd10b499c9b74dc560ca061fccd63547c136712fa6dd7007a3e3ae3020da5e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkZWQ5Njg1YTAwNDUzMGUyN2YyYzMwYWFjYTdhZmUyNjg4YzYwZjdmOWZmYTM1YjIyODhjZTlkNzFmZmU0Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmZTcwYmUyNGFkYjk5ZjliODY0NTQ1YmEzMzBkYmFiNTkwNWMzNWNmZjY4NGVkMjBkMGVjOGEwMjIzMDFkZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliZTgzYjBiNmViOThkNjQ1YjAyZmVhZDM4NmQ5YWQ2ZDZhNmMxNjEzMTRjZGU4NzgyNmU5YTkzYzg0ZDY1ZjYifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/photos.js#L13-L17",
+          "version": "repo-lines-v1:sha256:98416c9145bb299ee94b08369f8c60d2c11cdd27a128b37d6d4a4b7b40a8a51a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmY1OTg4MDUxMjAyM2ExNjY0ZDAwYWQ2OTU1MDljOWI3NzcyYTI4MDAzMDg4NDRmMDM3NjkwMTk2NTA3OTU3MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTI2YjUyNzQxNTAwY2U2Y2ZmNjk4MjUwNjU3YzJiMDgzNTNmZDZjMzY3NWZiNzdkZTg4ODBiOTI4OTllMTg1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2RiYTE3ZjVjZjY1ZWFlNTkxNmY2ZmE2Zjc0YTkxZDQ0NjY0YmJkN2Q5ODhhOGYyYmE0MjgxM2I3NjkwZTc3ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGNjNDIxZjk0ZmIyMDljNmZlNzZhZDc3OGQxMTYzYmIyMzliNzBhNjdkYTJiMDFhZDNkMGFiYzhmZjQxYzQyYiJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/photos.js#L88-L141",
+          "version": "repo-lines-v1:sha256:432df572a749be53593e2b8ad815ea37419dc2c0e9c1c62559c015a0fc291ddf:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzZmM4ODRhODk1NWM4YjgzY2Y0YzliY2QxNmM2ZWMwOTg3M2Q4NzFkOWI3N2YxZTQ4ZDQ3NjQ3NjMwMDRkOTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjNTNjNjU5NjY1NjY0NDQ0OTEwYmQ2NTk2NGM5YmYwZDc5OTJjNzdhM2U1OGQ1NjE1NDgzMTE1MGI4MzVmMWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyNTQ0N2UwMzlhOTkyYWJlZjgwZjQ2Nzc0MjdmMzEyNmIyZTIyYThlZGQ3NzRhZjI0MTg5MTI4MDViNzdjYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d81f5f0e17a4530b9d66039e49b4c9b",
+      "statement": "Saved recipes use KV key `recipes`; each recipe's photo is copied into KV at save time under `recipe-image:<id>` and served with `private, max-age=604800, immutable`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/api.test.js#L229-L277",
+          "version": "repo-lines-v1:sha256:ed88da167d936d542ac397d7947eefa41153702b9d7caa40041bbe4803a0b4c1:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjZDlmZGQ5MWEzZDQ3OTM2YmFmYTJhZDdhOThjZGEyZmEyODU0NzA3NWIwZTZhODRhODdkYWU5ZDMyNWFkNGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwZWFlMjk0NjE5MzdjODBmZTUwYTVmZDI5NjQ4MmE2M2QyZWIwNjU3YWIzMjFlMWNkOGExNTBkNjUwNGYyNDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExZmNkMmIzYTNiYzNiY2VlYTEwMTk3NWU1NTc5ZGI0YmNmMzgyMjQ5NTBkM2FlODk3MTRkNDAzMjlkMTNhNDIifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/recipes.js#L104-L153",
+          "version": "repo-lines-v1:sha256:ab8e31a92c604f483c98ce33a730c6a26e54eccd05ec97f8cff3ecc422084d40:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4OTQ2NjE0NDhiN2EzM2JkZGE2YjFhMzI0MzlmNzZmNTRlODA0YWIxZWIzYzNiOWRiZTYxMTY0MzlmMmRkMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczODc3ZTg2MWNmNjcxYzExODI3NmRiYjQ3MDkxMmRiYjI2YjAyNjkxYWFmMDJlMDgxOTExZTdiOTJjYWViMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/recipes.js#L12-L15",
+          "version": "repo-lines-v1:sha256:54d4ad318948a8012d6e805e98054af05b90e6ec69422073b8214ebf5b5c488a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjNmNGJiNGE4NDM2YWRkY2ZiZmY5OTZmZDkyNWViMDc2MzcwZGZjYWQ2ZDcwOTNmMTdlNmNiOTQwYzNlZmQ1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE5NDg1ZjJlZWEzZWNjOTk4MmM5MDBjZGFhYmVmZjRjMDE5YzQwZjRkNzQ4NDhiMjE0NDc2ZjJjMjk3NWVlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGI1ZGE2NTk0MDBiMDU0ZDQ5ZTZhN2FiM2I3MGU4NWY1YTk1MWIzZTFmNzJhYjcxNTNkZDA2YTNlNzY0NjllNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTA1Mjg4MThiZmI1NDA5NjE4NjA3ZjkwMmE5MGVkY2RhZDUzYzhjYWU0NDBlN2E4NjI1MDBmOTMxNjM0MzQzYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_054742f8f20b40f1963220f7aaf3b651",
+      "statement": "JSON responses default to `Cache-Control: no-store` via the `json()` helper; deliberate exceptions are TheMealDB explore (`private, max-age=86400`) and photo/recipe images (`private, max-age=604800, immutable`).",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/index.js#L173-L178",
+          "version": "repo-lines-v1:sha256:8cf23d8d267ccbfc75c5d3444af84fd107984a59632b80701b39b5332bfb8d8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWMwMDk3YjU3OTE4OWJjMDExY2Q1ZmI5OWYwMzEyZGEzZGM5ODU1ZGIyNTI4MjJjOGI0YWEwYTc0NzViM2E2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTAyM2ZmYWYzN2UyNGRhNzY0ZDM4YzI5M2Q2ZjIxMTVhMDZiMzc5N2E4ZTBkMjk3OTBjZDRkMTEwZTRhYTc0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L80-L85",
+          "version": "repo-lines-v1:sha256:b75138578a9e4657e3e9e467bd1e19385e79d694e46c0ebb54029174d30cbeec:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk3ODRhNzYxNmE0YTliMmZmZmRkZTExOTEzYmRkYTMzMDA2ZGIzMDk3YjVjZmEwODJlYjRhOWU1NzNhOGUyMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWVhODRjNWYzZTMwNTdiZWJhOTQzZmVjOTMwOWNjNmIxODkyOGMwNmNlYTVlNTFmODA1MDk5YmQ3MDA3OWU1YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2VlZGExZDU4NDY3ZTEzZTQ2NjVhZjNjZGI4N2FlMDJmM2Y1NzIzMzdhYzMwMjAxNmYxMTk4MjMzMTU0NjYyZCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/photos.js#L121-L125",
+          "version": "repo-lines-v1:sha256:b61ddf831871b11af2ba9a993fd545373c807ab71f3d8278af9559434c4903b8:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWUxMzI3NTBiZjY0Njk2YTIwZjhlNzEwMTMwNjc0NDUyYzczNTYzOGE1YjQyMTMzYjAyMDY1OTc2YjBlMGM4ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJhMmNiMjVhMTIyYjQ0MjIxYTYyMzRlYzY2MGE3YjVmYjdmOWJkZTdiM2I5ZTJiM2M1NTlhMGQ5NmZhYzczOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDI4ZWM3NTQwYjdmYWNjMDZiNjhlZmQzODMzYzJiMWEyMzE1ZTlmMTljODI5YjM0NjZkMTAyOGIxYWExODE0NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmU2ZTU3MzM4YWEzZWM4OTNiYmY4YWNlNGVjMzIyMWVlMmIzN2NkNDEyNmQwZjVhYzdjYmEyMjIyZTIzMjNlOSJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/recipes.js#L150-L153",
+          "version": "repo-lines-v1:sha256:b990a783f0c45e27ff8dc33efd0727e73dbaeb0215a739ec900820dae3bafa74:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMThiZTNhYTRmODIxZTgwMjVhM2ZjZjg2NzBmNzNmNGI0MTdiMjE3ZTFmZjA2MzA5OTEzOWViNTViMGM5Y2I4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM4NzdlODYxY2Y2NzFjMTE4Mjc2ZGJiNDcwOTEyZGJiMjZiMDI2OTFhYWYwMmUwODE5MTFlN2I5MmNhZWIxOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTg2YmIyMTdhM2Q0ZjQ0OGRjYWJhNTQ3NDk1MjAyYTlkNmQ5NmQ0OTJiNzgwMjllNzljNzE1MDEyZGIzMWM0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_801de3d46b7a4d10b5b94b80113995fd",
+      "statement": "Exceptions inside API handling are logged and returned as `502 {\"error\": \"<message>\"}`, and unknown routes return `404 {\"error\": \"not found\"}`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/index.js#L116-L116",
+          "version": "repo-lines-v1:sha256:767ce15d185f3149dd6042ff2e34838ecdc764ed2647defff034c113e6f8b2d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY3Y2UxNWQxODVmMzE0OWRkNjA0MmZmMmUzNDgzOGVjZGM3NjRlZDI2NDdkZWZmZjAzNGMxMTNlNmY4YjJkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY3Y2UxNWQxODVmMzE0OWRkNjA0MmZmMmUzNDgzOGVjZGM3NjRlZDI2NDdkZWZmZjAzNGMxMTNlNmY4YjJkNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIxNTIwZmVhMDAzMjJhY2Y3N2ZmMWNhMjRiYzM1OGE5MGFkYTM4NDVkY2E2YzAwNTg5NDUwODUxOWE3NTFkOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWIyNjZhMGEzNjVlYWM1ZDBhZDBjMGZkMGQ2MTFjMTU0M2RhNGU2NzNkYmU0Y2MwYjcyZGY3YWQyNDdmNDljYSJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L117-L120",
+          "version": "repo-lines-v1:sha256:1f866ec60bd5e10346c49908ad5f1299ad419600572e78525ecc817f9773d5b9:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFiOWE2NmY1ZTQwOWJiZWRkMWNjZDVkN2M0MDdjMjI2NTk0M2NmMDA1ZjZkOGVlN2FmN2IxOWQyNWY2NzhhYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDYzM2ZiMGNlNGQ3OGIwNTU1OGYwY2QxMDI4NjNhNzY5NTdmZTBjOTIwZDU2MjlkZjk4NTUzNDk1YWMwMzMyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTYzMmIzOTU5ZDVkZWIzYzU2MDQ5MTUxYjdiOTc2YmJhZWVjN2UwY2MxYjU4ZDg4MDY3YjQzNWYxMzJkMDU5MCJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

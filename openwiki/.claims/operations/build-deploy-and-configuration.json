@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9a1657943bad59ba665baf83c2554aa01bc0658c96ef50e18a63aa8ec9131557",
+  "pageVersion": "sha256:d48aa6627314b23e3febaaf2af659cf8bbd800f6e093004339899d8f3c814be9",
   "claims": [
     {
       "id": "claim_ef1b1fedf37544eba6ce52d3bce5fcbe",
@@ -83,10 +83,62 @@
           "version": "repo-lines-v1:sha256:6cec92ddff0d60ddd8429329c7992ccd9def9258d1e2cf537b16276e6b40e975:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
         }
       ]
+    },
+    {
+      "id": "claim_785916f0741647c7826d1114cd828751",
+      "statement": "Production secrets are managed with `npx wrangler secret put <NAME>` and stored in the gitignored `dashboard/.prod.vars`; local development uses `dashboard/.dev.vars` copied from `.dev.vars.example`.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L10-L13",
+          "version": "repo-lines-v1:sha256:9c0a8eb3d54e0d31c7bf665949cf6703014110821b266ea68817b38f18c60e2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1N2I4ZWE4Y2FhOTBlODczNmJlNzkzNGI4ZTVhMzhmYzk3NTNkOWQ4OWE3ZmM5YTIzZWE2ZWI4NmQ2YTFmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiJ9"
+        },
+        {
+          "resource": "repo://dashboard/.dev.vars.example#L1-L1",
+          "version": "repo-lines-v1:sha256:c93e97c877c4b272f9d045d04265e0947a176c772159b46f4cbb8cef4e488fde:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkzZTk3Yzg3N2M0YjI3MmY5ZDA0NWQwNDI2NWUwOTQ3YTE3NmM3NzIxNTliNDZmNGNiYjhjZWY0ZTQ4OGZkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkzZTk3Yzg3N2M0YjI3MmY5ZDA0NWQwNDI2NWUwOTQ3YTE3NmM3NzIxNTliNDZmNGNiYjhjZWY0ZTQ4OGZkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2ViZjQ2NTMzNThiOGY1MmI1YmZlOTQzZTYyMjgwMWYyODQxY2ExODE2NTg1MDU0NTgwYWYyMTY0NjBhZTNkOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_92c79ba182dc4ea09de0b5a69d7c0dc7",
+      "statement": "The page response is marked `Cache-Control: no-store` in `worker/index.js` so the frame never keeps an old build after a deploy; content-hashed `/assets/*` are cached immutably for a year via `public/_headers`.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/public/_headers#L1-L3",
+          "version": "repo-lines-v1:sha256:32d32863350cde0868fa5d86249f4e89f4bf0cc2abb2d409c1813c26f55b8f96:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmM4YTVhNmUyYmUxNmZjZTYwOTBlODI1YTZhZjMyOTQ1NTQ3MjA5ZDY2YzdjZjBmY2RiYzk1YTdmMzAwZWJlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmRjNDFhYTZlYjkwODg0MWZhMjFlODkxZTVhMzJjMjQ2YTRiM2U0OTMwZWQ0ZDhiYTdmZmE2NjM4ZGJjNWZkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L42-L50",
+          "version": "repo-lines-v1:sha256:7e8a6e17e9f7b3e8e9d5b5cffa92f436812e6acb41a8ba792a9c93035d85bc70:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODJhNzQ0ZjY3MWVmMTBkZGRiOWNhMTUwYmJjMDA4ZWIyM2JlMDQyOTE0OGRiMzAxN2RiODNjY2Q3ZTcwODg2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWJiNWU4YTgxYTIxYjM5MzA2YTJhZTA5OGNmODk0YmM4NDg5Mzg1OWQwNjM4ZGU2MGU4ZWZmYzI2NjkxYzM2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjg5YmRjYmUyMTdhMDNlMTZhMzc4NDdlNmIwMDQ2MTQ0ZjY4OWE5OGIyYjkxMjc1NjY2NjQ2Y2Y0M2UwMzExZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7fbae16f93574de08a9a09d8f3af6f20",
+      "statement": "The account stays on Workers Paid for cron CPU headroom and Durable Object WebSocket hibernation; steady-state request, KV write and image-transformation volumes fit inside the Paid plan's included usage, and the Free plan's 10 ms cron CPU limit motivates the calendar feed pre-filtering.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L63-L65",
+          "version": "repo-lines-v1:sha256:7c16c57ae6ced304267aa520428fd61db1b91369380f77fc032b812511ca2b39:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjNmNGE1MDhiYTA0ZWI1MzNjNjJlMTMxZDA2ZGU3MDZhMTBjYjYxNWZmNDIwZGYyN2Y5ZTg5ZGIzNTkzOGYxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMTFiNDhkNzRkMTFkNDAzOTU0OTFhMjc4NWRiYmUxMjk3OTIzYzA2ZjJiOGRmOWRhMWM4YWYwMjAwOWYyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGYwNjViNmIwZDc5NmIxZDU3NDYxNGU2MGQ4YTkyZTQxYzM5ZGU2ZjVlMDIyZTA5MTYwNDgxMGI2NDU5OWYxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDUyMWJhOTcwNzk3OGQxZmJlNTE0MWVhYjA1NDE1MTI5ZDhjMjhlNDMwNGFmNjkzYzBkZThjZmU2OTMzMjg3MyJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/calendar.js#L7-L12",
+          "version": "repo-lines-v1:sha256:03bac987f140eb70eb12acf31f132f77b0a5cdd1e85d1e913d92f14953a5c842:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAzM2ZlYjgwMDAzMzk3ODAyZTg1YmM0NmE3MDJmYTYyNmNmMjc2OGYzMDdiNzQ1NTZkZmE5ZmIzZWEwNTkzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODdiZTQwZjE1ZWY3NTNjZWNmZmNjMWM2ZWIzYjYxY2E4NTcwNGExMTNmNmIyNGY5NDI1MzQxNmVjMTYzMDFjZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTllMDNlODUwMjA1MjhlNmU0MDA5MzkxMTYwNjUxYmEyNGYwMTgwNjY4YzI1NGE3NjJhOTk3OGM3NzRiM2UzMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8328e4990854219815e4854772bce8b",
+      "statement": "The `.dev.vars`, `.prod.vars` and `.frame.vars` environment files are gitignored so secrets and frame-specific values are never committed.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L10-L13",
+          "version": "repo-lines-v1:sha256:9c0a8eb3d54e0d31c7bf665949cf6703014110821b266ea68817b38f18c60e2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1N2I4ZWE4Y2FhOTBlODczNmJlNzkzNGI4ZTVhMzhmYzk3NTNkOWQ4OWE3ZmM5YTIzZWE2ZWI4NmQ2YTFmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T16:59:46.542Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

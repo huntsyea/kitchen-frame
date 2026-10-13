@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7ab73d7aa248f5065e327067dc37bf2d56177b865b86d05789d36e86bdbf3137",
+  "pageVersion": "sha256:71847c2379c1a95b86abf17fcf6f8a815beae0aca949b2a363b65968ba725cc6",
   "claims": [
     {
       "id": "claim_4b6b62327cc6498e90cf731ab42bfeb1",
@@ -95,6 +95,10 @@
       "statement": "The Recipes view builds the Explore and Saved panes lazily and keeps them, hiding the inactive one with visibility:hidden, and opens a recipe as an overlay above the hidden list so Back keeps the scroll position.",
       "evidence": [
         {
+          "resource": "repo://dashboard/src/views/Recipes.svelte#L1-L8",
+          "version": "repo-lines-v1:sha256:3f4f205d5e0242a5c504ea25ac5a5ca469c9f22195aa80d1dd1a1024bd8d8e27:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDgxYTRlYjU4NzA5MmE5ZjdkODIzYzE4Zjk5Mzc0MjgxNGU3Nzg0ZjU0NjEyOTg0NzY5MWRjYzdmN2Y1YWVhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzJlYTJkNzAxYTIwMGQyYjFlMzBmOTdjYzk3NzRhZmJhZDk4OWUxOTc5NWVhMjZlMDliZjI1OTEyNTAyYjRhNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2U5ZGEyNTg0ZTMzMWQ1ZTAyMzVmMDI0NWE2MTUzMjYwODM1MTVkMzRkNTI2YTYyZmU1ZTQxMmViNTY5MzI2YiJ9"
+        },
+        {
           "resource": "repo://dashboard/src/views/Recipes.svelte#L145-L155",
           "version": "repo-lines-v1:sha256:638fc5047a4f138302d62706836a79e2e33ed6c82bcdbc17cbe465bf50ed97fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkNGE4ZGYwNTU3ZDAxNWRhNTliZWYwZmJjNDRiNDllZDJhOGJiODVjYWQxMzU4MWM3N2FkMTZiOTVlYjkwOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2YTQxNWEyYzUwZWVkNWU1YzhiYjg1MzllMmExNmNkMjBmOGJhNjQ3MjkyZDIwYjA3NTljMWViMTJmNThlMDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmOTAyZWFkYWU4MjI4MmZiZWQ1ZDViMjkyYzBlNzg0OTQ0MzAwOTg2MzQwNzAyNDc3MDJmOWIxYTFlYjZmNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk1NTVlZWNlOTA2YmNjNDEzZjJhN2I5ODM2OWMzYjNjNzgyNmVkOGYyYWY4NWRhNDI3NDQ4ODMwNzdlMjkxZTUifQ"
         },
@@ -105,6 +109,10 @@
         {
           "resource": "repo://dashboard/src/views/Recipes.svelte#L79-L79",
           "version": "repo-lines-v1:sha256:b5d84b1fe9c3a1782ab1830f2cd82c5c56f2c7846132d1fc364515e6fcb1b9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVkODRiMWZlOWMzYTE3ODJhYjE4MzBmMmNkODJjNWM1NmYyYzc4NDYxMzJkMWZjMzY0NTE1ZTZmY2IxYjllNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVkODRiMWZlOWMzYTE3ODJhYjE4MzBmMmNkODJjNWM1NmYyYzc4NDYxMzJkMWZjMzY0NTE1ZTZmY2IxYjllNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjU5YzI1YmYwMTQ2NDQyMmZhNDY1NzAwMGIyMDNkZjk0ZjYxMjA5ZGY0NTFkMjkxYzNmZjg3NjRhNzBlY2M3NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTgwYTZjMTE0MDIwYWMyMzliMDI3M2MyMzM2YWY5NGVlZmUyMDMyNTFkMmYxM2NlOGQ2OTk0ZWVkMWM1ZWVhOSJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/views/Recipes.svelte#L90-L113",
+          "version": "repo-lines-v1:sha256:aeea02c243a064410a8c89812de0cb27c6f222f066c0e4ce098018277ab6a25f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NDgwZjBmMmY4NzZhYmFhZmNlNzQxYWE3NmZiMTI1NThkNGYwY2VlYjAyZjhjZGNiMjRkOThjMjY3ZWIyOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0MzBmMjgxNDdjYTYzMzhjZjI5MjZhMDcwNzMxYjE2NzIxZTI3ZGZlOTdhODAzNzY5YzZjMjE4Nzk0MTg3NmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRkOTFhYTIzZDUzODUyNjhjMjdmZTZiYmUyODM4NjRjNjBkZDZiYjQ5MDJmY2Q3YmQ3NzBjYjhiMGNhMDQ4MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4ZWE2NmNmMTg3ZTE1NzU3NDM4ZWI3NDZiM2ExMmZhYzI4YjhkNzdiNzU0YjU0NTg4OTRiZjFlYWMxYmU3NWUifQ"
         }
       ]
     },
@@ -137,7 +145,7 @@
       "statement": "Tapping ingredients marks them as already on hand; Add to Groceries sends the remaining ones in one bulk request as 'name (measure)' tasks with the description 'For: <recipe title>', appends the returned items locally with that note, and in demo mode never reaches Todoist.",
       "evidence": [
         {
-          "resource": "repo://dashboard/src/lib/state.svelte.js#L70-L80",
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L73-L83",
           "version": "repo-lines-v1:sha256:5868653ca228631fcf510449e619d3bdf30dbefb1d9a7f799e18012e705eca47:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ZDY5YzlhNTMwZGEzOWQyNmRkMzA5MWJkNjdjNDRlM2NjMWI2YjU3YmUxOTM0YWFmZjlmNzBkNGFjZDljMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3YzYwYzg3ZTM4YTNmMjBiNDA1ZmQ0M2ZhNjUyZDhiMzc4MmZiZmZlNWFlZDZhMWM5NWI1ZTVmY2Q2OWI0YjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzYTY0YmYxMDNjYWM5NTBiZjdmNWQwZmIwM2Y2MTYyYzdjYWFjOTEyNTkwYjM3ZTM5ZTdhNGVmZmEzNmRhMjUifQ"
         },
         {
@@ -167,6 +175,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T05:27:36.156Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

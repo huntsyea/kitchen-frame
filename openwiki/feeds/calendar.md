@@ -1,11 +1,8 @@
 ---
 type: data-pipeline
 title: Calendar feed
-description: How several iCal feeds (iCloud family calendar, Google holidays) are fetched, pre-filtered, expanded with ical.js, merged and stored in KV by the Worker cron, and how the frame indexes the result by day for its Home, Week, Month and clock screens.
+description: How multiple iCal feeds are fetched, prefiltered, expanded with ical.js, merged and stored in KV by the Worker cron, how failures are isolated per feed, and how the frame indexes the result by day for its Home, Week, Month and clock screens.
 tags: [calendar, ical, ical.js, kv, cron, timezones]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T05:27:36.156Z
 sources:
   - id: openwiki-source-e12fdae11ea7713285efd699
     resource: repo://dashboard/src/lib/format.js
@@ -21,14 +18,17 @@ sources:
     resource: repo://dashboard/worker/calendar.test.js
   - id: openwiki-source-761c8b9c5f5e1234a74d94a4
     resource: repo://dashboard/worker/index.js
-generated: { by: "claude-code", at: "2026-10-13T05:27:36.156Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-13T17:09:19.129Z
 ---
 
 # Calendar feed
 
-The dashboard shows one merged calendar built from any number of iCal links (today: the iCloud
-"Yeagley Family" calendar and Google's US holidays). The Worker does all parsing; the frame
-receives a small sorted JSON list.
+The dashboard shows one merged calendar built from any number of iCal links (for example an iCloud
+family calendar and a Google holiday calendar). The Worker does all parsing; the frame receives a
+small sorted JSON list.
 
 ```text
 cron */10 ─► updateCalendar ─► refresh: fetch each feed ─► expand (calendar.js) ─► merge
@@ -50,59 +50,141 @@ current month) to 70 days ahead (five weeks of week view and the month view thro
 
 `calendar.js` is pure functions with no Worker APIs, so it runs under `node --test`.
 
-- **`prefilter`** exists because a Google feed contains every event ever created and full parsing
-  was too slow for a cron run. It unfolds continuation lines and, with a cheap string scan, keeps
-  only one-off events overlapping the window (±2 days), plus every recurring event, exception
-  (`RECURRENCE-ID`) and `DURATION` event, and the feed's VTIMEZONE blocks and `X-WR-TIMEZONE`.
-- **`expand`** parses the filtered text with ical.js, registers VTIMEZONEs, and emits events
-  overlapping the window. Cancelled events are dropped. Exceptions replace the matching
-  occurrence of their recurring master (tracked per uid). Recurrences are walked with a cap of
-  20,000 occurrences.
-- **`fastForward`** starts a recurrence walk at the last whole interval before the window instead
-  of at DTSTART (DAILY/WEEKLY by days, MONTHLY/YEARLY by months), giving identical results without
-  walking years of history. It is skipped for `COUNT` rules, multiple RRULEs and month days above
-  28.
-- **Time zones:** `utcMs` uses `Intl.DateTimeFormat` for IANA zones (current DST rules), the
-  feed's VTIMEZONE for other zone names, and the TZID / `X-WR-TIMEZONE` / fallback for floating
-  times. All-day events keep plain `YYYY-MM-DD` dates with an exclusive end so they land on their
-  own day on the frame; timed events become ISO instants.
-- **`merge`** flattens all feeds, drops duplicates with the same uid and start (the same invite on
-  two calendars), sorts by start, then calendar, then title, and strips the internal sort keys.
+### `prefilter(text, from, to)`
 
-Output events look like `{uid, cal, allDay, title, start, end, location?, holiday?}`.
+A Google feed contains every event ever created, and full ical.js parsing was too slow for a
+cron run. `prefilter` first unfolds continuation lines, then does a cheap string scan over each
+`VEVENT` block:
+
+- Keeps every event that has `RRULE`, `RDATE`, `RECURRENCE-ID` or `DURATION` — recurring events
+  and exceptions must survive so recurrence expansion can produce occurrences inside the window.
+- Keeps one-off events whose `DTSTART`/`DTEND` overlap `[from − 2 days, to + 2 days]`. The padding
+  avoids losing events that cross the window edge.
+- Always keeps `VTIMEZONE` blocks and the calendar-level `X-WR-TIMEZONE`.
+
+The output is a trimmed iCal text that ical.js can parse quickly.
+
+### `expand(text, cal, from, to, fallbackTz)`
+
+`expand` runs the filtered text through ical.js and emits events that overlap the window.
+
+1. Registers every `VTIMEZONE` with ical.js's `TimezoneService`.
+2. Resolves the start-time zone with `tzFor`: `DTSTART;TZID=…` first, then the feed's
+   `X-WR-TIMEZONE`, then the `DISPLAY_TZ` fallback.
+3. Splits components into three buckets:
+   - standalone non-recurring events;
+   - exception events (`RECURRENCE-ID`) — their instance key is recorded so the matching
+     generated occurrence is skipped;
+   - recurring masters (`RRULE`/`RDATE`), which are iterated later.
+4. Emits each event through `toEvent`. Cancelled events (`STATUS:CANCELLED`) are dropped. Timed
+   events become ISO instants; all-day events keep plain `YYYY-MM-DD` dates with an exclusive end
+   so the frame shows them on each covered day without time-of-day ambiguity.
+5. Recurring masters are expanded with `event.iterator(fastForward(...))`. The walk is capped at
+   20,000 occurrences per master and stops as soon as the next occurrence is more than a day past
+   the window.
+
+`EXDATE` is honoured automatically by ical.js's iterator; `RECURRENCE-ID` exceptions replace only
+the matching occurrence because `expand` tracks a per-UID set of overridden instance keys.
+
+### Time zone resolution
+
+`utcMs(t, tz)` converts an `ICAL.Time` to epoch milliseconds:
+
+- All-day values map to UTC midnight of that date.
+- UTC/Z values use `Date.UTC` directly.
+- For IANA zone names (`America/Chicago`, `America/New_York`, …), `Intl.DateTimeFormat` is used
+  with current DST rules. The code iterates the offset calculation once to converge on the right
+  instant.
+- For non-IANA zone names, it falls back to the feed's `VTIMEZONE` via `t.toUnixTime()`.
+- Floating times (no TZID and no ical.js zone) are interpreted in `tz`, which is the DTID parameter,
+  `X-WR-TIMEZONE`, or `DISPLAY_TZ` / UTC.
+
+This is the piece most validated by the test fixtures: a weekly practice in CDT, a daily event
+since 1995, a floating farmers market in the calendar's default zone, and a DST change where the
+same wall-clock time shifts from 12:00Z to 13:00Z.
+
+### `fastForward(event, from)`
+
+ical.js walks recurrences from `DTSTART`. A daily event from 1995 would require thousands of
+steps, so `fastForward` computes the last whole interval before the window and starts the iterator
+there instead:
+
+- `DAILY` and `WEEKLY` advance by whole days (`interval × 1` or `interval × 7`).
+- `MONTHLY` and `YEARLY` advance by whole months (`interval` or `12 × interval`).
+- Skipped when `COUNT` is present, when there is more than one `RRULE`, or when the start day is
+  above 28 (to avoid month-length edge cases).
+
+The test suite compares fast-forwarded results against the same rule with a huge `COUNT` and
+verifies they match.
+
+### `merge(lists)`
+
+`merge` flattens all feed arrays, drops duplicates that share the same `uid` and `start` (the same
+invite appearing on two calendars), sorts by `startMs`, then calendar index, then title, and strips
+the internal `startMs`/`endMs` sort keys before returning the list.
+
+The output shape is `{uid, cal, allDay, title, start, end, location?, holiday?}`.
 
 ## Refresh, storage and failure (`dashboard/worker/index.js`)
 
-- `refresh(env, previous)` fetches all feeds in parallel. A feed whose URL contains "holiday" has
-  its events marked `holiday: true` (the Week view leaves them out of its "more events ahead"
-  count). If a feed fails, its last good events from the previous copy are reused and the error
-  is listed in `errors`, so a blip never blanks the wall display.
-- `updateCalendar` writes the result to KV key `calendar` only when the events or errors changed,
-  or when the stored copy is over an hour old (`HEARTBEAT_MS`, keeping `updated` meaningful). The
-  cron runs it every 10 minutes, so typical KV writes drop from 144 a day to about 24.
-- `GET /api/calendar` answers from KV. With no copy, or with `?refresh` (used by Settings →
-  Reload), it refreshes synchronously. If the copy is older than 75 minutes (`STALE_MS`, i.e. the
-  cron fell behind) it answers with the copy and refreshes in the background via `waitUntil`.
+`refresh(env, previous)` fetches all feeds in parallel and returns a single object:
+
+```js
+{ updated, calendars: urls.length, errors, events }
+```
+
+- `webcal://` is rewritten to `https://` and the request asks for `text/calendar`.
+- A feed whose URL contains "holiday" has its events marked `holiday: true` after expansion, so
+  the frame can exclude holidays from counts.
+- **Per-calendar failure handling:** if a feed throws or returns a non-iCal body, the error is
+  logged, an entry `{cal, error}` is added to `errors`, and that feed's last good events from the
+  previous KV copy are reused. Other feeds are unaffected, so a transient blip never blanks the
+  wall display. The error list is returned to the frame so the UI can show that something is stale.
+
+`updateCalendar` writes the result to KV key `calendar` only when the events or errors changed,
+or when the stored copy is over an hour old (`HEARTBEAT_MS`, keeping `updated` meaningful). The
+cron runs it every 10 minutes, so typical KV writes drop from 144 a day to about 24.
+
+`GET /api/calendar` answers from KV. With no copy, or with `?refresh` (used by Settings →
+Reload), it refreshes synchronously. If the copy is older than 75 minutes (`STALE_MS`, i.e. the
+cron fell behind) it answers with the copy and refreshes in the background via `waitUntil`.
+
+See [Worker routing, auth and caching](../worker/routing-auth-and-caching.md) for how the route is
+authenticated and how the cron is wired.
 
 ## On the frame
 
 `loadCalendar()` polls every 5 minutes and only replaces state when the response changed (see
-[app shell](../frontend/app-shell-state-and-polling.md)); the last copy is kept in localStorage so the
-frame boots with a calendar when offline, and Home/Week show "Offline · <time>" in that case.
+[App shell, state and polling](../frontend/app-shell-state-and-polling.md)); the last copy is kept
+in `localStorage` so the frame boots with a calendar when offline, and Week/Month show
+"Offline · <time>" in that case.
 
-`eventsOn(events, day)` in `src/lib/format.js` is the single way views ask for a day's events.
-It builds a per-feed index (a `WeakMap` keyed by the events array) once per calendar copy:
-timed events under their local start day, all-day events under every day from start to exclusive
-end. Home, Week, Month and the idle clock screen call it for many days every minute, so this
-replaced repeated full scans. The Month view also derives a day key from the minute clock so its
-grid rebuilds only when the date changes (see
-[views](../frontend/views-components-and-design-system.md)).
+`eventsOn(events, day)` in `dashboard/src/lib/format.js` is the single way views ask for a day's
+events. It builds a per-feed index (a `WeakMap` keyed by the events array) once per calendar copy:
+timed events live under their local start day, all-day events under every day from start to
+exclusive end. Home, Week, Month and the idle clock screen call it for many days each minute, so
+this replaced repeated full scans.
 
-## Tests
+The Week view uses the `holiday` flag to leave holidays out of the "more events ahead" badge count
+(`calendar.data.events.filter((e) => !e.holiday && Date.parse(e.start) >= from).length`).
 
-`worker/calendar.test.js` uses `fixtures/google.ics` and `fixtures/icloud.ics` to cover EXDATE,
-moved and cancelled instances, a daily event since 1995, multi-day all-day events, prefiltering,
-folded lines/TZID/floating times, merge de-duplication, a DST change, and that fast-forwarded
-monthly/yearly rules match a full walk. `worker/api.test.js` covers the stale-copy background
-refresh, holiday marking, and that the cron writes KV only on change or hourly. See
-[tests](../testing/tests-and-verification.md).
+The Month view derives a day key from the minute clock so its month grid rebuilds only when the
+date changes, not every minute.
+
+## Tests as the specification
+
+`worker/calendar.test.js` is the spec for parser edge cases. It uses `fixtures/google.ics` and
+`fixtures/icloud.ics` to cover:
+
+- weekly recurrence with `EXDATE`, moved (`RECURRENCE-ID`) and cancelled instances;
+- a daily event since 1995 expanding only inside the window;
+- multi-day all-day events with exclusive end dates;
+- one-off events outside the window dropped by `prefilter` before parsing;
+- iCloud specifics: folded lines, `TZID`, floating times, all-day events;
+- merging two calendars, sorting, and dropping the shared-invite duplicate;
+- a DST change keeping wall-clock time;
+- fast-forwarded `MONTHLY` and `YEARLY` rules matching a full ical.js walk.
+
+`worker/api.test.js` covers the stale-copy background refresh, holiday-feed marking, per-calendar
+failure reuse, and the cron writing KV only on change or hourly. See
+[Tests and verification](../testing/tests-and-verification.md).

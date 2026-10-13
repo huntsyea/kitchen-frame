@@ -4,16 +4,18 @@ title: Quickstart
 description: Entry point to this repository's wiki - what the photo-frame family dashboard is, how to run, test and deploy it, and which page to read for each kind of change.
 tags: [quickstart, overview, routing, getting-started]
 sources:
+  - id: openwiki-source-8037e2358a2c4f9b2c722a11
+    resource: repo://AGENTS.md
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
   - id: openwiki-source-51dca17ef0b6465be67eaf89
     resource: repo://dashboard/package.json
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
-generated: { by: "claude-code", at: "2026-10-13T05:27:36.156Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T13:37:37.830Z
+    at: 2026-10-13T17:09:19.129Z
 ---
 
 # Quickstart
@@ -24,6 +26,9 @@ by one Cloudflare Worker (`dashboard/worker/`). The Worker proxies the family ca
 Todoist lists, an iCloud photo album and TheMealDB, and hosts a Durable Object that pushes
 messages from AI agents to the screen. The frame talks to Home Assistant directly on the LAN for
 music and speech. Start with [system architecture](./overview/system-architecture.md).
+
+Before asking an agent to pull just-in-time context from OpenWiki, read the retrieval discipline
+in [AGENTS.md](../AGENTS.md).
 
 ## Run, test, deploy
 
@@ -71,7 +76,7 @@ Then tap Settings → Reload on the frame to load the new build. Secrets, bindin
 | Deploy, configure secrets, or check Cloudflare usage | [Build, deploy and configuration](./operations/build-deploy-and-configuration.md) |
 | Add or fix tests, or verify a UI change | [Tests and verification](./testing/tests-and-verification.md) |
 
-Human-facing docs in the repo: `README.md` (setup), `docs/frame.md` (device record and undo
-commands), `docs/messages.md` and `docs/recipes.md` (agent API contracts), `docs/research.md`
-(upstream findings), `DESIGN.md` / `PRODUCT.md` (design and product briefs), `CLAUDE.md` (agent
-rules).
+Human-facing docs in the repo: `README.md` (setup), `AGENTS.md` (OpenWiki retrieval discipline),
+`docs/frame.md` (device record and undo commands), `docs/messages.md` and `docs/recipes.md`
+(agent API contracts), `docs/research.md` (upstream findings), `DESIGN.md` / `PRODUCT.md` (design
+and product briefs), `CLAUDE.md` (agent rules).

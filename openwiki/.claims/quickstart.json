@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2d369f838ae73e72cfb0fce9111933aa92518a84488138a1409797b7f144cc00",
+  "pageVersion": "sha256:a86095810ffac41bd0d8dc1db33e0ba9bd2e4f8c18495641abfe73a8532bf1f1",
   "claims": [
     {
       "id": "claim_e8628f211b8b4d798f2ec86aabaa4f2f",
@@ -31,10 +31,20 @@
           "version": "repo-lines-v1:sha256:8ab9eaecb0b1b6abf0a119e74d5f87d581fa7bb043bf97a077ed1caf442b778e:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRlMjNiNzgxYzkwNDNkYTk4OGU5ZWJiMDQ1ZjQ4OWJmZDU0MTA5NDU4M2ZlOTliNmFhN2JlMzEzNTg2OGU4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDI0MTVkOTMwOGRkY2ExMTM1M2UyOTBmMWQwN2EyYTFlYjU4YjZjZTIyMzViMmMyZGY1ZTkzMmM2ZDZlYjRmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjZmZjA1OTcwOGY1M2Y4OWU4YjYxZDA5N2EzMzc3NDBkZDE5NDNlMzk2OGM0YWViMmVmM2Y0ZjA3NjlkNzI1MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjhlZWNhOTdjZjM4NzYzNGYzYWNjZTZlMDQ0NjE1NjliMTYxYjYzYjhhOGU4NjIyM2Y0MjNlOGFmNDQyOGIxNCJ9"
         }
       ]
+    },
+    {
+      "id": "claim_7bb1c41593984c31af4b739a62ebcdb9",
+      "statement": "Quickstart links to AGENTS.md as the source for OpenWiki retrieval discipline; it does not inline the retrieval rules.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L1-L15",
+          "version": "repo-lines-v1:sha256:5a99db190588a58887dedd862087182bcc044b1c2e4fa49bd3cc06e8d28e4a33:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMTgwZjljMTI2OTAzYmNjMzMxYWE5NTQ1NmU0OTQ0NGE3ZDRkMDExZThhMmE4M2Y1ZGM4NzAyMzkxODEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5Zjc4NzE0ODkzYWE3Nzk0MmNlYTFjNGEyZTAyMzFkYmI3ZmEyYTQxYTcwYzgxNDYwYTNjNjc1NjJkYTNhYWEifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T13:37:37.830Z"
+    "at": "2026-10-13T17:09:19.129Z"
   }
 }

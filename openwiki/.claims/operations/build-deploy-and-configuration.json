@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a91e7209daef2de7e70e936fb477c2181b6ecc3a3e508acba599ceb0feb20289",
+  "pageVersion": "sha256:9a1657943bad59ba665baf83c2554aa01bc0658c96ef50e18a63aa8ec9131557",
   "claims": [
     {
       "id": "claim_ef1b1fedf37544eba6ce52d3bce5fcbe",
@@ -69,18 +69,24 @@
       "statement": "A scheduled GitHub Actions workflow runs OpenWiki daily (and on demand), removes transient run state, and opens a pull request with the wiki changes, failing the job if OpenWiki failed.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L36",
-          "version": "repo-lines-v1:sha256:f837b8d106b259811d3f57c2c549871f94c8a3ef24805dd792c8b9ae70ae3ecc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MWM2MGQ4MzU5N2M3NmNjYTY5NmFhYzc0ZGZiN2FjNWRjMzM2MmZlNjUxZjhjYWI1YTMwNDk5NjMwMTdkNDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5MjQ3NzIxNDRhNmNhNTFhMjljNjljYjg0OTU4ZWY1MmZjOGQ0YThmMzdmOGExNTk5ZTVkNzRmOTk5NGY2MDUifQ"
-        },
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L94",
+          "version": "repo-lines-v1:sha256:c845cbc0d5a61ab3f5819d9040cc7bc27c85c03a86b1cfc82eafb7cddf6a0a3e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b2f299c51e0b497daf6fd5943b577cb4",
+      "statement": "The OpenWiki workflow uses Ollama Cloud through the OpenAI-compatible provider with the OLLAMA_API_KEY secret and an OPENWIKI_MODEL_ID repository variable defaulting to kimi-k2.7-code, and skips every step with a notice when the key is not set.",
+      "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L50-L88",
-          "version": "repo-lines-v1:sha256:8a16c25992e382f80a5b31b3d85e8d23224696724c52368fb8e668084ee2430c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3OWM4ODBmNjJkNDIyNTM4YmNhODRjYjU1ZWNlOGZlMTBlOTY1OGIwNjExMTVjM2ZhYmNkYzdiM2JlY2Y0NDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxOTEzNzMyNTgyYzNlNjAzNTkwNzg2Yzg2ODM2OTUxZmYzNWU5YjJkMGY4ZDMxMDY3ZDRmNGM4NzQzZGIyYWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/openwiki-update.yml#L12-L57",
+          "version": "repo-lines-v1:sha256:6cec92ddff0d60ddd8429329c7992ccd9def9258d1e2cf537b16276e6b40e975:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T13:37:37.830Z"
+    "at": "2026-10-13T16:59:46.542Z"
   }
 }

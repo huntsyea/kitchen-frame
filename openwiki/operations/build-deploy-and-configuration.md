@@ -5,7 +5,7 @@ description: How to run the dashboard locally, build and deploy it to Cloudflare
 tags: [deploy, wrangler, vite, cloudflare, configuration, secrets, operations]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T13:37:37.830Z
+    at: 2026-10-13T16:59:46.542Z
 sources:
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml
@@ -21,7 +21,7 @@ sources:
     resource: repo://dashboard/worker/weather.js
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
-generated: { by: "claude-code", at: "2026-10-13T05:27:36.156Z" }
+generated: { by: "claude-code", at: "2026-10-13T16:59:46.542Z" }
 ---
 
 # Build, deploy and configuration
@@ -97,5 +97,9 @@ feeds.
 `AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily
 (and on demand): it installs OpenWiki, runs `openwiki code --update`, removes transient run state,
 and opens a "docs: update OpenWiki" pull request with the `openwiki/` changes (preserving partial
-progress if the run fails). It needs an `OPENAI_API_KEY` repository secret; LangSmith keys are
-optional.
+progress if the run fails). Inference runs on **Ollama Cloud** through OpenWiki's
+OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository
+secret; until that exists every step is skipped with a notice instead of failing. The model is
+the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened
+by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the
+required checks (they only touch `openwiki/`).

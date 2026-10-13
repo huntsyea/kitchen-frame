@@ -11,3 +11,4 @@ diagnostics/
 kiosk/build/
 .prod.vars
 .frame.vars
+.ollama.vars

@@ -9,11 +9,21 @@ permissions:
   contents: write
   pull-requests: write
 
+# Inference runs on Ollama Cloud through OpenWiki's OpenAI-compatible provider.
+#   Secret   OLLAMA_API_KEY      ollama.com -> Settings -> Keys (the job skips cleanly until it's set)
+#   Variable OPENWIKI_MODEL_ID   optional; any Ollama Cloud model id (default below)
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      HAS_OLLAMA_KEY: ${{ secrets.OLLAMA_API_KEY != '' }}
     steps:
+      - name: Skip without an Ollama API key
+        if: ${{ env.HAS_OLLAMA_KEY != 'true' }}
+        run: echo "::notice title=OpenWiki skipped::Add the OLLAMA_API_KEY repository secret to enable wiki updates."
+
       - name: Check out repository
+        if: ${{ env.HAS_OLLAMA_KEY == 'true' }}
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           # Full history so `openwiki code --update` can diff HEAD against the
@@ -22,38 +32,34 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node.js
+        if: ${{ env.HAS_OLLAMA_KEY == 'true' }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
 
       - name: Install OpenWiki
+        if: ${{ env.HAS_OLLAMA_KEY == 'true' }}
         # mermaid + jsdom are optional; they add high-fidelity validation of Mermaid diagrams. Remove if your wiki has none.
         run: npm install --global openwiki@0.7.2 mermaid@11.16.0 jsdom@29.1.1
 
       - name: Run OpenWiki
         id: openwiki
+        if: ${{ env.HAS_OLLAMA_KEY == 'true' }}
         continue-on-error: true
         run: openwiki code --update --print
         env:
-          OPENWIKI_PROVIDER: openai
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENWIKI_MODEL_ID: "gpt-5.6-terra"
-          # Required for the LangSmith connector's code-mode pull to authenticate.
-          # For extra workspaces, add OPENWIKI_LANGSMITH_API_KEY_2, _3, ... as repo
-          # secrets and env entries here.
-          OPENWIKI_LANGSMITH_API_KEY: ${{ secrets.OPENWIKI_LANGSMITH_API_KEY }}
-          # Optional: also trace this workflow's own OpenWiki run to LangSmith.
-          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
-          LANGCHAIN_PROJECT: openwiki
-          LANGCHAIN_TRACING_V2: "true"
+          OPENWIKI_PROVIDER: openai-compatible
+          OPENAI_COMPATIBLE_BASE_URL: https://ollama.com/v1
+          OPENAI_COMPATIBLE_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OPENWIKI_MODEL_ID: ${{ vars.OPENWIKI_MODEL_ID || 'kimi-k2.7-code' }}
 
       - name: Remove transient OpenWiki run state
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
         run: rm -f -- openwiki/.run.json
 
       - name: List OpenWiki update paths
         id: paths
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
         # CLAUDE.md is listed only when present: git add fails on a missing path
         # and then stages nothing.
         run: |
@@ -63,7 +69,7 @@ jobs:
 
       - name: Create OpenWiki update pull request
         id: create-pr
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
           add-paths: ${{ steps.paths.outputs.list }}

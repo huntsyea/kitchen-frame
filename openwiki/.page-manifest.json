@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "pages": {
     "/openwiki/device/kiosk-app-and-frame.md": {
+      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8",
       "pageVersion": "sha256:6190347bb4c0d0775683d139c0be8a782b230e987add47da456286595326e7c3",
       "completedBy": "claude-code",
-      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb",
-      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8"
+      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb"
     },
     "/openwiki/features/agent-messages.md": {
+      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8",
       "pageVersion": "sha256:84e54fd2bd3c822b24fcbf753bdbe9622aa50b739284aeb5bb503a330b9008e6",
       "completedBy": "claude-code",
-      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb",
-      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8"
+      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb"
     },
     "/openwiki/features/recipes.md": {
       "sourceFingerprint": "sha256:b2a3d3712400c1f09bf7ba6e1a408fa2323f469f3cec8be6287aaecf8c33f35d",
@@ -44,10 +44,10 @@
       "completedRunId": "e99fb859-a4a1-47db-81b1-af7e76a38fa3"
     },
     "/openwiki/frontend/app-shell-state-and-polling.md": {
+      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8",
       "pageVersion": "sha256:6a25e689de634594c48772f7d85ca04dd4ef9dc37933effe6c390b902c4015bc",
       "completedBy": "claude-code",
-      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb",
-      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8"
+      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb"
     },
     "/openwiki/frontend/views-components-and-design-system.md": {
       "sourceFingerprint": "sha256:b2a3d3712400c1f09bf7ba6e1a408fa2323f469f3cec8be6287aaecf8c33f35d",
@@ -56,16 +56,17 @@
       "completedRunId": "e99fb859-a4a1-47db-81b1-af7e76a38fa3"
     },
     "/openwiki/integrations/home-assistant-music-and-speech.md": {
+      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8",
       "pageVersion": "sha256:fbd071ada3aba606bf86c3107b33c859f056fa9eded062aacae27bfd48225f73",
       "completedBy": "claude-code",
-      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb",
-      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8"
+      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb"
     },
     "/openwiki/operations/build-deploy-and-configuration.md": {
-      "sourceFingerprint": "sha256:e762544ca0ce1cec66b590195390f52ae0546f9db1447129e4fdec7ddd990a62",
-      "pageVersion": "sha256:a91e7209daef2de7e70e936fb477c2181b6ecc3a3e508acba599ceb0feb20289",
+      "pageVersion": "sha256:9a1657943bad59ba665baf83c2554aa01bc0658c96ef50e18a63aa8ec9131557",
       "completedBy": "claude-code",
-      "completedRunId": "5aa828ed-ab4d-47cd-baf2-da3298cc3204"
+      "completedRunId": "4b582664-423f-4f2d-a9eb-31b1d8cb0d02",
+      "gitHead": "0b1dd2d1eb2231137a4ef29cfbc784c6ae91c031",
+      "sourceFingerprint": "sha256:4a3ed7324a3a2b369f679258dff757d9fc1b8c917a8374f3759bb0c0ad2d9360"
     },
     "/openwiki/overview/system-architecture.md": {
       "sourceFingerprint": "sha256:e762544ca0ce1cec66b590195390f52ae0546f9db1447129e4fdec7ddd990a62",
@@ -80,10 +81,10 @@
       "completedRunId": "5aa828ed-ab4d-47cd-baf2-da3298cc3204"
     },
     "/openwiki/testing/tests-and-verification.md": {
+      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8",
       "pageVersion": "sha256:b8141b62ef45eed7f1405ceebdb8e4fcab98b534181b50af7559bb0c3ce890f0",
       "completedBy": "claude-code",
-      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb",
-      "sourceFingerprint": "sha256:dd0aba0152b11310564d1af2d08b330e0d1e14e5d3d88c0c28c3fb763ecb9cd8"
+      "completedRunId": "bf73a7c1-bbf4-44d9-bfd9-29b34d783bfb"
     },
     "/openwiki/worker/routing-auth-and-caching.md": {
       "sourceFingerprint": "sha256:b2a3d3712400c1f09bf7ba6e1a408fa2323f469f3cec8be6287aaecf8c33f35d",

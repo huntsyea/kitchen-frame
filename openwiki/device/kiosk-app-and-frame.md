@@ -3,9 +3,6 @@ type: component
 title: Kiosk app and the frame device
 description: The Pastigio FRAME156 photo frame the dashboard runs on, and the small Gradle-free Android kiosk app (com.huntsyea.frame) that boots into the dashboard, retries through the frame's 2008 boot clock, and exposes a brightness bridge to the page.
 tags: [kiosk, android, webview, device, adb, frame156]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml

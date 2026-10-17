@@ -5,7 +5,7 @@ description: How to build, test, deploy, and configure the dashboard and Worker,
 tags: [deploy, wrangler, vite, cloudflare, configuration, secrets, operations]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-10-17T12:05:15.889Z
 sources:
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml
@@ -29,7 +29,7 @@ sources:
     resource: repo://dashboard/wrangler.jsonc
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-17T12:05:15.889Z" }
 ---
 
 # Build, deploy and configuration
@@ -43,6 +43,7 @@ Everything deployable lives in `dashboard/`: one Cloudflare Worker that serves t
 | `npm run dev` | Vite dev server with the Worker running locally through `@cloudflare/vite-plugin` (also reachable on the LAN; `*.getbb.app` allowed for remote port sharing). Secrets come from `.dev.vars` (template: `.dev.vars.example`). |
 | `npm test` | `node --test worker/*.test.js` (see [tests](../testing/tests-and-verification.md)). |
 | `npm run build` | Production build into `dist/`: JS targeted at `chrome106`, CSS at `chrome61` (see [design system](../frontend/views-components-and-design-system.md)). |
+| `npm run preview` | `vite preview`. |
 | `npm run deploy` | `vite build && wrangler deploy`. Always build before deploying, or the previous bundle ships. |
 
 Open the app once with `?key=<DASHBOARD_KEY>`; the page remembers the key. `?diag` turns on a perf overlay (fps, jank, DOM size, image megapixels, heap).
@@ -64,7 +65,7 @@ Open the app once with `?key=<DASHBOARD_KEY>`; the page remembers the key. `?dia
 
 Production secrets are set with `npx wrangler secret put <NAME>` from `dashboard/`; the production values are kept in the gitignored `dashboard/.prod.vars`. Never print or commit them. Local development copies `dashboard/.dev.vars.example` to `dashboard/.dev.vars`.
 
-`dashboard/.dev.vars.example`, `.prod.vars` and `.frame.vars` are all gitignored (see `.gitignore`).
+`dashboard/.dev.vars.example`, `.prod.vars`, `.frame.vars` and `.ollama.vars` are all gitignored (see `.gitignore`).
 
 | Secret/var | Used for |
 | --- | --- |
@@ -81,7 +82,7 @@ Home Assistant credentials are deliberately **not** Worker secrets: they live on
 
 ## Getting a new build onto the frame
 
-Because the page is served `no-store` and assets are content-hashed, the frame runs a new build on its next page load: Settings → Reload (which also forces a calendar refresh), the kiosk's two-finger escape → Reload, or a restart. It does not reload itself after a deploy. Cloudflare can take around 30 s to serve a new version everywhere, so a reload right after deploying may still get the old one. Kiosk changes need a rebuilt APK installed over USB.
+Because the page is served `no-store` and assets are content-hashed, the frame runs a new build on its next page load: Settings → Reload (which also forces a calendar refresh), the kiosk's two-finger escape → Reload, or a restart. It does not reload itself after a deploy. Cloudflare can take around 30 s to serve a new version everywhere, so a reload right after deploying may still get the old one. Kiosk changes need a rebuilt APK installed over USB (see [kiosk](../device/kiosk-app-and-frame.md)).
 
 ## Cloudflare usage and cost boundaries
 

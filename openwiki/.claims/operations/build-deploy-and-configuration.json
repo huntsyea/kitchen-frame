@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d48aa6627314b23e3febaaf2af659cf8bbd800f6e093004339899d8f3c814be9",
+  "pageVersion": "sha256:4fc7ec9814797ead12dde7dfcd811c8b957387f08274b202c8c88b7a974ac6a5",
   "claims": [
     {
       "id": "claim_ef1b1fedf37544eba6ce52d3bce5fcbe",
-      "statement": "Development, test, build and deploy are npm scripts: vite dev, node --test over the worker tests, vite build, and deploy as vite build followed by wrangler deploy.",
+      "statement": "Development, test, build, preview and deploy are npm scripts: vite dev, node --test over the worker tests, vite build, vite preview, and deploy as vite build followed by wrangler deploy.",
       "evidence": [
         {
           "resource": "repo://dashboard/package.json#L6-L12",
@@ -70,7 +70,7 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/openwiki-update.yml#L1-L94",
-          "version": "repo-lines-v1:sha256:c845cbc0d5a61ab3f5819d9040cc7bc27c85c03a86b1cfc82eafb7cddf6a0a3e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:1b8cf262be281eeaaf5ab8375f020c3ab438f8a96972c5736e38ccbe54c53e11:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -80,7 +80,7 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/openwiki-update.yml#L12-L57",
-          "version": "repo-lines-v1:sha256:6cec92ddff0d60ddd8429329c7992ccd9def9258d1e2cf537b16276e6b40e975:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
+          "version": "repo-lines-v1:sha256:e2da3415efe39ea0123746c45a60aba76df4227a39c964d46437fe84b22f25db:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
         }
       ]
     },
@@ -128,17 +128,17 @@
     },
     {
       "id": "claim_c8328e4990854219815e4854772bce8b",
-      "statement": "The `.dev.vars`, `.prod.vars` and `.frame.vars` environment files are gitignored so secrets and frame-specific values are never committed.",
+      "statement": "The `.dev.vars`, `.prod.vars`, `.frame.vars` and `.ollama.vars` environment files are gitignored so secrets and frame-specific values are never committed.",
       "evidence": [
         {
-          "resource": "repo://.gitignore#L10-L13",
-          "version": "repo-lines-v1:sha256:9c0a8eb3d54e0d31c7bf665949cf6703014110821b266ea68817b38f18c60e2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1N2I4ZWE4Y2FhOTBlODczNmJlNzkzNGI4ZTVhMzhmYzk3NTNkOWQ4OWE3ZmM5YTIzZWE2ZWI4NmQ2YTFmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiJ9"
+          "resource": "repo://.gitignore#L10-L14",
+          "version": "repo-lines-v1:sha256:68dfc50327658533170cfc121c3deb2158701863abbecda5d0e5566963fb1aae:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-10-17T12:05:15.889Z"
   }
 }

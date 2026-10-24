@@ -13,6 +13,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  openwiki-guards:
+    name: OpenWiki publication guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: bash -n .github/scripts/prepare-openwiki-update.sh
+      - run: python3 .github/scripts/test-prepare-openwiki-update.py
+
   dashboard:
     name: Dashboard tests and build
     runs-on: ubuntu-latest

@@ -67,7 +67,7 @@ jobs:
 
       - name: Create OpenWiki update pull request
         id: create-pr
-        if: ${{ !cancelled() && steps.prepare.outputs.has-pages == 'true' }}
+        if: ${{ !cancelled() && steps.prepare.outputs.has-changes == 'true' }}
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           add-paths: ${{ steps.prepare.outputs.list }}
@@ -80,10 +80,11 @@ jobs:
             OpenWiki result: ${{ steps.openwiki.outcome }}
             Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            This PR contains changed wiki pages. Review their content before merging.
-            If the result is `failure`, the pages are partial output and the previous
-            documentation baseline is preserved. A merge does not certify that the
-            interrupted update completed.
+            This PR contains OpenWiki output, which can include pages, Claims,
+            manifests, or metadata from a successful check with no content changes.
+            Review the diff and recorded status before merging. An `interrupted`
+            status preserves unfinished-work semantics and must not be treated as
+            a completed update. Failed status-only attempts are not published.
 
       - name: Annotate OpenWiki update pull request
         if: ${{ !cancelled() && steps.create-pr.outputs.pull-request-url != '' }}

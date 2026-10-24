@@ -8,29 +8,34 @@ case "$outcome" in
   *) echo "Unsupported OpenWiki outcome: $outcome" >&2; exit 1 ;;
 esac
 
+# Match OpenWiki's ephemeral-CI example. Pages, Claims, and manifests remain;
+# this checkout's active queue is not committed to the documentation branch.
 rm -f -- openwiki/.run.json
-
-# A failed attempt must not replace the last successful documentation baseline.
-if [[ "$outcome" != success ]]; then
-  if git cat-file -e HEAD:openwiki/.last-update.json 2>/dev/null; then
-    git restore --source=HEAD --staged --worktree -- openwiki/.last-update.json
-  else
-    rm -f -- openwiki/.last-update.json
-  fi
-fi
 
 paths=(openwiki AGENTS.md .github/workflows/openwiki-update.yml)
 if [[ -e CLAUDE.md ]]; then paths+=(CLAUDE.md); fi
 git add -A -- "${paths[@]}"
 (IFS=,; echo "list=${paths[*]}") >> "${GITHUB_OUTPUT:?}"
 
-# Include additions, edits, and deletions, but require an actual wiki page.
-# Claims, manifests, timestamps, and agent instructions alone do not qualify.
-if git diff --cached --quiet -- ':(glob)openwiki/**/*.md'; then
-  # Discard metadata-only output too, including a successful no-page attempt.
+status=$(python3 - <<'PY'
+import json
+from pathlib import Path
+path = Path('openwiki/.last-update.json')
+print(json.loads(path.read_text()).get('status', '') if path.exists() else '')
+PY
+)
+
+# Interrupted metadata is meaningful when it accompanies durable output.
+# Keep that state intact, including Claims/manifest-only changes. Only discard
+# an unsuccessful attempt whose sole change is .last-update.json. A successful
+# no-op deliberately refreshes that file and must still be publishable.
+if [[ "$outcome" != success || "$status" != complete ]] &&
+   git diff --cached --quiet -- "${paths[@]}" ':(exclude)openwiki/.last-update.json'; then
   git restore --source=HEAD --staged --worktree -- "${paths[@]}"
-  echo 'has-pages=false' >> "${GITHUB_OUTPUT:?}"
-  echo '::notice title=OpenWiki update skipped::No wiki pages changed; preserving the documentation baseline and any existing update PR.'
+  echo 'has-changes=false' >> "$GITHUB_OUTPUT"
+  echo '::notice title=OpenWiki update skipped::Only unsuccessful run metadata changed; preserving the prior wiki and any existing update PR.'
+elif git diff --cached --quiet -- "${paths[@]}"; then
+  echo 'has-changes=false' >> "$GITHUB_OUTPUT"
 else
-  echo 'has-pages=true' >> "${GITHUB_OUTPUT:?}"
+  echo 'has-changes=true' >> "$GITHUB_OUTPUT"
 fi

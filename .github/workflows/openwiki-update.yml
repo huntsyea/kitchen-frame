@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: "0 8 * * *"
 
+# Only one run may prepare/update the shared PR branch at a time.
+concurrency:
+  group: openwiki-update
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pull-requests: write
@@ -53,26 +58,19 @@ jobs:
           OPENAI_COMPATIBLE_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
           OPENWIKI_MODEL_ID: ${{ vars.OPENWIKI_MODEL_ID || 'kimi-k2.7-code' }}
 
-      - name: Remove transient OpenWiki run state
-        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
-        run: rm -f -- openwiki/.run.json
-
-      - name: List OpenWiki update paths
-        id: paths
-        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
-        # CLAUDE.md is listed only when present: git add fails on a missing path
-        # and then stages nothing.
-        run: |
-          paths=openwiki,AGENTS.md,.github/workflows/openwiki-update.yml
-          if [ -e CLAUDE.md ]; then paths="$paths,CLAUDE.md"; fi
-          echo "list=$paths" >> "$GITHUB_OUTPUT"
+      - name: Prepare OpenWiki documentation changes
+        id: prepare
+        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' && (steps.openwiki.outcome == 'success' || steps.openwiki.outcome == 'failure') }}
+        env:
+          OPENWIKI_OUTCOME: ${{ steps.openwiki.outcome }}
+        run: bash .github/scripts/prepare-openwiki-update.sh "$OPENWIKI_OUTCOME"
 
       - name: Create OpenWiki update pull request
         id: create-pr
-        if: ${{ !cancelled() && env.HAS_OLLAMA_KEY == 'true' }}
+        if: ${{ !cancelled() && steps.prepare.outputs.has-changes == 'true' }}
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
-          add-paths: ${{ steps.paths.outputs.list }}
+          add-paths: ${{ steps.prepare.outputs.list }}
           branch: openwiki/update
           commit-message: "docs: update OpenWiki"
           title: "docs: update OpenWiki"
@@ -80,10 +78,13 @@ jobs:
             Automated OpenWiki documentation update.
 
             OpenWiki result: ${{ steps.openwiki.outcome }}
+            Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            When the result is `failure`, this PR intentionally preserves only the
-            pages completed before the failure. Merge it to make that progress the
-            baseline for the next scheduled run.
+            This PR contains OpenWiki output, which can include pages, Claims,
+            manifests, or metadata from a successful check with no content changes.
+            Review the diff and recorded status before merging. An `interrupted`
+            status preserves unfinished-work semantics and must not be treated as
+            a completed update. Failed status-only attempts are not published.
 
       - name: Annotate OpenWiki update pull request
         if: ${{ !cancelled() && steps.create-pr.outputs.pull-request-url != '' }}

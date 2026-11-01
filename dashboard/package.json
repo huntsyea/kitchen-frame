@@ -11,11 +11,11 @@
     "deploy": "vite build && wrangler deploy"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.63.1",
+    "@cloudflare/vite-plugin": "^1.66.0",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
-    "lucide-static": "^1.55.0",
-    "svelte": "^5.57.2",
-    "vite": "^8.3.4",
+    "lucide-static": "^1.63.0",
+    "svelte": "^5.57.3",
+    "vite": "^8.3.5",
     "wrangler": "^4.149.0"
   },
   "dependencies": {

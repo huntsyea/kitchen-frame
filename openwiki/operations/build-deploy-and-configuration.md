@@ -5,8 +5,10 @@ description: How to build, test, deploy, and configure the dashboard and Worker,
 tags: [deploy, wrangler, vite, cloudflare, configuration, secrets, operations]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-03T16:02:35.675Z
 sources:
+  - id: openwiki-source-23d1f0d32031635db013d5ed
+    resource: repo://.github/scripts/prepare-openwiki-update.sh
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml
   - id: openwiki-source-ea70eb6c045047448e446296
@@ -29,7 +31,7 @@ sources:
     resource: repo://dashboard/wrangler.jsonc
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-03T16:02:35.675Z" }
 ---
 
 # Build, deploy and configuration
@@ -64,7 +66,7 @@ Open the app once with `?key=<DASHBOARD_KEY>`; the page remembers the key. `?dia
 
 Production secrets are set with `npx wrangler secret put <NAME>` from `dashboard/`; the production values are kept in the gitignored `dashboard/.prod.vars`. Never print or commit them. Local development copies `dashboard/.dev.vars.example` to `dashboard/.dev.vars`.
 
-`dashboard/.dev.vars.example`, `.prod.vars` and `.frame.vars` are all gitignored (see `.gitignore`).
+`dashboard/.dev.vars`, `.prod.vars`, `.frame.vars` and `.ollama.vars` are all gitignored (see `.gitignore`).
 
 | Secret/var | Used for |
 | --- | --- |
@@ -91,4 +93,6 @@ The Free plan's 10 ms cron CPU limit is why the calendar parser pre-filters feed
 
 ## Keeping this wiki current
 
-`AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily (and on demand): it installs OpenWiki, runs `openwiki code --update`, removes transient run state, and opens a "docs: update OpenWiki" pull request with the `openwiki/` changes (preserving partial progress if the run fails). Inference runs on **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`).
+`AGENTS.md` and `CLAUDE.md` carry the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily at 08:00 UTC and on demand. It uses a concurrency group (`openwiki-update`, `cancel-in-progress: false`) so only one run updates the shared PR branch at a time, checks out the full history (`fetch-depth: 0`), installs OpenWiki plus optional Mermaid/jsdom validators, and runs `openwiki code --update --print`. Inference uses **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`.
+
+The follow-up `.github/scripts/prepare-openwiki-update.sh` removes the transient `openwiki/.run.json`, stages `openwiki/`, `AGENTS.md`, `.github/workflows/openwiki-update.yml`, and `CLAUDE.md` if it exists, reads the status from `openwiki/.last-update.json`, and preserves partial progress: it discards an unsuccessful run whose only change is `.last-update.json`, but keeps durable page/Claim/manifest changes from a failed or interrupted run. `peter-evans/create-pull-request` then opens (or updates) a `docs: update OpenWiki` pull request from the `openwiki/update` branch. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`). If the OpenWiki step itself failed, the workflow still creates or updates the PR when there are durable changes, then fails the job so the run is marked red.

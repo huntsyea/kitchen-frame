@@ -3,9 +3,6 @@ type: reference
 title: Recipes (Explore, Saved, Groceries)
 description: The Recipes tab browses TheMealDB categories and random picks, stores saved recipes in KV with copied images, and sends missing ingredients to the Todoist grocery list.
 tags: [recipes, themealdb, kv, groceries, agents, svelte]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-e12fdae11ea7713285efd699
     resource: repo://dashboard/src/lib/format.js
@@ -23,7 +20,10 @@ sources:
     resource: repo://dashboard/worker/index.js
   - id: openwiki-source-3d87a5bdd7a2737ed75505a1
     resource: repo://dashboard/worker/recipes.js
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Recipes (Explore, Saved, Groceries)
@@ -108,9 +108,10 @@ curl -X POST "$KITCHEN_FRAME_URL/api/recipes" \
 - Response: `201 {"id": "..."}`. `400` for missing title or no ingredients/steps, `401` for a
   wrong token, `429` when 300 recipes are saved. A duplicate `ref` returns `200 {"id": "...", "existing": true}`.
 
-The agent skill lives at `~/.agents/skills/kitchen-frame-recipe` (outside this repo). It extracts
+`docs/recipes.md` in this repo is the human-readable contract for the external agent skill. The
+skill itself lives at `~/.agents/skills/kitchen-frame-recipe` (outside this repo): it extracts
 schema.org Recipe JSON-LD from a link, previews the result, and posts with `$KITCHEN_FRAME_URL` /
-`$KITCHEN_FRAME_TOKEN`. `docs/recipes.md` in this repo is the human-readable contract for that skill.
+`$KITCHEN_FRAME_TOKEN`.
 
 ## Frame
 

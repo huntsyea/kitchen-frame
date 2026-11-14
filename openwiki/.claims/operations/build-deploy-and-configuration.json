@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d48aa6627314b23e3febaaf2af659cf8bbd800f6e093004339899d8f3c814be9",
+  "pageVersion": "sha256:8ca12366bc7813fabfeb1255c22af2a80527f389b5d431090e9cbd1b3b6dca75",
   "claims": [
     {
       "id": "claim_ef1b1fedf37544eba6ce52d3bce5fcbe",
@@ -66,11 +66,15 @@
     },
     {
       "id": "claim_a57406e6bd1541ca8c16c54b94ebe112",
-      "statement": "A scheduled GitHub Actions workflow runs OpenWiki daily (and on demand), removes transient run state, and opens a pull request with the wiki changes, failing the job if OpenWiki failed.",
+      "statement": "A scheduled GitHub Actions workflow runs OpenWiki daily at 08:00 UTC (and on demand), removes transient run state (openwiki/.run.json), and opens a pull request with the wiki changes; the job fails at the end if OpenWiki itself failed.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L94",
-          "version": "repo-lines-v1:sha256:c845cbc0d5a61ab3f5819d9040cc7bc27c85c03a86b1cfc82eafb7cddf6a0a3e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/scripts/prepare-openwiki-update.sh#L11-L41",
+          "version": "repo-lines-v1:sha256:0114e722ca93c71ae3ed1927d913596e6425ed4410789a88a985119d4a68395e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMWFjNGE2YmM4OTBjNTBhMGEwOTAyOWNmZmNjOTY3OTdlYmViZTMxNGFiMDAyNDc5ZDE0ZjQxNDU1OWI0YzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NjlkMjM3Y2Q0MjBiOWQzOGI5ODFhMGE0ZjY3NzAxOTBhNGE4M2RjYTFmZTU2YzRmNWJhMWUyY2JjMGVmNzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiM2E1YjIzMDA2Y2I2NzgxOWQ2NWQxYjVmMWM5Njg2NzE0MGQzOWE0ZDgzM2RiZGJiODc4MGU0ODA2YjBiNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L95",
+          "version": "repo-lines-v1:sha256:c1b36faedbfbf387896303151490c613490bb438a02fa056782cf9d6c26a8214:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -79,8 +83,8 @@
       "statement": "The OpenWiki workflow uses Ollama Cloud through the OpenAI-compatible provider with the OLLAMA_API_KEY secret and an OPENWIKI_MODEL_ID repository variable defaulting to kimi-k2.7-code, and skips every step with a notice when the key is not set.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L12-L57",
-          "version": "repo-lines-v1:sha256:6cec92ddff0d60ddd8429329c7992ccd9def9258d1e2cf537b16276e6b40e975:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
+          "resource": "repo://.github/workflows/openwiki-update.yml#L17-L59",
+          "version": "repo-lines-v1:sha256:4d661fcdcf15bf86e8e19d9dd9e40370215ff9c01c47d79ce7e959b0a8e2d8bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYjhiYzEzOWY5MDM0NjIzYzI4N2JmZjE1ZWNiNjFmZDAwYmZjODdiYjIzNjAwZWQxODJiODc2NGQwYTA2MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NmU4YmI2OWNkNWQ5OWI2MTg5Yzk0NmJhNjQwNmFmYTE5ZTljZDAwN2UwMWZiOTMwYzFiYzVkYTYyNTFkNTcifQ"
         }
       ]
     },
@@ -135,10 +139,34 @@
           "version": "repo-lines-v1:sha256:9c0a8eb3d54e0d31c7bf665949cf6703014110821b266ea68817b38f18c60e2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1N2I4ZWE4Y2FhOTBlODczNmJlNzkzNGI4ZTVhMzhmYzk3NTNkOWQ4OWE3ZmM5YTIzZWE2ZWI4NmQ2YTFmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiJ9"
         }
       ]
+    },
+    {
+      "id": "claim_aaca1c99f30844f0bd95b3d57ec35189",
+      "statement": "CI runs dashboard tests and build, kiosk APK build, and OpenWiki prepare-script guards on every pull request and push to main.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L1-L57",
+          "version": "repo-lines-v1:sha256:2204881548d15e3be01ad68f0834b3be4344113745ddf07b56ad30172954c42e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2NmQwNGZhNzkyMDQxYWEwNGMxY2ZmYjZkN2IxNWFkYTc1N2UxZGU4OTFlNDY2MzFmYmZmYzU2YTFhZThmNjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79137c67c7314a7f931d1b8c40f6e564",
+      "statement": "The Todoist project names default to Groceries and To-do in the Worker and are overridden to Grocery List and Household in wrangler.jsonc.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/todoist.js#L5-L6",
+          "version": "repo-lines-v1:sha256:71f573d0da1e73f1ea4cd716f6909512ca9fd61130ff6c7095b641953fd79b82:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWUxYzFlZWE5MTRjMTdmNjI4ZWM3ZGJhZGQxYWViYTFiNjBkZDVhNzEwZWQ0YTFlNTc2NmE3NjYzOWEyZTA4YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzYwNTRiYmExMDgxZmRjOGY5MDhjMWJjODdkMWEyMjJlOTEzMmI3MDZhYWI4NjA2ODdmOWQ1ODA5NWZkZWM5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGZhZTBlOTg0ZjVlZWZkNjY2ZjY3YjQwZWNhODliNDA4ZGJlMjEzMDYyYThmMTlmNjhlNzVhOTE1NGE0MTdkZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTMxYWFhYzhkODlkYjBkMGU2MmU2N2I4Mzg2NzcxZjQ0YWM3N2UzYjU5NTVhOTUzZDFhZjc2MTY0OWEzMWYxMSJ9"
+        },
+        {
+          "resource": "repo://dashboard/wrangler.jsonc#L19-L19",
+          "version": "repo-lines-v1:sha256:3a5dab59d0b36e22662db451df3a7fc611ec12969abdc219afc9f00c1df2272d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2E1ZGFiNTlkMGIzNmUyMjY2MmRiNDUxZGYzYTdmYzYxMWVjMTI5NjlhYmRjMjE5YWZjOWYwMGMxZGYyMjcyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2E1ZGFiNTlkMGIzNmUyMjY2MmRiNDUxZGYzYTdmYzYxMWVjMTI5NjlhYmRjMjE5YWZjOWYwMGMxZGYyMjcyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDcyNDM3ZWVhYWY5YTU3M2ExYmFlYTEwYWI3NzA2ZDdiOTA2NmYwMDJlZTZjZjg2Y2ZhZjNiMGZlMjk2ZTkwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWVlMDZmYjQwZmY4YjA0ZWFhNzU3YWUwYWY0Mzc2ODJlZGEzYTk5ZjhlMGFkNmMyNzc2Yzg3ZDE2MDViN2M5ZiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-14T14:55:31.391Z"
   }
 }

@@ -3,9 +3,6 @@ type: component
 title: Worker routing, auth and caching
 description: How the Cloudflare Worker entry point serves the page and assets, authenticates the frame and AI agents, dispatches every /api route, sets cache headers, uses KV, and runs the calendar cron.
 tags: [cloudflare-workers, routing, auth, caching, api]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-a735d7910a81a35570838e4c
     resource: repo://dashboard/public/_headers
@@ -19,7 +16,10 @@ sources:
     resource: repo://dashboard/worker/recipes.js
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Worker routing, auth and caching
@@ -40,40 +40,40 @@ cached for a year as immutable by `public/_headers`. See
 
 ## Credentials
 
-| Credential | Who holds it | Accepted |
-| --- | --- | --- |
-| `DASHBOARD_KEY` | the frame (localStorage) | `Authorization: Bearer` on any `/api` route; or `?key=` on GET for routes an `<img>` or WebSocket must reach: `/api/photos/:id`, `/api/recipes/:id/image`, `/api/messages/live` |
-| `AGENT_TOKEN` | AI agents (the kitchen-frame skills) | only `POST /api/messages` and `POST /api/recipes`; it can read nothing |
-| none | | static assets |
+| Credential | Who holds it | Routes | Accepted as |
+| --- | --- | --- | --- |
+| `DASHBOARD_KEY` | the frame (localStorage) | all `/api/*` except agent-only `POST`s | `Authorization: Bearer` on any route; `?key=` on GET-only routes an `<img>` or WebSocket must reach: `/api/photos/:id`, `/api/recipes/:id/image`, `/api/messages/live` |
+| `AGENT_TOKEN` | AI agents (kitchen-frame skills) | only `POST /api/messages` and `POST /api/recipes` | `Authorization: Bearer` |
+| none | public | static assets | — |
 
-The agent routes are checked before the frame key: `POST /api/messages` requires the agent token
-(the frame key is rejected there), and `POST /api/recipes` with the agent token saves directly;
-everything else falls through to `authorized()`, which returns 401 JSON on failure. If
-`DASHBOARD_KEY` is unset (local development), the check is skipped.
+The agent token is checked first. `POST /api/messages` explicitly requires `AGENT_TOKEN` and
+rejects the frame key; `POST /api/recipes` accepts either token. Everything else falls through to
+`authorized()`, which checks `DASHBOARD_KEY`. If `DASHBOARD_KEY` is unset (local development), the
+frame-key check is skipped.
 
 ## Route map
 
-| Method | Route | Caller | Implements | Module |
+| Method | Route | Auth | What it does | Response shape |
 | --- | --- | --- | --- | --- |
-| `GET` | `/api/calendar` (`?refresh`) | frame | Merged iCal feeds; cron refreshes them in KV every 10 min | `calendar.js` |
-| `GET` | `/api/weather` | frame | Open-Meteo current + 5-day | `weather.js` |
-| `GET` | `/api/lists/:list` | frame | Todoist project tasks (`groceries` or `todo`) | `todoist.js` |
-| `POST` | `/api/lists/:list` | frame | Add one item, or `items: [...]` for up to 40 | `todoist.js` |
-| `POST` | `/api/lists/:list/:id/done` | frame | Complete an item | `todoist.js` |
-| `GET` | `/api/photos` | frame | iCloud shared album photo list | `photos.js` |
-| `GET` | `/api/photos/:id` | frame (as `<img src>`) | One photo, resized and proxied | `photos.js` |
-| `GET` | `/api/messages` | frame | Pending messages, oldest first | `messages.js` (`MessageRoom`) |
-| `GET` | `/api/messages/live` | frame (as WebSocket) | Live push of the message list | `messages.js` (`MessageRoom`) |
-| `POST` | `/api/messages` | AI agent | Post a full-screen message | `messages.js` (`MessageRoom`) |
-| `POST` | `/api/messages/:id/dismiss` | frame | Remove a message | `messages.js` (`MessageRoom`) |
-| `GET` | `/api/recipes/explore` | frame | Browse or random TheMealDB recipes | `recipes.js` |
-| `GET` | `/api/recipes` | frame | Saved recipes | `recipes.js` |
-| `POST` | `/api/recipes` | frame or agent | Save a recipe | `recipes.js` |
-| `DELETE` | `/api/recipes/:id` | frame | Remove a saved recipe | `recipes.js` |
-| `GET` | `/api/recipes/:id/image` | frame (as `<img src>`) | Stored saved-recipe photo | `recipes.js` |
+| `GET` | `/api/calendar` (`?refresh`) | frame | Merged iCal feeds; cron refreshes them in KV every 10 min | `{ updated, calendars, errors, events }`; `?refresh` bypasses KV |
+| `GET` | `/api/weather` | frame | Open-Meteo current + 5-day | `{ unit, temp, feels, code, day, days:[...], updated }` or `{ error }` if unconfigured |
+| `GET` | `/api/lists/:list` | frame | Todoist project tasks (`groceries` or `todo`) | `{ project, items:[{id,content,due?,section?,assignee?,note?}], sections:[{id,name}], people:{id:name}, updated }`; `503` if `TODOIST_TOKEN` is missing |
+| `POST` | `/api/lists/:list` | frame | Add one item (`{content, description?}`) or bulk `{items:[...]}` up to 40 | `{ id, content }` for one item; `{ items:[{id, content}] }` for bulk; `400` if empty |
+| `POST` | `/api/lists/:list/:id/done` | frame | Complete an item | `{ ok: true }` |
+| `GET` | `/api/photos` | frame | iCloud shared album photo list | `{ photos:[{id,w,h,date}], updated, error? }`; empty list with a hint if `ALBUM_URL` is missing |
+| `GET` | `/api/photos/:id` | frame (`?key=` OK) | One photo, resized and proxied | `image/jpeg` with `Cache-Control: private, max-age=604800, immutable`; `404` if missing |
+| `GET` | `/api/messages` | frame | Pending messages, oldest first | `{ messages:[{id,title,body,from,at,expires?,speak?}] }` |
+| `GET` | `/api/messages/live` | frame (`?key=` required) | WebSocket: messages pushed on every change | `101` upgrade; initial frame and updates are `{ messages:[...] }` |
+| `POST` | `/api/messages` | agent | Post a full-screen message | `201 { id }`; `400` empty/invalid, `401` wrong token, `429` at 20 pending |
+| `POST` | `/api/messages/:id/dismiss` | frame | Remove a message | `{ ok: true }` |
+| `GET` | `/api/recipes/explore` | frame | Browse TheMealDB (`?c=Chicken`) or one recipe (`?id=mdb:...` / `?random=1`) | `{ recipes:[{id,title,thumb}] }` for a category; `{ recipe }` for one/random |
+| `GET` | `/api/recipes` | frame | Saved recipes | `{ recipes:[...] }` |
+| `POST` | `/api/recipes` | frame or agent | Save a recipe | `201 { id }`; duplicate `ref` returns `200 { id, existing: true }`; `400`/`429` possible |
+| `DELETE` | `/api/recipes/:id` | frame | Remove a saved recipe and its stored photo | `{ ok: true }` |
+| `GET` | `/api/recipes/:id/image` | frame (`?key=` OK) | Stored saved-recipe photo | image response with `Content-Type` from KV metadata and `Cache-Control: private, max-age=604800, immutable` |
 
 Optional features degrade gracefully when not configured: photos return an empty list with
-"Add ALBUM_URL to show photos", lists return 503 "Add TODOIST_TOKEN to connect Todoist", weather
+"Add ALBUM_URL to show photos", lists return `503 {"error": "Add TODOIST_TOKEN to connect Todoist"}`, and weather
 returns an error object without coordinates.
 
 ## KV caching and per-feed refresh
@@ -113,7 +113,7 @@ can't change.
 
 Saved recipes are one KV value (`recipes`). A saved recipe's photo is copied and resized into KV at
 save time (`recipe-image:<id>`), so the frame never has to trust or fetch an external site. Recipe
-images are also served with `private, max-age=604800, immutable`. TheMealDB upstream responses are
+images are served with `private, max-age=604800, immutable`. TheMealDB upstream responses are
 cached on the edge for a day via `cf: { cacheTtl: 86400, cacheEverything: true }`; random explore
 results are `no-store`.
 

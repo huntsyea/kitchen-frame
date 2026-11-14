@@ -5,7 +5,7 @@ description: How AI agents post full-screen messages to the frame and how they a
 tags: [messages, durable-objects, websocket, hibernation, agents, tts]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
 sources:
   - id: openwiki-source-262fee19998c22821ad4184a
     resource: repo://dashboard/src/App.svelte
@@ -25,14 +25,16 @@ sources:
     resource: repo://dashboard/worker/messages.js
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
-generated: { by: "claude-code", at: "2026-10-13T14:37:10.456Z" }
+  - id: openwiki-source-7d99c481b73bd57972b5f745
+    resource: repo://docs/messages.md
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 ---
 
 # Agent messages (live push)
 
 Any AI agent or script holding `AGENT_TOKEN` can put a message on the kitchen frame. It covers the
 whole screen (dashboard or slideshow) until someone taps its X, and is normally read aloud on the
-Kitchen Mini. Delivery is push-based: a message reaches the screen about 0.1 s after the POST.
+kitchen speaker. Delivery is push-based: a message reaches the screen about 0.1 s after the POST.
 
 ```text
 agent ──POST /api/messages (AGENT_TOKEN)──► Worker ──► MessageRoom (Durable Object "frame")
@@ -46,8 +48,7 @@ frame ──POST /api/messages/:id/dismiss (frame key)──► Worker ──►
 `dashboard/worker/messages.js` defines `MessageRoom`, bound as `MESSAGES` with a SQLite-backed
 migration in `wrangler.jsonc` (see [build and configuration](../operations/build-deploy-and-configuration.md)).
 There is exactly one instance, named `frame`, obtained through `room(env)`; because every request
-goes through that instance, the list is strongly consistent (KV, used before, cached reads for
-30–60 s, which made fast polling pointless).
+goes through that instance, the message list is strongly consistent.
 
 The Worker (`worker/index.js`) only authenticates and forwards; the room speaks a tiny internal
 HTTP protocol:
@@ -85,8 +86,8 @@ The room is designed to stay asleep:
 - The constructor registers `setWebSocketAutoResponse('ping' → 'pong')`, so the frame's keep-alive
   is answered by the runtime without waking the object or billing duration.
 - There are no in-memory timers; time-based work uses storage alarms. `webSocketMessage`,
-  `webSocketClose` and `webSocketError` are no-ops (the compatibility date auto-replies to close
-  frames).
+  `webSocketClose` and `webSocketError` are no-ops because the runtime handles hibernated
+  socket lifecycles automatically.
 
 It wakes only to accept a connection, store a post or dismissal, or run an expiry alarm.
 
@@ -109,7 +110,8 @@ In `dashboard/src/lib/state.svelte.js`:
 time, "1 of N", title and body; its X calls `dismissMessage()`, which hides it locally at once and
 POSTs the dismissal (the room then pushes the shorter list to every screen). `App.svelte` holds
 messages back entirely in demo mode, and `Ambient.svelte` pauses the slideshow while a message
-covers it.
+covers it. Demo mode only suppresses display on the frame; the server still stores and pushes
+messages, so they appear once demo mode is turned off.
 
 ## Read-aloud
 
@@ -123,8 +125,8 @@ fails, and persisted in localStorage (`frame-announced`, last 100). On the very 
 already present are treated as announced.
 
 The speaker comes from `announceTarget()`: the one chosen in Settings (initially
-`media_player.kitchen_mini`, this household's speaker) if Home Assistant has it, otherwise the
-first Music Assistant speaker, so read-aloud works on any setup without configuration.
+`media_player.kitchen_mini`) if Home Assistant has it, otherwise the first available Home Assistant
+media player, so read-aloud works on any setup without configuration.
 
 ## Agent skill
 

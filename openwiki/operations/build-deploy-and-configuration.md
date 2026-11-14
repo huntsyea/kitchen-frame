@@ -3,10 +3,11 @@ type: operations
 title: Build, deploy and configuration
 description: How to build, test, deploy, and configure the dashboard and Worker, including secrets, bindings, Cloudflare usage and cost boundaries, and how this wiki is kept up to date.
 tags: [deploy, wrangler, vite, cloudflare, configuration, secrets, operations]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
+  - id: openwiki-source-23d1f0d32031635db013d5ed
+    resource: repo://.github/scripts/prepare-openwiki-update.sh
+  - id: openwiki-source-164e2da859b5277df81c7d94
+    resource: repo://.github/workflows/ci.yml
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml
   - id: openwiki-source-ea70eb6c045047448e446296
@@ -23,13 +24,18 @@ sources:
     resource: repo://dashboard/worker/calendar.js
   - id: openwiki-source-761c8b9c5f5e1234a74d94a4
     resource: repo://dashboard/worker/index.js
+  - id: openwiki-source-fd5601bf85cef5c591f92e95
+    resource: repo://dashboard/worker/todoist.js
   - id: openwiki-source-cb5a2109e8a56015671f5cae
     resource: repo://dashboard/worker/weather.js
   - id: openwiki-source-0d4db84e2b7fee7556be759e
     resource: repo://dashboard/wrangler.jsonc
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Build, deploy and configuration
@@ -53,18 +59,18 @@ Open the app once with `?key=<DASHBOARD_KEY>`; the page remembers the key. `?dia
 | --- | --- |
 | `main: worker/index.js` | Entry point; also exports the `MessageRoom` Durable Object class. |
 | `assets` (`ASSETS`), `run_worker_first: ["/", "/index.html"]` | Built files are plain assets; the Worker serves the page itself so it can mark it `no-store`. `public/_headers` caches hashed `/assets/*` for a year as immutable. |
-| `kv_namespaces` (`CALENDAR`) | One KV namespace for the calendar, album list, photo bytes (`photo:<id>`), saved recipes and recipe images. |
+| `kv_namespaces` (`CALENDAR`) | One KV namespace holds the calendar, album list, photo bytes (`photo:<id>`), saved recipes and recipe images. |
 | `durable_objects` (`MESSAGES` → `MessageRoom`) + migration `v1` `new_sqlite_classes` | The hibernating message room (see [agent messages](../features/agent-messages.md)). |
 | `triggers.crons: */10 * * * *` | Calendar refresh (see [calendar](../feeds/calendar.md)). |
 | `images` (`IMAGES`) | One-time resizing of saved-recipe and slideshow photos. |
-| `vars` | `TODOIST_GROCERY_PROJECT` = "Grocery List", `TODOIST_TODO_PROJECT` = "Household". |
+| `vars` | `TODOIST_GROCERY_PROJECT` = "Grocery List", `TODOIST_TODO_PROJECT` = "Household" (defaults in the Worker are "Groceries" / "To-do"). |
 | `observability` | Workers logs on. |
 
 ## Secrets and environment files
 
 Production secrets are set with `npx wrangler secret put <NAME>` from `dashboard/`; the production values are kept in the gitignored `dashboard/.prod.vars`. Never print or commit them. Local development copies `dashboard/.dev.vars.example` to `dashboard/.dev.vars`.
 
-`dashboard/.dev.vars.example`, `.prod.vars` and `.frame.vars` are all gitignored (see `.gitignore`).
+`dashboard/.dev.vars`, `.prod.vars` and `.frame.vars` are all gitignored (see `.gitignore`).
 
 | Secret/var | Used for |
 | --- | --- |
@@ -75,7 +81,7 @@ Production secrets are set with `npx wrangler secret put <NAME>` from `dashboard
 | `ALBUM_URL` | iCloud shared album link with Public Website on. |
 | `WEATHER_LAT`, `WEATHER_LON` | Weather location (optional `WEATHER_UNIT`). |
 | `DISPLAY_TZ` (optional) | Fallback zone for floating calendar times. |
-| `TODOIST_GROCERY_PROJECT`, `TODOIST_TODO_PROJECT` | Todoist project names for groceries and tasks (default "Groceries" / "To-do"). |
+| `TODOIST_GROCERY_PROJECT`, `TODOIST_TODO_PROJECT` | Todoist project names for groceries and tasks. Defaults are "Groceries" / "To-do"; this deployment overrides them to "Grocery List" / "Household" in `wrangler.jsonc`. |
 
 Home Assistant credentials are deliberately **not** Worker secrets: they live only in the frame's localStorage, pushed from the gitignored `.frame.vars` (see [Home Assistant](../integrations/home-assistant-music-and-speech.md)). Agent tooling on the developer's machine uses `KITCHEN_FRAME_URL` / `KITCHEN_FRAME_TOKEN` from `~/.zshenv`.
 
@@ -89,6 +95,20 @@ The account is on Workers Paid. Steady use is roughly 1,500–2,000 Worker reque
 
 The Free plan's 10 ms cron CPU limit is why the calendar parser pre-filters feeds. The Worker remains on the Paid plan so the cron has enough headroom for a large calendar and for Durable Object WebSocket hibernation.
 
+## CI
+
+`.github/workflows/ci.yml` runs on every pull request and on pushes to `main`. It has three jobs:
+
+| Job | What it checks |
+| --- | --- |
+| `openwiki-guards` | Parses `prepare-openwiki-update.sh` and runs a Python test for the prepare script. |
+| `dashboard` | `npm ci`, `npm test`, `npm run build` inside `dashboard/`. |
+| `kiosk` | Builds the Android APK with `kiosk/build.sh` and uploads `kiosk/build/frame.apk` as a 14-day artifact. |
+
+The dashboard job uses the `dashboard/package-lock.json` npm cache; the kiosk job installs Android build-tools 34.0.0 and platform android-34.
+
 ## Keeping this wiki current
 
-`AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily (and on demand): it installs OpenWiki, runs `openwiki code --update`, removes transient run state, and opens a "docs: update OpenWiki" pull request with the `openwiki/` changes (preserving partial progress if the run fails). Inference runs on **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`).
+`AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily at 08:00 UTC (and on demand via `workflow_dispatch`): it installs OpenWiki, runs `openwiki code --update`, removes transient run state (`openwiki/.run.json`), and opens a "docs: update OpenWiki" pull request with the `openwiki/` changes, plus `AGENTS.md`, `CLAUDE.md` and the workflow file itself. The prepare script preserves partial progress when the run fails and only publishes meaningful changes. The job fails at the end if OpenWiki itself failed.
+
+Inference runs on **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`).

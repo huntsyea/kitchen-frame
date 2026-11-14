@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:19ba79413354fb3baa37db76e33162f20fdd3ac280b072574724e7168304ed7c",
+  "pageVersion": "sha256:8400bce6bbfa9b1191014edd55b1acd5a30e0813d65a7e27555dbcbf77f1ad11",
   "claims": [
     {
       "id": "claim_9237ad72c67041e19ae8e5f2015124c6",
@@ -57,66 +57,6 @@
       ]
     },
     {
-      "id": "claim_e4723b707c554d218164493a7fee4000",
-      "statement": "Tests run with node's built-in test runner over worker/*.test.js, without a Worker runtime or network.",
-      "evidence": [
-        {
-          "resource": "repo://dashboard/package.json#L6-L12",
-          "version": "repo-lines-v1:sha256:5ff6fe370df50458a20b42baebbe3aa62ad8341a3a5071adb84c0c93b3210ec6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2E2M2JmMDk0ZjUzYTg5MTIzMjc5MjRlMjllMTE5MzIzYjJjOTU5YWNjMDEzMmZhZmEyNzE1MmI1YmQ5Zjg2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2JiNDRlZWE0ZWNlYzU0YTRkODI2OTU2Y2U2NjdlMTNjNjIwY2Y1MjVjNWJkZTI1NDNlYzQ5YzgyZjMxOTdmMyJ9"
-        },
-        {
-          "resource": "repo://dashboard/worker/calendar.test.js#L1-L4",
-          "version": "repo-lines-v1:sha256:f57cfba1b4ad2be53509314fb672700dae7375795b408b13307d9bd6b0989400:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmE5NjViNzc2NTZmNWYyZGVkNzg1MDA3MTI4ZTg1ZmQzYTQ4OWQ1MTc0MWIyYjI3ZmM5NzM5MWM5MmEyOGQ2OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkzMWEzYzJhNjAxM2Q1YmM3ZWUzMWM0MWY5Nzc1NTc2NzhhZTYwYzgyMmVhZjBlN2U1Y2VjYjI3MTFkMWY5MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E5MzViMTgyYzJkNzVlMWY1ODgzMmQ1NGVhN2ZiMTZmYjcwM2I5Yjc2Mjc5MmZjMWQwYjlhMTVhMjg1ZDZkYiJ9"
-        }
-      ]
-    },
-    {
-      "id": "claim_1ab6520b76ae4f2abec60a792b0f482c",
-      "statement": "Calendar parser tests use Google and iCloud fixture feeds at a fixed date and cover EXDATE, moved/cancelled instances, long-running daily events, all-day ranges, prefiltering, iCloud time zone quirks, merge de-duplication, DST, and fast-forward equivalence.",
-      "evidence": [
-        {
-          "resource": "repo://dashboard/worker/calendar.test.js#L1-L87",
-          "version": "repo-lines-v1:sha256:565d6b75a86e8bec6d56ae9579708ea8afd3cdbfe0879167b8ca8b010191e79d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhOTY1Yjc3NjU2ZjVmMmRlZDc4NTAwNzEyOGU4NWZkM2E0ODlkNTE3NDFiMmIyN2ZjOTczOTFjOTJhMjhkNjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
-        },
-        {
-          "resource": "repo://dashboard/worker/fixtures/google.ics",
-          "version": "repo-file-v1:sha256:e449d0536aea7a1bd7f8479d69e0222e10513ca379f9c47edcb4e19af0d9de43"
-        },
-        {
-          "resource": "repo://dashboard/worker/fixtures/icloud.ics",
-          "version": "repo-file-v1:sha256:6b2ab27070b3e98d0c98350c346548f799d8ab2711878405c3c62b13486e4c8e"
-        }
-      ]
-    },
-    {
-      "id": "claim_765d5c66fc9b4d2b98e774b9db2f64b3",
-      "statement": "API tests call the Worker's fetch handler directly with a fake Todoist API installed on globalThis.fetch before each test and fake bindings for KV and assets.",
-      "evidence": [
-        {
-          "resource": "repo://dashboard/worker/api.test.js#L20-L61",
-          "version": "repo-lines-v1:sha256:3b0c7c0632b545a8b0b0b89922fdf11c33d754f278ef3ace0bc47ab973fef021:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyNjk0ZTBiZTg3YzdmYTk0M2U0YjM3MThmOWMwNDY0ODYxMmU4NjU2MmY0NjI3MjQxNTI2MzM0YTI5NjNkMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0OTkyMGRlODVmZDQ1MjljOWQ0YWRmNTUwMmMzMWIxOWY1NzljNTFhMzc4NDRhOTA4MGU0ZjIyOGIxMDE0NGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMjYzOGMzZWIyMzY1NmQxN2RmZjQ4OGJlY2RjMzFhNTM0NWUxNjM2YmNmZjQ5NTY2MWI5ZmIzODM4OWFmMDEifQ"
-        },
-        {
-          "resource": "repo://dashboard/worker/api.test.js#L305-L319",
-          "version": "repo-lines-v1:sha256:1874cb1cca8d24e9f392c07a571e6a9b4ae321f9ef4dbf8544780f9057ab2967:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOWVkYjhkNzljYTljZDcwMjZhZGM1OGI3MTM1NmNkZjZkMjI0YWE0MWMzNTZkOTYwMmE3MmJiNzUyN2E5NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzMTc5ZTYyZGQwYjYzYmFjN2NlZmUxNTBjYWRjOWQ4MTM1NzVjYzE2YjkwOWY0ZWRlMTZiOWYzZTlhMWQwMmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5YzYzODAxMzQ2ODhjNDlkNmQ1MGJmMzJmNjU3ZTA3ODE4OGIzNDlhZjQwMzQzMGFjMjU3MDcyMGVlZTdlMGMifQ"
-        }
-      ]
-    },
-    {
-      "id": "claim_4901b611d4b7476cbfefe5810099b990",
-      "statement": "Message tests construct the real MessageRoom with a stand-in Durable Object context (storage, alarms, sockets) behind a fake namespace.",
-      "evidence": [
-        {
-          "resource": "repo://dashboard/worker/api.test.js#L321-L336",
-          "version": "repo-lines-v1:sha256:cbef055171abf96f9b5922bc1a97723c48a59bb4ecd9517d5d1bfa47f98a0658:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmYjI4MmMzNjFhYzVkNWUzYTAzNTYwMzM1YzI5N2VmZGRiN2JkOTlmMWMzZTA2ZGE4YzdiZDFhNjc3OWQzNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2ZDMyNzAxZWU2NjU5NWFhZmQ2NGU5YTNiMGJiNzFkNWIwZDhhY2E2NzgyNGRmYmE4ODU3YzUzYjYwMzNhZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
-        },
-        {
-          "resource": "repo://dashboard/worker/api.test.js#L7-L18",
-          "version": "repo-lines-v1:sha256:ad9f4b41287d0da9f8455e85761b46b9bc1249c7dcfcc915aa14e197532a733e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyODNmYWQyNDM5ZGM5YTU4NWI5ZDBhMWFkMDUxNjViN2Y0YmMwNmE4NmUxZWM1MTU2ZDI0MWQ3MTc2ZGI2NDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmY2EzZmNmZGZhODBhZWJmMWFlNTMyM2I2YzgzOTgyOWNmZmM2YmRiMzE4OWJmZTBjZjE5MWIzN2RlNjZjZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEyZDM3YzQ1ODA5MzAzZThiMGI5M2YzNzM2ZDUzYWY1MjQzZjFiNjZiMTgzZWEzZTI1ZjY4YTdhMWRiYWEzYmEifQ"
-        }
-      ]
-    },
-    {
       "id": "claim_b01f976ed0c44033a4028b77cfc3b9d0",
       "statement": "Frontend verification uses a headless browser at the frame's 1280×720 CSS viewport, typically with demo mode enabled and the ?diag overlay for fps, long frames, DOM nodes, image megapixels and heap.",
       "evidence": [
@@ -155,6 +95,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-14T14:55:31.391Z"
   }
 }

@@ -5,7 +5,7 @@ description: End-to-end view of the family photo-frame dashboard - an Android ki
 tags: [architecture, overview, cloudflare-workers, svelte, android, kiosk]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
 sources:
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
@@ -35,7 +35,7 @@ sources:
     resource: repo://kiosk/src/com/huntsyea/frame/MainActivity.java
   - id: openwiki-source-3a44815832a872f4778f822b
     resource: repo://SECURITY.md
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 ---
 
 # System architecture
@@ -47,9 +47,9 @@ The project turns a rooted Android photo frame into a kitchen wall dashboard: cl
 ```text
 ┌──────────── Frame (Android 8.1, WebView 106) ────────────┐
 │ kiosk app com.huntsyea.frame (HOME launcher, WebView)    │
-│   └─ Svelte app (dashboard/src) ───────────────┐          │
-│        │ https + key            │ ws:// on LAN  │          │
-└────────┼─────────────────────────┼─────────────────┘          
+│   └─ Svelte app (dashboard/src) ───────────────┐        │
+│        │ https + key            │ ws:// on LAN   │        │
+└────────┼─────────────────────────┼────────────────┘        
          ▼                       ▼
   Cloudflare Worker            Home Assistant (+ Music Assistant, Piper TTS)
   (dashboard/worker)
@@ -102,12 +102,13 @@ The project turns a rooted Android photo frame into a kitchen wall dashboard: cl
 
 ### 2. Svelte app (`dashboard/src/`)
 
-A Svelte 5 runes app (no SvelteKit) built by Vite with `chrome106` / `chrome61` targets. It is mounted by `main.js` and bootstrapped from localStorage.
+A Svelte 5 runes app (no SvelteKit) built by Vite with `chrome106` / `chrome61` targets. `main.js` mounts `App` and starts the diagnostics overlay; `App.svelte` declares the tabs and renders only the active view.
 
 - **Authentication.** `src/lib/api.js` stores the key passed as `?key=` in `localStorage` under `frame-key`, then sends it as a bearer token. Image and WebSocket GET requests carry the key in the URL because `<img>` and `WebSocket` cannot send custom headers.
-- **State and polling.** `src/lib/state.svelte.js` owns the feed `$state` objects and the pollers. `start()` kicks off the minute-aligned clock, calendar (5 min), weather (15 min), Tasks (1 min), Groceries (1 min only while its tab is open), and photos (5 min only while the clock screen is up). Messages use a WebSocket; a 1 min HTTP fallback runs only while the socket is down.
+- **State and polling.** `src/lib/state.svelte.js` owns the feed `$state` objects and the pollers. `start()` kicks off the minute-aligned clock, calendar (5 min), weather (15 min), Tasks (1 min), Groceries (1 min only while its tab is open), and photos (5 min only while the clock screen is showing photos). A `single()` helper makes sure only one request per feed is in flight at a time; a `changed()` helper skips both localStorage writes and re-renders when the data is identical.
+- **Messages.** The frame opens a WebSocket to `/api/messages/live` as soon as it starts. While the socket is up, the Durable Object pushes the pending list on every change. If the socket drops, the frame reconnects with exponential backoff and polls `GET /api/messages` once a minute so nothing is missed.
 - **Idle and slideshow.** After a configurable idle timeout the app unmounts the dashboard, sets `ui.idle = true`, and renders `Ambient` with a clock, date, weather, next event, now playing and the family photo slideshow. Tapping wakes it back to Home.
-- **Home Assistant.** `src/lib/ha.svelte.js` connects directly to `ws://<home-assistant>:8123/api/websocket` from the browser; the URL and long-lived token live only in `localStorage` (`frame-ha-url`, `frame-ha-token`). The Music tab only appears when a token is present.
+- **Home Assistant.** `src/lib/ha.svelte.js` connects directly to `ws://<home-assistant>:8123/api/websocket` from the browser. HA's REST API rejects cross-origin calls, but its WebSocket API does not, so everything goes over the socket. The URL and long-lived token live only in `localStorage` (`frame-ha-url`, `frame-ha-token`); the Music tab only appears when a token is present.
 - **Demo mode.** Settings → Demo mode swaps in invented data from `demo.js`, never writes to Todoist, never shows family photos, and suppresses agent messages.
 
 ### 3. Cloudflare Worker (`dashboard/worker/`)
@@ -115,7 +116,7 @@ A Svelte 5 runes app (no SvelteKit) built by Vite with `chrome106` / `chrome61` 
 One Worker serves both the built app and the API. `wrangler.jsonc` wires:
 
 - `ASSETS` for the Vite-built static files;
-- `CALENDAR` KV for calendar, photo list, photo bytes, saved recipes and recipe images;
+- `CALENDAR` KV for calendar data, photo album list, photo bytes, saved recipes and recipe images;
 - `MESSAGES` Durable Object binding to the `MessageRoom` class;
 - `IMAGES` for one-time image resizing;
 - a `*/10 * * * *` cron to refresh the calendar.
@@ -142,7 +143,32 @@ One Worker serves both the built app and the API. `wrangler.jsonc` wires:
 | `GET /api/messages/live` | WebSocket pushed on every change. |
 | `POST /api/messages/:id/dismiss` | Dismisses a message. |
 
-`authorized()` checks `Authorization: Bearer <DASHBOARD_KEY>` for most routes and allows the key in the query string only for photo, recipe image and WebSocket routes.
+`authorized()` checks `Authorization: Bearer <DASHBOARD_KEY>` for most routes and allows the key in the query string only for photo, recipe image and WebSocket routes. `AGENT_TOKEN` is accepted only for `POST /api/messages` and `POST /api/recipes`.
+
+## Persistence boundaries
+
+| What | Where | Why |
+| --- | --- | --- |
+| Merged calendar (events + errors) | `CALENDAR` KV (`calendar` key) | Refreshed by cron every 10 min; returned even when upstream is slow. |
+| Photo album list | `CALENDAR` KV (`photos` key) | iCloud links expire, so the Worker keeps a short-lived listing and re-lists in the background. |
+| Photo bytes | `CALENDAR` KV (`photo:<id>`) | Resized once for the 1920×1080 screen; later frames serve from KV instead of refetching iCloud. |
+| Saved recipes list | `CALENDAR` KV (`recipes`) | Added by the frame or agents; deduplicated by `ref`. |
+| Saved recipe images | `CALENDAR` KV (`recipe-image:<id>`) | Copied at save time so the frame never fetches arbitrary third-party sites. |
+| Pending messages | `MessageRoom` Durable Object SQLite | One object named `frame` holds the list and WebSockets; pushed live to every connected frame. |
+| Settings and cached feed data | frame `localStorage` (`frame-*` keys) | Survives reboots; lets the dashboard boot with something when the Worker or Wi-Fi is slow. |
+| Home Assistant URL + token | frame `localStorage` only (`frame-ha-url`, `frame-ha-token`) | Never touches Cloudflare; pushed to the frame over ADB. |
+
+The `CALENDAR` namespace name is historical: it was created for the calendar feed and later reused for every KV-backed feature.
+
+## Message flow
+
+1. An agent or script `POST`s to `https://<worker>/api/messages` with `Authorization: Bearer <AGENT_TOKEN>`.
+2. The Worker forwards the body to the single `MessageRoom` Durable Object instance named `frame`.
+3. The Durable Object stores the message in SQLite-backed storage, sets an alarm for its expiry if one was given, and pushes the updated pending list to every connected frame over WebSocket.
+4. The frame displays the message full-screen until dismissed. A spoken announcement is sent through Home Assistant for new messages, except during quiet hours (10 PM–7 AM), in demo mode, or when `speak: false`.
+5. Dismissing a message calls `POST /api/messages/:id/dismiss`, which the Durable Object applies and broadcasts to all frames.
+
+Because the Durable Object uses WebSocket hibernation, keep-alive pings (`ping` → `pong`) are answered by the runtime itself and do not bill CPU or wake the object.
 
 ## Data flow at a glance
 

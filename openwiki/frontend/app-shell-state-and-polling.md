@@ -5,7 +5,7 @@ description: How the Svelte 5 dashboard boots on the frame, manages shared state
 tags: [svelte, state, polling, localstorage, idle, demo-mode, boot]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
 sources:
   - id: openwiki-source-1749acaa35a5ed1522bc474a
     resource: repo://dashboard/index.html
@@ -19,7 +19,7 @@ sources:
     resource: repo://dashboard/src/lib/state.svelte.js
   - id: openwiki-source-74255eeb4097b4c275c2f7c4
     resource: repo://dashboard/src/main.js
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 ---
 
 # App shell, state and polling
@@ -107,6 +107,19 @@ When demo mode is toggled, `setSetting('demo', …)` clears the demo list caches
 All settings live in `localStorage` as `frame-*` keys and survive reboots. The settings sheet (`components/Settings.svelte`) edits them through `setSetting()`, except brightness, which is controlled through the kiosk bridge (`window.FrameKiosk`) and is only available inside the kiosk app.
 
 Theme can be `auto`, `light` or `dark`. In `auto`, `applyTheme()` uses the current day's sunrise and sunset from the weather feed; until weather arrives it falls back to 7 AM / 7 PM. The `?theme=` query parameter still overrides the stored preference for ADB setup. `applyTheme()` is called every minute with the clock tick and again whenever new weather data arrives.
+
+## Message read-aloud
+
+Agent messages are pushed to the frame over a WebSocket (`/api/messages/live`), with a 30 s ping/pong keepalive. While the socket is down the frame reconnects with exponential backoff and polls `/api/messages` once a minute. New messages are read aloud through Home Assistant if:
+
+- read-aloud is on in Settings (`ui.announceOn !== 'off'`),
+- Home Assistant is connected,
+- it is not quiet hours (22:00–07:00 frame time),
+- the message does not have `speak: false`,
+- the message is fresh (under 10 minutes old), so a late reconnect does not read stale news,
+- it has not been announced before (the last 100 announced ids are persisted in `frame-announced`).
+
+`announceTarget()` returns the configured speaker if HA still has it, otherwise the first Music Assistant speaker. The full read-aloud path and Home Assistant integration are documented in [Home Assistant: music and speech](../integrations/home-assistant-music-and-speech.md), and message display rules are on [Agent messages](../features/agent-messages.md).
 
 ## Reload and self-healing
 

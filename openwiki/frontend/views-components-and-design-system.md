@@ -3,9 +3,6 @@ type: design-system
 title: Views, components and design system
 description: The dashboard's screens and shared components, its flat iOS-widget design tokens with light and dark palettes, the generated Lucide icon set, and the WebView 106 and low-power GPU rules every style must follow.
 tags: [svelte, views, components, css, design-tokens, webview-106, icons]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-a49bc3873fe9977f6676320a
     resource: repo://dashboard/scripts/icons.mjs

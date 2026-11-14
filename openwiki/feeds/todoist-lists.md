@@ -1,7 +1,7 @@
 ---
 type: data-pipeline
 title: Todoist lists (Tasks and Groceries)
-description: How the Worker proxies two Todoist projects (named by TODOIST_TODO_PROJECT / TODOIST_GROCERY_PROJECT) into Tasks and Groceries lists, with sections, assignees and description notes; how the frame polls, renders and optimistically edits them; and the bulk-add path used by recipes.
+description: How the Worker proxies two Todoist projects into Tasks and Groceries lists with sections, assignees and description notes; how the Svelte frame polls, persists, renders and optimistically edits them; and the bulk-add path used by recipes.
 tags: [todoist, tasks, groceries, worker, svelte, polling]
 sources:
   - id: openwiki-source-262fee19998c22821ad4184a
@@ -20,32 +20,39 @@ sources:
     resource: repo://dashboard/worker/index.js
   - id: openwiki-source-fd5601bf85cef5c591f92e95
     resource: repo://dashboard/worker/todoist.js
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 ---
 
 # Todoist lists (Tasks and Groceries)
 
-Two tabs come from Todoist: **Tasks** and **Groceries**. Their project names are configured with Worker variables (defaults "To-do" and "Groceries"; this household uses "Household" and "Grocery List"). The Todoist token stays on the Worker; the frame only talks to `/api/lists/:list`. Home also renders the same task list.
+Two dashboard tabs come from Todoist: **Tasks** and **Groceries**. The Todoist token never reaches the frame; the Worker proxies them through `/api/lists/:list`. The Home tab also renders the same Tasks widget using the same shared state and completion handler, so a task completed on Home is immediately reflected in the Tasks tab.
 
 ## Configuration
 
+The Worker reads a secret and two variables to know which Todoist projects to use:
+
 | Name | Kind | Purpose |
 | --- | --- | --- |
-| `TODOIST_TOKEN` | secret | Todoist API token. Without it, list routes return 503 "Add TODOIST_TOKEN…" and the frame shows "Todoist isn’t connected yet." |
-| `TODOIST_TODO_PROJECT` | var | Project name for `todo` (default "To-do") |
-| `TODOIST_GROCERY_PROJECT` | var | Project name for `groceries` (default "Groceries") |
+| `TODOIST_TOKEN` | secret | Todoist API token. Without it, list routes return `503` with `"Add TODOIST_TOKEN to connect Todoist"`. The frame detects this message and shows "Todoist isn’t connected yet." |
+| `TODOIST_TODO_PROJECT` | var | Project name for the `todo` list (default `"To-do"`). In `wrangler.jsonc` this household uses `"Household"`. |
+| `TODOIST_GROCERY_PROJECT` | var | Project name for the `groceries` list (default `"Groceries"`). In `wrangler.jsonc` this household uses `"Grocery List"`. |
+
+These vars are defined in `dashboard/wrangler.jsonc`:
+
+```jsonc
+"vars": { "TODOIST_GROCERY_PROJECT": "Grocery List", "TODOIST_TODO_PROJECT": "Household" }
+```
 
 ## Worker (`dashboard/worker/todoist.js`)
 
-- **Project lookup:** project names are matched case-insensitively against `/projects` (paged,
-  200 per page, up to 1,000). The name→id map (`projectIds`) is cached per isolate, and concurrent callers share one in-flight `/projects` request (`listing`), so a 40-item bulk add on a cold isolate lists projects once.
+- **Project lookup:** `projectId()` matches the configured project name case-insensitively against Todoist `/projects` (paged, 200 per page, up to 1,000). The name→id map is cached per isolate, and concurrent callers share one in-flight `/projects` request (`listing`), so a 40-item bulk add on a cold isolate only lists projects once.
 - **`getList`** fetches the project's tasks on every request, in parallel with the project's metadata, and returns `{project, items, sections, people, updated}`.
 - **Metadata cache:** sections (sorted by `section_order`) and collaborators (id → name; only shared projects have any) change rarely, so `projectMeta` caches them per isolate for 10 minutes.
-- **`sortTasks`** drops subtasks and completed tasks. Groceries keep Todoist's own `child_order`; to-dos put dated items first (earliest date, so overdue, at the top), then fall back to `child_order`. Each item is `{id, content, due?, section?, assignee?, note?}`, where `note` is the first non-empty line of the task description, trimmed and cut to 120 characters (e.g. "For: Beef Mandi" from a recipe).
-- **Writes:** `addItem` creates a task in the project with an optional description; `completeItem` closes a task.
+- **`sortTasks`** drops subtasks and completed tasks. Groceries keep Todoist's own `child_order`; Tasks put dated items first (earliest date, so overdue, at the top), then fall back to `child_order`. Each item is `{id, content, due?, section?, assignee?, note?}`, where `note` is the first non-empty line of the task description, trimmed and cut to 120 characters (for example "For: Beef Mandi" from a recipe).
+- **Writes:** `addItem` creates a task in the project with an optional description; `completeItem` closes a task by id.
 
 Routes in `dashboard/worker/index.js`:
 
@@ -60,15 +67,24 @@ Content and descriptions are trimmed to 500 characters. The bulk-add route exist
 
 ## Frame
 
-### State and polling (`dashboard/src/lib/state.svelte.js`)
+### Offline-first state and polling (`dashboard/src/lib/state.svelte.js`)
 
-`lists.todo` and `lists.groceries` hold `items`, `sections`, `people`, `project` and `error`, seeded from localStorage at boot so the lists show offline. `loadList(name)` goes through the shared `single()` in-flight guard and only replaces `items` or the metadata when `changed()` reports a difference, so unchanged polls skip both the state update and the localStorage write. See [app shell](../frontend/app-shell-state-and-polling.md).
+`lists.todo` and `lists.groceries` hold `items`, `sections`, `people`, `project` and `error`. They are seeded from `localStorage` at boot (`cached('todo')`, `cached('groceries')`, plus metadata caches) so the saved list remains visible even when the frame is offline. `loadList(name)` goes through the shared `single()` in-flight guard and only replaces `items` or metadata when `changed()` reports a difference, so unchanged polls skip both the state update and the `localStorage` write.
 
-Polling follows what's on screen: Tasks every minute while the dashboard is up (Home shows them), Groceries every minute only while its tab is open. `App.svelte` loads a list immediately when its tab opens, and waking from the clock screen reloads Tasks via `exitIdle()`.
+Polling follows what's on screen:
 
-Edits are optimistic:
+- **Tasks** are polled every minute while the dashboard is showing and not idle (`!ui.idle`), because Home and the Tasks tab both display them.
+- **Groceries** are polled every minute only while its own tab is open and the dashboard is not idle.
+- A list is loaded immediately when its tab opens (`App.svelte` effect on `ui.tab`).
+- Waking from the clock screen (`exitIdle()`) reloads Tasks, since the Home tab shows them.
 
-- `completeItem` removes the row at once and puts it back with an error if Todoist refuses.
+See [app shell](../frontend/app-shell-state-and-polling.md) for the `every()`, `single()`, `changed()` and `remember()` primitives.
+
+### Optimistic edits
+
+Edits are optimistic so the UI feels instant:
+
+- `completeItem` removes the row at once and restores it with an error message if Todoist refuses.
 - `addItem` appends the returned item to the list and persists it.
 - `addToGroceries` (used by [recipes](../features/recipes.md)) sends missing ingredients in one bulk `POST`, each with a description naming the recipe, and appends the returned items to `lists.groceries` immediately with their notes.
 
@@ -76,12 +92,14 @@ In demo mode lists come from `dashboard/src/lib/demo.js` and edits never reach T
 
 ### Rendering (`dashboard/src/views/List.svelte`, `dashboard/src/components/TaskRow.svelte`)
 
-- Tasks without a section (or with an unknown one) come first, unlabelled, like Todoist's list view: a full-width card above the Tasks board, or the first group in Groceries.
-- **Tasks** (`board=true`) shows one card per section in Todoist order, including empty ones, so it mirrors Todoist. **Groceries** shows one card with items flowing in columns under section headings (aisles), skipping empty sections. Sections are bucketed in one pass.
-- `TaskRow` shows a ring that fills before the row disappears (350 ms, so a tap feels confirmed), the assignee's avatar, and a small grey line with the due label ("Overdue" in red), the section name and the note.
+- **Tasks without a section** (or with an unknown section) come first, unlabelled, like Todoist's list view. In Tasks they appear in a full-width card above the board; in Groceries they form the first group before any section headings.
+- **Tasks** (`board=true`) shows one card per section in Todoist order, **including empty sections**, so it mirrors Todoist.
+- **Groceries** shows one card with items flowing in columns under section headings (aisles), **skipping empty sections**. Sections are bucketed in one pass.
+- `List.svelte` resolves each item's assignee name with `who(item) = list.people[item.assignee]` and passes it to `TaskRow`.
+- `TaskRow` shows a ring that fills before the row disappears (350 ms, so a tap feels confirmed), the assignee's avatar when a name is provided, and a small grey line with the due label ("Overdue" in red), the section name and the note.
 - The Add button opens an inline field that stays open for several additions in a row.
 
-Home reuses the same `TaskRow` and `completeItem` handler for its Tasks widget, so completing a task there also updates the shared list.
+The Home tab reuses the same `TaskRow` and `completeItem('todo', i)` handler for its Tasks widget, so completing a task there also updates the shared list.
 
 ## Tests
 

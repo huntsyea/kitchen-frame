@@ -1,8 +1,8 @@
 ---
 type: data-pipeline
 title: Photos and idle slideshow
-description: How photos from an iCloud shared album reach the frame's idle clock screen - anonymous CloudKit listing, a KV-cached album list and image cache proxied through the Worker, one-time resizing, and the frame's preloaded, paired slideshow.
-tags: [photos, icloud, cloudkit, kv, slideshow, images-binding]
+description: How the iCloud shared album behind the idle clock screen is discovered via anonymous CloudKit calls, cached and resized in the Worker, and preloaded, paired and dimmed on the frame.
+tags: [photos, icloud, cloudkit, kv, slideshow, images-binding, frame, ambient]
 sources:
   - id: openwiki-source-262fee19998c22821ad4184a
     resource: repo://dashboard/src/App.svelte
@@ -20,10 +20,10 @@ sources:
     resource: repo://dashboard/worker/index.js
   - id: openwiki-source-272749880eb665924bb98bdd
     resource: repo://dashboard/worker/photos.js
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Photos and idle slideshow
@@ -37,7 +37,9 @@ frame ── GET /api/photos ──────────► Worker ─ KV "ph
 
 ## Why everything goes through the Worker
 
-The frame's Android 8.1 trust store lacks DigiCert Global Root G2, so it cannot fetch from Apple's photo servers. The Worker lists the album and passes every image through, and Apple URLs never reach the frame: `listPhotos` returns only ids, widths, heights, and dates.
+The frame's Android 8.1 trust store lacks DigiCert Global Root G2, so it cannot fetch from Apple's photo servers. The Worker lists the album and passes every image through, and Apple URLs never reach the frame.
+
+The Worker also keeps full-resolution phone photos away from the frame. The [Pastigio FRAME156](../device/kiosk-app-and-frame.md) is a Rockchip RK3326 with 32-bit userspace and 951 MB RAM, and its Wi-Fi is slow; decoding multi-megapixel originals would stall the slideshow and the dashboard. Every image is resized once in the Worker before it is cached.
 
 ## Listing the album (`dashboard/worker/photos.js`)
 
@@ -52,9 +54,11 @@ The frame's Android 8.1 trust store lacks DigiCert Global Root G2, so it cannot 
    Videos and HEIC-only originals are dropped.
 4. Each chosen photo gets an id of `recordName + '-' + fingerprint[0..12]`, so editing a photo changes its fingerprint and therefore its URL, making image URLs immutable. The list is capped at 500 photos.
 
-This is not a documented Apple API and may change without notice.
+This is not a documented Apple API and may change without notice. Dates come back from CloudKit as `assetDate` values, not as calendar/VTIMEZONE data.
 
-`getAlbum` stores `{ fetched, photos }` under KV key `photos` for 30 minutes. When the cached copy is older, a request receives the stale list immediately and a background relist refreshes KV (`ctx.waitUntil`), with only one relist per isolate at a time (`relisting`). When forced or when there is no cached copy and listing fails, the Worker returns the last good list with an `error` attached; if there is no cached copy at all, it throws.
+## Album cache policy
+
+`getAlbum` stores `{ fetched, photos }` under KV key `photos`. The copy is considered fresh for 30 minutes (`MAX_AGE_MS`). When the cached copy is older, a request receives the stale list immediately and a background relist refreshes KV via `ctx.waitUntil`, with only one relist per isolate at a time (`relisting`). When forced or when there is no cached copy and listing fails, the Worker returns the last good list with an `error` attached; if there is no cached copy at all, it throws.
 
 ## Serving images
 
@@ -62,7 +66,7 @@ This is not a documented Apple API and may change without notice.
 
 1. Returns bytes from KV `photo:<id>` if present, marking the response `X-Photo-Source: kv`.
 2. Otherwise looks the id up in the current album list and fetches its signed Apple URL. If that fails (expired link or a brand-new photo not yet in the cached list), it force-relists the album once and retries. Still failing → HTTP 404.
-3. Resizes once through the Cloudflare Images binding (`env.IMAGES`) via `worker/images.js`'s `shrink`: 1920 px wide for landscapes, 960 px for portraits (because two portraits are shown side by side). Only originals larger than 250 KB are transformed; if the binding is missing, the image is already small, or resizing does not reduce size, the original bytes are kept.
+3. Resizes once through the Cloudflare Images binding (`env.IMAGES`) via `worker/images.js`'s `shrink`: the binding transforms only originals larger than 250 KB to a JPEG of quality 80, fitting within 1920 px for landscapes or 960 px for portraits (because two portraits are shown side by side). If the binding is missing, the image is already small, or resizing does not reduce the size, the original bytes are kept.
 4. Stores the bytes in KV with a 30-day TTL and responds `X-Photo-Source: icloud` plus `Cache-Control: private, max-age=604800, immutable`. Because ids include the fingerprint, a given URL never changes content, so the frame can cache the image in its own HTTP cache for a week.
 
 `<img>` cannot send Authorization headers, so image URLs carry the frame key as `?key=` via `withKey()` in `src/lib/api.js`. `authorized()` in `worker/index.js` accepts the key in the query string only for image routes. See [routing and auth](../worker/routing-auth-and-caching.md).
@@ -71,7 +75,11 @@ This is not a documented Apple API and may change without notice.
 
 ### Loading the list
 
-`loadPhotos()` in `src/lib/state.svelte.js` runs once at startup, then every 5 minutes only while the clock screen is up and photos would be visible. It is also called when the frame enters idle (`rearmIdle`) and when the play button is tapped (`startSlideshow`). In demo mode it always sets the list to empty, so family photos are never shown. The list is polled only when `photosVisible()` is true: by default that means daytime, or at night only when Settings → Photos at night is enabled (`ui.nightPhotos`, persisted as `frame-night-photos`).
+`loadPhotos()` in `src/lib/state.svelte.js` runs once at startup, then every 5 minutes only while the clock screen is up and photos would be visible. It is also called when the frame enters idle (`rearmIdle`) and when the play button is tapped (`startSlideshow`). In demo mode it always sets the list to empty, so family photos are never shown. The list is polled only when `photosVisible()` is true.
+
+### Night-photos setting
+
+`ui.theme` is set by `applyTheme()` from the weather feed's sunrise/sunset times, or pinned to light/dark/auto via `?theme=` or Settings. `photosVisible()` returns `ui.theme !== 'dark' || ui.nightPhotos`: by default the slideshow is on during the day, and at night only when Settings → Photos at night is enabled (`ui.nightPhotos`, persisted as `frame-night-photos`). When it is false at night, `Ambient` clears the slide layers, leaving only the clock text on a black background.
 
 ### Queue and preloading (`src/lib/slides.js`)
 
@@ -88,7 +96,7 @@ Because the frame's Wi-Fi can take seconds per photo, the next slide is always d
 
 When `ui.idle` is set, `App.svelte` unmounts the dashboard views and renders `Ambient`: clock and date in the Settings clock colour, weather, the next event, and now playing. Slides advance every 30 seconds with a 1.2-second cross-fade, keeping at most two layers in the DOM. The slide layer holds one landscape image or two portrait images with a small gap.
 
-`showPhotos` is true only when there are photos, `photosVisible()` is true, and no agent message is covering the screen (`covered`). At night (`ui.theme === 'dark'`) the clock-screen text is dimmed to 70 % opacity and the photo layer to 45 %, so the kitchen is not lit up. If Settings → Photos at night is off, `photosVisible()` is false at night and the slideshow clears, leaving just the clock text on a black background. Any tap calls `exitIdle()`.
+`showPhotos` is true only when there are photos, `photosVisible()` is true, and no agent message is covering the screen (`covered`). At night (`ui.theme === 'dark'`) the clock-screen text is dimmed to 70 % opacity and the photo layer to 45 %, so the kitchen is not lit up. Any tap calls `exitIdle()`.
 
 ## Tests
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a3e1d7dfdbb76ae76af44b712b65eece7cab86d8ea34d4f3c054dac7a77e21e4",
+  "pageVersion": "sha256:adbfd1f23901615555d8504dcebcac17335e681fa2a5fb794a484bd6d6372ed7",
   "claims": [
     {
       "id": "claim_233e19405da34f6da52a9a13d4d9379d",
@@ -119,10 +119,24 @@
           "version": "repo-lines-v1:sha256:b0fbc29d6083d79412ae309d7a2c1be3fec7115c19eb1c90563cfe434fda0551:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTE4OGQzZDliMTdlOWY0MzZmMWYxMTU4NGYxNWRmNmZkZDk3M2YxZDQxMTJmZmIyOGMyNzE4YjkxYTAzMjM5NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGEwNTBkZGJjMzg4OGQwNjBlMTRiMmYwMjk2ZDkwODY0YzY3ZWI0Y2JkMjNjYjVkOTFjNTg5ZjkwMzhmNWRkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzU4YzJiNjBiZDc0YTQ5Nzc0MDkzMTczYjZjOTExOTMwYzkzZWJiMThlZTA3NzlhZjA1ODA2MzA4ODcyOTJkNyJ9"
         }
       ]
+    },
+    {
+      "id": "claim_d5347b0799e74353bd5373a0531f79c5",
+      "statement": "Agent messages are pushed over a WebSocket with a 30 s ping/pong keepalive; when the socket is down the frame reconnects with backoff and polls once a minute. New messages are read aloud through Home Assistant subject to quiet hours, the speak flag, a 10-minute freshness window, and a persisted set of already-announced ids.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L132-L201",
+          "version": "repo-lines-v1:sha256:bf1f177c7942fade080d3f35f15dd69364631f61f8e04084939b72a61f026b05:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhYzEyYmQwZTM0MWQ2NmU5MzJlNjNlMWRlYzA0NGZlMzNhM2JkMDNhMzc4ZDhiYzJkYWE1YTZhYTczNzQ5NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDI2NzRhYWM4Y2ZiODNiZDU5MDRmZTQyOGZlYjIyNjEwODEzY2Y2OGY1NjQzNTJiNDM3OTg4ZGMyMTlhY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNGI2MDhiNjA3YzUxOGM2MjQ1NWQ1MDA0NWQ1NDRmMDVkMjNhYmNhYTJhYzlkZjU1OTBkMmJmZGJhZDY0N2MifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/state.svelte.js#L288-L305",
+          "version": "repo-lines-v1:sha256:a850185c6cd79af90f135179a0510adffd52d1cc6055ce924b3eb3c84c8dc039:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzYmNkYTVkNGVjYzczYmI0NGY1Y2FmMTllYzM2OTA4MzRhZWVhYmNlMzdiZDJmMjU4MWQxMTNjZDk1MzA5NDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkMTA3ZDAxYmY2N2Y0MzJkNGJlOTk5ZWU2ZmM4NWVkMmI4YTlhYzk1YWQ2ZDA2YTBiOWJiNzgzMjk1NDQ5OTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhZjI0YzhhODMwMjNhMTRhOWY3YWFjYjUyMmMzN2ZlYjY1NGFhMTQwNzAyMGRlOTA4MTgyOTNkYjdhMmM2MjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkYjRlM2NmYWFiZWZlYWVhN2QwNTc0MzlkYjgxODdkM2IyNTlmNzA5ZTg3NzFiOTU5ZmNhZjdmMmYzODczNmQifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-14T14:55:31.391Z"
   }
 }

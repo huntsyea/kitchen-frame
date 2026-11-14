@@ -1,11 +1,11 @@
 ---
 type: data-pipeline
 title: Weather and day/night theme
-description: The Open-Meteo weather proxy and its compact response, and how the frame uses sunrise and sunset (or a pinned preference) to switch between the light and dark palettes and dim the clock screen at night.
+description: The Open-Meteo weather proxy and its compact response, how WMO weather codes become icons and labels, and how sunrise/sunset (or a pinned preference) switches the light/dark palette and dims the idle clock screen.
 tags: [weather, open-meteo, theme, dark-mode, sunrise, sunset]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-14T14:55:31.391Z
 sources:
   - id: openwiki-source-136e4998beec00d02c60296f
     resource: repo://dashboard/src/lib/api.js
@@ -21,21 +21,31 @@ sources:
     resource: repo://dashboard/worker/api.test.js
   - id: openwiki-source-cb5a2109e8a56015671f5cae
     resource: repo://dashboard/worker/weather.js
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
 ---
 
 # Weather and day/night theme
 
-Weather appears in the top bar, on Home and on the idle clock screen. Its sunrise and sunset times also drive the dashboard's light/dark theme.
+Weather appears in the top bar (`App.svelte`), on `Home` and on the idle `Ambient` clock screen. Its sunrise and sunset times also drive the dashboard's light/dark theme.
 
 ## Worker (`dashboard/worker/weather.js`)
 
-`GET /api/weather` calls [Open-Meteo](https://open-meteo.com) (free, no key) for the configured location: `WEATHER_LAT`, `WEATHER_LON` (secrets in this deployment; rounded coordinates) and optional `WEATHER_UNIT` (`fahrenheit` by default, or `celsius`). Without coordinates it returns `{error: 'Set WEATHER_LAT and WEATHER_LON'}`.
+`GET /api/weather` calls [Open-Meteo](https://open-meteo.com) (free, no API key) for the configured location.
+
+Configuration (set in `.dev.vars` / wrangler vars):
+
+| Var | Purpose |
+| --- | --- |
+| `WEATHER_LAT` | Latitude of the frame. |
+| `WEATHER_LON` | Longitude of the frame. |
+| `WEATHER_UNIT` | `fahrenheit` (default) or `celsius`. |
+
+Without coordinates the endpoint returns `{error: 'Set WEATHER_LAT and WEATHER_LON'}`.
 
 The upstream request asks for:
 
-- current: `temperature_2m`, `apparent_temperature`, `weather_code`, `is_day`;
-- daily: `temperature_2m_max`, `temperature_2m_min`, `precipitation_probability_max`, `weather_code`, `sunrise`, `sunset`;
+- `current`: `temperature_2m`, `apparent_temperature`, `weather_code`, `is_day`;
+- `daily`: `temperature_2m_max`, `temperature_2m_min`, `precipitation_probability_max`, `weather_code`, `sunrise`, `sunset`;
 - five forecast days with `timezone: auto` and the chosen temperature unit.
 
 It is edge-cached for 10 minutes (`cf: { cacheTtl: 600, cacheEverything: true }`) so every frame poll does not hit Open-Meteo.
@@ -53,9 +63,22 @@ Dates and sunrise/sunset are local wall-clock strings (`YYYY-MM-DDTHH:MM`). The 
 
 ## Rendering weather
 
-`weatherInfo(code, day)` in `src/lib/format.js` maps WMO weather codes to a label, a Lucide icon name and a tint (`sun` yellow or `rain` blue), with night variants for clear and partly cloudy. The top bar (`App.svelte`), Home and the Ambient clock screen all call it with the current `day` flag from `weather.data`; the four-day forecast strip on Home omits the `day` argument and therefore defaults to daytime icons.
+`weatherInfo(code, day)` in `src/lib/format.js` maps WMO weather codes to a label, a Lucide icon name and a tint (`sun` yellow or `rain` blue), with night variants for clear and partly cloudy. The top bar (`App.svelte`), `Home` and `Ambient` all call it with the current `day` flag from `weather.data`; the four-day forecast strip on `Home` omits the `day` argument and therefore defaults to daytime icons.
 
-Home shows the current temperature and condition, today's high/low, and the next four days with rain probability and highs/lows. Ambient and the top bar show only the current temperature and icon.
+| Code | Label | Icon | Tint |
+| --- | --- | --- | --- |
+| 0 | Sunny (day) / Clear (night) | `sun` / `moon` | `sun` / none |
+| 1–2 | Partly Cloudy | `cloudSun` / `cloud` | `sun` / none |
+| 3 | Cloudy | `cloud` | none |
+| 45–48 | Foggy | `fog` | none |
+| 51–57 | Drizzle | `rain` | `rain` |
+| 61–67 | Rain | `rain` | `rain` |
+| 71–77 | Snow | `snow` | none |
+| 80–82 | Showers | `rain` | `rain` |
+| 85–86 | Snow Showers | `snow` | none |
+| 95+ | Thunderstorms | `storm` | `rain` |
+
+`Home` shows the current temperature and condition, today's high/low, and the next four days with rain probability and highs/lows. `Ambient` and the top bar show only the current temperature and icon.
 
 ## Polling and caching (`src/lib/state.svelte.js`)
 
@@ -67,16 +90,22 @@ Home shows the current temperature and condition, today's high/low, and the next
 
 `applyTheme()`:
 
-- with `light` or `dark`, uses that;
+- with `light` or `dark`, uses that preference directly;
 - with `auto`, is dark before today's sunrise or from sunset on, using the forecast day whose `date` matches the local date, falling back to 7:00 and 19:00 until weather has loaded.
 
-It writes `ui.theme` and sets the `data-theme` attribute on the root element. The minute-aligned clock tick calls it every minute; it also runs when the weather response changes and when the preference changes.
+It writes `ui.theme` and sets the `data-theme` attribute on the root element. The minute-aligned clock tick calls `applyTheme()` every minute; it also runs when the weather response changes and when the preference changes.
 
 `src/style.css` defines the two palettes under `:root, [data-theme="light"]` and `[data-theme="dark"]`, using iOS system colours. Switching theme is therefore a single attribute repaint with no component re-render (see [design system](../frontend/views-components-and-design-system.md)).
 
 ## Night on the clock screen
 
-`Ambient.svelte` treats `ui.theme === 'dark'` as night: the clock text drops to 70% opacity and the photo slideshow to 45%, so the kitchen is not lit up after sunset. Photos are only shown at night when Settings → Photos at night is set to Dimmed (`ui.nightPhotos`), as decided by `photosVisible()`. See [photos and slideshow](./photos-and-slideshow.md).
+`Ambient.svelte` treats `ui.theme === 'dark'` as night:
+
+- the clock text drops to 70% opacity;
+- the photo slideshow drops to 45%;
+- the slideshow is hidden entirely at night unless Settings → Photos at night is enabled (`ui.nightPhotos`), as decided by `photosVisible()`.
+
+This keeps the kitchen from being lit up after sunset. See [photos and slideshow](./photos-and-slideshow.md).
 
 ## Tests
 

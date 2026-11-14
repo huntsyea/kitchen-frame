@@ -3,9 +3,6 @@ type: integration
 title: "Home Assistant: music and speech"
 description: How the photo frame connects directly to Home Assistant on the LAN over its WebSocket API to list Music Assistant speakers, show now playing, control music, and read agent messages aloud with text-to-speech.
 tags: [home-assistant, music-assistant, websocket, tts, music, lan]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-81e5843e3f05d867bcedaa39
     resource: repo://dashboard/src/components/NowPlaying.svelte
@@ -16,6 +13,9 @@ sources:
   - id: openwiki-source-28fc9369ef5fcb7aea5d2dcd
     resource: repo://docs/frame.md
 generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Home Assistant: music and speech

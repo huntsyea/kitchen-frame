@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a86095810ffac41bd0d8dc1db33e0ba9bd2e4f8c18495641abfe73a8532bf1f1",
+  "pageVersion": "sha256:fd7eca658a9868689aa03945c5951c08f817e112da713a41d3c85348184c6705",
   "claims": [
     {
       "id": "claim_e8628f211b8b4d798f2ec86aabaa4f2f",
@@ -41,10 +41,96 @@
           "version": "repo-lines-v1:sha256:5a99db190588a58887dedd862087182bcc044b1c2e4fa49bd3cc06e8d28e4a33:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMTgwZjljMTI2OTAzYmNjMzMxYWE5NTQ1NmU0OTQ0NGE3ZDRkMDExZThhMmE4M2Y1ZGM4NzAyMzkxODEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5Zjc4NzE0ODkzYWE3Nzk0MmNlYTFjNGEyZTAyMzFkYmI3ZmEyYTQxYTcwYzgxNDYwYTNjNjc1NjJkYTNhYWEifQ"
         }
       ]
+    },
+    {
+      "id": "claim_283219c522b54a34b41bce0a0c319091",
+      "statement": "The family dashboard is composed of an Android kiosk app in kiosk/, a Svelte 5 web app in dashboard/src/, and a single Cloudflare Worker in dashboard/worker/ that proxies calendars, weather, Todoist, iCloud photos, TheMealDB recipes, and agent messages; the frame also talks directly to Home Assistant on the LAN for music and speech.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L27-L36",
+          "version": "repo-lines-v1:sha256:ea9a96d23f6829d985cad9e236906168801122a7553fa1a5c79d7a8ed8d87a24:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyYTI3MzhkMjUwNDZiYTdlZTkzMDY1N2MxZmM5MTdkY2I3ZDFkODRhOTVkYTQ1ZmM0NDk5ODM3YzFkZDIxYzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwZmMzZmZkOTVlZDgyN2EzYzM2OTY1YzgyZTU2MjhkNmJiMGRkMDU0OTZlNGZhMTAxNTQxNGI3YjNlN2ViZDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3OTlhMzgxMGUyOTdhOWY1ZGE0ZDFkZTZmOTNmZWJkMTk5NzdjMDM4Y2E4N2QyZmE3NGIyMmUwOTBhZTFmOTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNmM0MDg2Y2RmMzAzOWFlOGY1OGJhNjNjMTU3OTRkYzlhMjZjMTNkYWUyNjFmMzg5M2E4NzkwMjA3NDkyY2QifQ"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/ha.svelte.js#L1-L4",
+          "version": "repo-lines-v1:sha256:9351199a01b19091647246f7acfc2976654f3fa735eeb3e9002314eb51dfa998:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ3ODFiN2EyZGVlZGMzYjYyMjk2YzQwZmU0YTc2OTIyZjQxZDg0YmQ5NDNlNzhiODIxMmNiNDczZmQwNDgwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y4YTAwMzFmYzEyNGQ4MTA4YWFmZTY2ZTM4YzdhYWMzMzc3YjNmYTliYjYyMmE4MWRkNDBhNDYyZjE0Yjk0YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzZmZTNhM2Q5ZDg2NjI1MGI5MzBjMmUwNjY0NzkwNzZhYjE0MDY1MzE2ODMxZjExYzc4MGIyNzU3NzdlYTg5NCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L1-L22",
+          "version": "repo-lines-v1:sha256:bd190e53e3c8950f199f0453cf38825bd5f2bf6c8da4d56e5c9e4c996242f047:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNTQ3MjMyYWFjMWVlMGU1ODYyZGIxODY0ZDkwNzk2ODI4NmQ0YjAyOGU5YWE3NjQ5Nzg1YzIzNWE0MTJmMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZGJhZjRhYzg2NzMxNjY3OTIxYTIxMjk0OWNhMDRiNjZhZGVlZDU2NDNlOTJhNjUwNzI4NzhjOTU5ZmU0ZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhMWUzMTk1MjA4OWMwOThiNTgyNDdiNmQ5NTA1YzJiY2M5Mzg4YzQ1ZDIxMjNmODc4YmU1MDg0NDA3ZWUwMGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3209403d5ba6454384a3100502fcf1ad",
+      "statement": "The entry points for testing, local development and deployment are npm scripts in dashboard/package.json: test runs the Node built-in test runner against worker tests, dev starts the Vite/Worker environment, and deploy builds with Vite then deploys with Wrangler.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L45-L50",
+          "version": "repo-lines-v1:sha256:d3e5b5a1b7062745dcbc5d69c2abd915b753c866278698eba39431f5ab571b0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM0M2ZiODlkZDcxMzkxNzA2YmI2NTUzMzcxMzlhZTY2YWMxMGZhY2M0MjYyYmNkMjQ4YzIyOWNmMGUyNWQwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDdmYzQ2MzY2NzBiYTg4MThkMTY5MmI2OWUxOGNiNjM0NDExNDJkNDE4MzA1ZDUwNjA5ZWIxNDliNzI1YmVhYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY1MDU5YjQ4ZTE0YWE5ZTRmZmE4NjMxZjZlNmE4ZmI2NjA5NWU5ZDQyOTk1OTM3YzJkYzhmNjQxYjM3MTMyZiJ9"
+        },
+        {
+          "resource": "repo://README.md#L79-L84",
+          "version": "repo-lines-v1:sha256:f4e0f3b81c78713bd1d67d148ed0cdd227153fb7fc4b6454fe084dfa82503701:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM0M2ZiODlkZDcxMzkxNzA2YmI2NTUzMzcxMzlhZTY2YWMxMGZhY2M0MjYyYmNkMjQ4YzIyOWNmMGUyNWQwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWEwMTZkZjZiOWJjMDA1ZDYxNTlmYWVkMzk3MzdmNTRkZTIwMjI4ZTViY2RlNGJhOWRhY2ZhNGYwOTk3Nzk2MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWZkNWQwNjhiYWRmZGVkZjk1NGYxYTg3YjJjMmExYzIwODk2NWUxYzkyNTRiOGVlM2RmZTQzM2I5YTAxMTE3MSJ9"
+        },
+        {
+          "resource": "repo://dashboard/package.json#L6-L12",
+          "version": "repo-lines-v1:sha256:5ff6fe370df50458a20b42baebbe3aa62ad8341a3a5071adb84c0c93b3210ec6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2E2M2JmMDk0ZjUzYTg5MTIzMjc5MjRlMjllMTE5MzIzYjJjOTU5YWNjMDEzMmZhZmEyNzE1MmI1YmQ5Zjg2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTE0MzY5YzBlNzI3ZDc4Mjg5YjMxMDFmMGI5ZWU5NzFjOTYzODAwMzkzNzYzYzc4MDcxNWY0ZjI0MzZjNTZkMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3969262eefbd43709b6c8f083a186ed7",
+      "statement": "Global change constraints include WebView 106 / chrome61 CSS target, no oklch/color-mix/:has/4-8 digit hex, flat fills, no shadows/blurs, mounting only the visible view, no per-second timers, and measuring UI changes with ?diag before and after.",
+      "evidence": [
+        {
+          "resource": "repo://CLAUDE.md#L6-L24",
+          "version": "repo-lines-v1:sha256:3a5ef5224dacf6f8c0ab40935ce5b57d04baab6d8921d3b8824ed0d15b31c60a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxODUwNGE0NTJiMjkyNTc0MmM4NDg2N2E1OGEwNjEzZDUyZDk3YWYzNjM1MTljNWI4ZmZmN2QwZmNiMzQxYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlZTk2NTA5ZDE5ZWU1Mjg0OTA2MzgwNzc2MzI4YWU5YzdhNWU2MjhiNDlkMThmZWJhMjM0YzAzYTNlMjU4ZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwZjhkN2UwYjk4ZTg1MjU2ZGU4MzYwYzk3ZjU2Yjk4MTA2N2I1YzEyYzYzNTEwNmE0NGU3ZGUxODg3MTNhZjcifQ"
+        },
+        {
+          "resource": "repo://dashboard/vite.config.js#L5-L13",
+          "version": "repo-lines-v1:sha256:d3bcb0d8d2d755f6c8f18c575462a60de84a008beeb72aa2bacc8dc5bde1a4b8:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYzMjkwNTdkOWEzZGQxZGE5ZGFiZjBkZTdmOGM4OTljNTNjYjZiYjI1N2E5YjM3Y2QyOTM5Yjk0MTg1ZTcyNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWRkNDY4MTZmMjlmOTQyNGRkNDA3NjNmOTJmNWE1ZmFmN2IyY2MyNzAwYjlkNGJkMjI4ZThlZDdlOWE3MjZhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzAzZmYwN2U0ZDFlNWYwNzBhOTJmYjU0M2M3NGVkMGNhNWRkOTE4YzljNjI4MGRlMzBiMjA0YzM3MDk4NTYwYiJ9"
+        },
+        {
+          "resource": "repo://docs/research.md#L40-L62",
+          "version": "repo-lines-v1:sha256:ccbdde6f67856ed78e6c125aa4dd2fd24ac0f7bc3f0a7f186d7e620904b1c92b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0ZGU0NzE5YzA1ZmM4ODE2YWUzMWZjMjQ5ODI2MTJmZTFkNmQ3MmI2ZWY1MzQ0OWU5MzViNjkwMWMyMGY4YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjMzBkZTQ0MDhhMjI0YTAxYTFkYzVmZDRjZjgxM2NkNDJiMzRhOGU3YjJhMjZlZjY5OGU3MzRmMGI0MTgyMDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhZmUxMTI5YzIxOGZhZTJlMTE2MmY1NDE5Yjc0MjAwNmZiNjcxYjU5MWRhYzk2YTBkNjA1ZGY4OTdjMjY5MzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8bf814ad5e0044f2bbf9c194314f1391",
+      "statement": "Secrets must stay on the Worker or in frame localStorage; .dev.vars, .prod.vars and .frame.vars must never be committed. Home Assistant credentials live only in frame localStorage, not in the deployed site or Cloudflare.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/.dev.vars.example#L1-L1",
+          "version": "repo-lines-v1:sha256:c93e97c877c4b272f9d045d04265e0947a176c772159b46f4cbb8cef4e488fde:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkzZTk3Yzg3N2M0YjI3MmY5ZDA0NWQwNDI2NWUwOTQ3YTE3NmM3NzIxNTliNDZmNGNiYjhjZWY0ZTQ4OGZkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkzZTk3Yzg3N2M0YjI3MmY5ZDA0NWQwNDI2NWUwOTQ3YTE3NmM3NzIxNTliNDZmNGNiYjhjZWY0ZTQ4OGZkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2ViZjQ2NTMzNThiOGY1MmI1YmZlOTQzZTYyMjgwMWYyODQxY2ExODE2NTg1MDU0NTgwYWYyMTY0NjBhZTNkOSJ9"
+        },
+        {
+          "resource": "repo://dashboard/src/lib/ha.svelte.js#L1-L4",
+          "version": "repo-lines-v1:sha256:9351199a01b19091647246f7acfc2976654f3fa735eeb3e9002314eb51dfa998:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ3ODFiN2EyZGVlZGMzYjYyMjk2YzQwZmU0YTc2OTIyZjQxZDg0YmQ5NDNlNzhiODIxMmNiNDczZmQwNDgwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y4YTAwMzFmYzEyNGQ4MTA4YWFmZTY2ZTM4YzdhYWMzMzc3YjNmYTliYjYyMmE4MWRkNDBhNDYyZjE0Yjk0YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzZmZTNhM2Q5ZDg2NjI1MGI5MzBjMmUwNjY0NzkwNzZhYjE0MDY1MzE2ODMxZjExYzc4MGIyNzU3NzdlYTg5NCJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/index.js#L15-L22",
+          "version": "repo-lines-v1:sha256:b2eadcf4630bfe435110cf3d4e1426df7ce75b8d4ec377578a23b9e97329fc39:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODY4Y2I4N2Y5MDZiNTE1YzUwZWViODMyZDI4MzM0M2JkY2UzYWE3YWI2YTRjZjkzNGUyNzE3ODlkZTNhZTk1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDFkYmFmNGFjODY3MzE2Njc5MjFhMjEyOTQ5Y2EwNGI2NmFkZWVkNTY0M2U5MmE2NTA3Mjg3OGM5NTlmZTRkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWZiNzU5MGIyNmM4NDhhYzE1NzNjZGQ2ZTVkOTUzOGFiNDJiZmExODJjZWY4MTNjMThiY2ZhNTU5NjBlN2Q2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2ExZTMxOTUyMDg5YzA5OGI1ODI0N2I2ZDk1MDVjMmJjYzkzODhjNDVkMjEyM2Y4NzhiZTUwODQ0MDdlZTAwYSJ9"
+        },
+        {
+          "resource": "repo://docs/frame.md#L58-L60",
+          "version": "repo-lines-v1:sha256:a2806eeea98f33838c695e498714a0ab7a454f00ad2686be9b92dae0c49c2d54:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmNmNWZjNjliNzMyM2I4MDFhZjM2ZGE3NmZmYWY0MWQyMGRmZjY1MDU4MDlhNDIxNGM2ZmU2NzYwNWVjNjA4YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjdjZDFjMjkwMjhlNmQ4ZTkwNmY1YzBjNzY1NGFmMmVmNzhlNjRjZjM0ZTQzNDg0NjRlZjExZGNiMzM2YzIyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGEyYmIyYTgxMWQ2NzEyOTNjMDJlNzdjZjI1NDcxY2RlMTY0OGJkNDFmYmY1ZGRlNjg5OGEyMTJhNDExZTYxOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYxOWRiYmVjOTY0OTI2M2MzYTkyZTkyNDRjMTZlMDg4NzYwNTEwNjRiOTI1ZmEzYTFlZmI5MWNhNzYwMTZjNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_13488713a27147a7a370c13f1d04768a",
+      "statement": "Quickstart routes readers through the wiki hierarchy via a task-to-page table covering architecture, feeds, features, frontend, Home Assistant, kiosk, operations, and testing domains.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L25-L26",
+          "version": "repo-lines-v1:sha256:37d724746ef752e45fffb4e71b1bacc9a0e4a5605ec887ed4475f8c104eb9c45:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBiNGI1ZTZiZWY1ZDUxNTA4MTQwMTUxMjkyMDYxOTZjNTZmOGM2Zjc4YzhlNTJkOTliMjgzYWIyZDMwY2Q5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTNjNTU4ZGZiYzUzNjUwYjVmNTE5MGQzZTEwNTc1ZjU2Mzc3NmE4MjE2OTBhMjIzMzM0ZDkwZDljN2QwMzUxZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTMyMzZhZDk2YjNkNjc5MTZiZDNhOTMyYWFiZjI1ODBiYWUxOTRmM2FjODYyYTVhMTBjMjEzOTc0OTAwZWE3NiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-14T14:55:31.391Z"
   }
 }

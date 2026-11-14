@@ -3,9 +3,6 @@ type: testing
 title: Tests and verification
 description: How the Worker and frontend are verified without touching the physical frame. Node's built-in test runner exercises worker/*.test.js with mocked fetch, KV and Durable Objects, while frontend changes are checked in a headless 1280×720 browser using demo mode and the ?diag overlay.
 tags: [testing, node-test, mocks, fixtures, verification, headless-browser, demo-mode]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
 sources:
   - id: openwiki-source-1749acaa35a5ed1522bc474a
     resource: repo://dashboard/index.html
@@ -21,16 +18,15 @@ sources:
     resource: repo://dashboard/worker/api.test.js
   - id: openwiki-source-7fc4ec3787abf1e07adb8d8f
     resource: repo://dashboard/worker/calendar.test.js
-  - id: openwiki-source-e0922edba974cd178a66bf62
-    resource: repo://dashboard/worker/fixtures/google.ics
-  - id: openwiki-source-fab37fe2bf7e0b41e1a37929
-    resource: repo://dashboard/worker/fixtures/icloud.ics
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-14T14:55:31.391Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-14T14:55:31.391Z
 ---
 
 # Tests and verification
 
-The project keeps verification away from the family frame as much as possible. Automated tests cover the Worker, and frontend changes are checked in a headless browser at the frame's exact CSS size before any deploy.
+The project verifies as much as possible away from the family frame. The Worker is exercised by Node's built-in test runner with every external service replaced by fakes. Frontend changes are built and inspected in a browser at the frame's exact CSS size, usually with demo data, before any deploy.
 
 ## Running the Worker tests
 
@@ -40,13 +36,15 @@ From `dashboard/`:
 npm test
 ```
 
-`npm test` runs `node --test worker/*.test.js` (`package.json` scripts). There is no test framework, no Worker runtime and no network: the Worker's `fetch` and `scheduled` handlers are imported directly and called with fake bindings. Everything in `worker/` is written to run under plain Node — for example `calendar.js` is pure functions, and `MessageRoom` only touches Durable Object APIs through its injected `ctx`.
+`npm test` runs `node --test worker/*.test.js` (`package.json` scripts). There is no test framework, no Worker runtime and no network: the Worker's `fetch` and `scheduled` handlers are imported directly and called with fake bindings. `worker/calendar.js` is pure functions, and `MessageRoom` only touches Durable Object APIs through its injected `ctx`, so both run under plain Node.
 
 There are no automated frontend tests. UI changes are verified by building and looking in a browser (see [Verifying frontend changes](#verifying-frontend-changes)).
 
+All tests use synthetic data and fake services, never real secrets. `globalThis.fetch` is replaced per test to stand in for Todoist, iCal hosts, CloudKit, TheMealDB and image CDNs; KV and Durable Objects are in-memory stand-ins; and the calendar fixtures are invented but shaped like real Google and iCloud exports.
+
 ## `worker/calendar.test.js`
 
-Pure parser tests at a fixed "now" (`2026-10-12T12:00:00Z`) against two real-shaped fixtures, `worker/fixtures/google.ics` and `worker/fixtures/icloud.ics`. The fixtures encode the edge cases the calendar pipeline has to get right:
+Pure parser tests at a fixed "now" (`2026-10-12T12:00:00Z`) against two fixtures, `worker/fixtures/google.ics` and `worker/fixtures/icloud.ics`. The fixtures encode the edge cases the calendar pipeline has to get right:
 
 | Fixture | Edge case | What the test checks |
 | --- | --- | --- |
@@ -65,7 +63,7 @@ Pure parser tests at a fixed "now" (`2026-10-12T12:00:00Z`) against two real-sha
 | `icloud.ics` | All-day | Trash pickup keeps plain start/end dates. |
 | Synthetic feeds | Fast-forward equivalence | Monthly and yearly `RRULE`s using fast-forward logic produce the same occurrences as a brute-force walk with a huge `COUNT`. |
 
-See [Calendar feed](../feeds/calendar.md) for how `prefilter`, `expand` and `merge` are used by the cron and API.
+Holiday feeds are not exercised in `calendar.test.js` itself; that marking is tested through the calendar route in `api.test.js`. See [Calendar feed](../feeds/calendar.md) for how `prefilter`, `expand` and `merge` are used by the cron and API.
 
 ## `worker/api.test.js`
 
@@ -79,11 +77,11 @@ End-to-end tests call `worker.fetch(new Request(…), env, ctx)` directly. The s
 | Area | What the tests protect |
 | --- | --- |
 | **Auth** | API calls need the dashboard key; static assets do not. The agent token can post messages and save recipes, but cannot read anything. |
-| **Todoist** | Project lookup across pagination pages; Todoist order for groceries; subtasks hidden; dated to-dos first with overdue on top; add and complete; unknown list and missing token handling; description `note`. |
+| **Todoist lists** | Project lookup across pagination pages; Todoist order for groceries; subtasks hidden; dated to-dos first with overdue on top; add and complete; unknown list and missing token handling; description `note`. |
 | **Weather** | `shape()` keeps only the fields the screen uses. |
 | **Calendar** | A stale copy is served immediately and refreshed in the background; holiday-feed events are marked; cron writes KV only on change or hourly. |
 | **Photos** | Anonymous album resolution; edited version preferred over master; videos skipped; images proxied and cached; small-JPEG originals used when no medium exists, while large or HEIC originals are rejected. |
-| **Messages** | Validation and limits; dismissal; 20-message cap; push to connected sockets on post/dismiss; expiry alarm; `/api/messages/live` needs the key and a WebSocket upgrade. |
+| **Messages** | Validation and limits; dismissal; push to connected sockets on post/dismiss; expiry alarm; `/api/messages/live` needs the key and a WebSocket upgrade. |
 | **Recipes** | TheMealDB normalisation and sized thumbnails; saving via agent and frame; image storage; `ref` de-duplication; bulk grocery add with descriptions; vegetarian/vegan exclusion. |
 
 When behaviour changes intentionally, update the test that encodes it (for example the stale-calendar threshold) rather than deleting it.
@@ -98,9 +96,9 @@ Run `npm test`, then `npm run build` to catch Svelte warnings and errors. Deploy
 
 ### 2. Headless browser at the frame size
 
-Open the deployed page (or `npm run preview`) in a headless browser at **1280×720** CSS pixels — the frame's viewport on the 1920×1080 FRAME156, which renders the 1280-wide layout at 1.5×. Use `?key=<DASHBOARD_KEY>` so the page can authenticate, and enable demo mode (`frame-demo` in `localStorage`) so the frame never touches real calendars, tasks, photos or messages.
+Open the deployed page (or `npm run preview`) in a browser at **1280×720** CSS pixels — the frame's viewport on the 1920×1080 FRAME156, which renders the 1280-wide layout at 1.5×. Use `?key=<DASHBOARD_KEY>` so the page can authenticate, and enable demo mode (Settings → Demo mode, stored as `frame-demo` in `localStorage`) so the frame never touches real calendars, tasks, photos or messages.
 
-Demo mode is toggled in Settings → Demo mode. It replaces real feeds with invented data from `src/lib/demo.js` and suppresses agent messages, Todoist writes and family photos (see [App shell, state and polling](../frontend/app-shell-state-and-polling.md)).
+Demo mode replaces real feeds with invented data from `src/lib/demo.js`, shows no family photos, and suppresses agent read-aloud, Todoist writes and agent messages (see [App shell, state and polling](../frontend/app-shell-state-and-polling.md)).
 
 Screenshot the affected screens in both light and dark themes.
 

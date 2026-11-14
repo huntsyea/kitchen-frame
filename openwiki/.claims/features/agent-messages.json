@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:0cc44e3715c5c3bc6d952a6af3208f991b392370482f375f04a1d1727d22c598",
+  "pageVersion": "sha256:e37379e357e9aef0d6e047eb510f7cf07e292a7514b45a2726a4ef7e20aac715",
   "claims": [
     {
       "id": "claim_7b3aa1b9227f4e02a4acd48f7780719c",
@@ -169,10 +169,42 @@
           "version": "repo-lines-v1:sha256:f0aa935c7b22f194fe04b3e45d8ca0798e9e35a5e7068c4f193734f8b94cdc80:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDlmMTA1NDIwNjEwODViYzI0YzFlZGNlNDFkZWI4ZGVjOTNjOGI1ZDk2MzcxMTY0OTFjZDg5ZDViZmQ4MjViNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJjZGY1YjBhMzM2NjUzMTFmMDNmODcyMDRlMDg3MjM2YzhjNjI5ODE0YTkyM2MwNzBkNzg0NjA1MGVlYWFjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmMzMTk2MTJmNjU1ZGYwODJiN2VkOGU2YTA4ZDM3OWYwZjJiOGM4NjI2ZjZkODJkNjEyOTY3YzJjNDhjOWI5YyJ9"
         }
       ]
+    },
+    {
+      "id": "claim_a6bdae1efa454b158762fe646667555b",
+      "statement": "Demo mode suppresses message display on the frame, but the server still stores posts and pushes updates, so messages appear once demo mode is turned off.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/src/App.svelte#L74-L74",
+          "version": "repo-lines-v1:sha256:e7c4e838972ed4e7a4a50377a293767d815bc0f2327b906b77718b31f57e2b6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTdjNGU4Mzg5NzJlZDRlN2E0YTUwMzc3YTI5Mzc2N2Q4MTViYzBmMjMyN2I5MDZiNzc3MThiMzFmNTdlMmI2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTdjNGU4Mzg5NzJlZDRlN2E0YTUwMzc3YTI5Mzc2N2Q4MTViYzBmMjMyN2I5MDZiNzc3MThiMzFmNTdlMmI2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2JmMzcwYmRiYzNiZDFiY2VhM2FmYjJjYTE5NjMzNTA2Mzg4Y2JkN2IwZWZmN2JkMmE2ODA3NzQzMDM5YjIzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjkxYTZhZjNkZWNiNWU4Mjg4NmE0YjVjNzAyYzdkMjU3NjIwYzk3OTBmZWZmNWRmZTM4NTZhM2ZjMjRmN2ZmYyJ9"
+        },
+        {
+          "resource": "repo://dashboard/worker/messages.js#L55-L92",
+          "version": "repo-lines-v1:sha256:8e2440ebccd77ddbb8fefdc9b8d75d4c43cad85438ab9ce9b1fec54ac9cbf780:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YjBlMDUzNTBmZGY5MjgxYzU0NmZlM2I5NjkxOGE1NWIzMGM3MzE5YzY3YzAyZDgyYzM1ZDRhZmQyYWRjNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhZjA0NTAyZDM5ZjM3YzIzYzgxYzBkNDJmNTc4NGViYTllMmUzMDJjNmZiMjY3MTJmZjdiZmQ3MzYxYjNhZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkODI2M2FiNDg2NzRkMGZmNTJmNGM2YTI2N2UzNDE2MThiMTY1Nzk2Y2U0NzIyMDcyYjdiMWQyMTY4OWEyNDcifQ"
+        },
+        {
+          "resource": "repo://docs/messages.md#L31-L32",
+          "version": "repo-lines-v1:sha256:7ebea2eb00d142832c0fe45087eaf117a9eb7871617a70853c97c2e7efaf1191:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFhYTVmOTgyZDMwZTk0ZWQxY2I0MmU1MTExYjgyYWYxYzAzMDQ0MzFkMTVkYmQ1YzU3MzI4MjQ4MTA0YTM2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWViMDZhYWYwZTA0OTc4M2MxNDg3Yjk0MGY0YjViMGZjMjJiNmYwYjlkMjI5OGI5MGM3NDg1OWYzNjUwM2U4OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzM4NjliYjI1ODdlNTUyYzgxOGU5ZWM1Y2JmYjM3YzM0MzI2ODQ0ZDk3MDNmNTQ2N2MxODViZjE0MjFhZDc2NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTIzZmQzMWU3OTg1OWQ0YTI2NmFkODFiYTYzNjcxOTliMmEzZTAzNDFiYTg1MDMyMzRlNjc5YjAxOWIyYmIxNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f73fd1b3532d4405b439b691508b4cff",
+      "statement": "MessageRoom's webSocketMessage, webSocketClose and webSocketError handlers are intentionally no-ops because hibernated WebSocket lifecycles are handled automatically by the runtime.",
+      "evidence": [
+        {
+          "resource": "repo://dashboard/worker/messages.js#L25-L42",
+          "version": "repo-lines-v1:sha256:057b3c77f5ac50275708d849ea4f0fe7f43f336f770f7ef9baa989ed1bccabed:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4NDA0MzA1MzMwOGY2ZWI1OWJjZjAxZDg4NzA4OTlkZmI3MjdhM2M2NjEwYjkyZjE2MmIxNmY1NDRkZDAyNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiM2Y4MTUzYWQ4NjY4ZGQ0NWEyMzA4NTAxNTZmMjg4ZDE3OGZjNDcxNDJhNDc5NWNmMWFkMDdhZTAwMWI0MjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJlZWYyOTk2ZWFiZWVhODU4YTNiNmE3ZTU4ZTJmY2ZkN2JhMWVlZTQ5MWQzZTY3ZTM3MmVhOTIxYzBjNWY0OWQifQ"
+        },
+        {
+          "resource": "repo://dashboard/worker/messages.js#L94-L98",
+          "version": "repo-lines-v1:sha256:daf895ab7fdf4ac0810af58d998b3e81429382b695ffb59bdef9aaa4a20b1d14:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTQ1YzVhNjY4YmE4YWNhNTU5NGVmODJkNGE2OWE5NWUyNmRlOWM0NmNmZjVhZGRjMjU5MzIwMjBjYjBiNTAyMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmUzYjYxMzY5ZmRmMjEzMzhkOTkzYTVmOTY4OTFmNzRlNmI0Y2VkOTEwYjhhYzdmZTFmMWU2ZmY3NjYzZDNiYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-14T14:55:31.391Z"
   }
 }

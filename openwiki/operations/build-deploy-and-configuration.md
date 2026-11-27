@@ -5,8 +5,12 @@ description: How to build, test, deploy, and configure the dashboard and Worker,
 tags: [deploy, wrangler, vite, cloudflare, configuration, secrets, operations]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-27T18:01:53.396Z
 sources:
+  - id: openwiki-source-23d1f0d32031635db013d5ed
+    resource: repo://.github/scripts/prepare-openwiki-update.sh
+  - id: openwiki-source-f2292403088287d438035804
+    resource: repo://.github/scripts/test-prepare-openwiki-update.py
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml
   - id: openwiki-source-ea70eb6c045047448e446296
@@ -29,7 +33,7 @@ sources:
     resource: repo://dashboard/wrangler.jsonc
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-27T18:01:53.396Z" }
 ---
 
 # Build, deploy and configuration
@@ -64,7 +68,7 @@ Open the app once with `?key=<DASHBOARD_KEY>`; the page remembers the key. `?dia
 
 Production secrets are set with `npx wrangler secret put <NAME>` from `dashboard/`; the production values are kept in the gitignored `dashboard/.prod.vars`. Never print or commit them. Local development copies `dashboard/.dev.vars.example` to `dashboard/.dev.vars`.
 
-`dashboard/.dev.vars.example`, `.prod.vars` and `.frame.vars` are all gitignored (see `.gitignore`).
+`dashboard/.dev.vars.example`, `.prod.vars`, `.frame.vars`, and `.ollama.vars` are all gitignored (see `.gitignore`).
 
 | Secret/var | Used for |
 | --- | --- |
@@ -91,4 +95,15 @@ The Free plan's 10 ms cron CPU limit is why the calendar parser pre-filters feed
 
 ## Keeping this wiki current
 
-`AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily (and on demand): it installs OpenWiki, runs `openwiki code --update`, removes transient run state, and opens a "docs: update OpenWiki" pull request with the `openwiki/` changes (preserving partial progress if the run fails). Inference runs on **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`).
+`AGENTS.md` carries the OpenWiki usage block. `.github/workflows/openwiki-update.yml` runs daily at 08:00 UTC (and on demand): it installs OpenWiki, runs `openwiki code --update`, delegates the post-run cleanup and PR staging to `.github/scripts/prepare-openwiki-update.sh`, then opens a "docs: update OpenWiki" pull request. The final step exits non-zero if OpenWiki itself failed, so the workflow run is marked failed even when partial changes are preserved.
+
+Only one update run may prepare the shared `openwiki/update` branch at a time (`concurrency: openwiki-update`, `cancel-in-progress: false`).
+
+The prepare script decides whether anything should be published:
+- It removes the transient `openwiki/.run.json` file.
+- It stages `openwiki/`, `AGENTS.md`, `.github/workflows/openwiki-update.yml`, and `CLAUDE.md` when that file exists.
+- If the only change is unsuccessful run metadata in `openwiki/.last-update.json`, it restores the files and reports no changes.
+- If a failed OpenWiki run still produced durable page, claim, or manifest changes, it keeps those changes and the `interrupted` status so partial progress is not lost.
+- A successful no-op that only refreshes `openwiki/.last-update.json` is still publishable.
+
+Inference runs on **Ollama Cloud** through OpenWiki's OpenAI-compatible provider (`https://ollama.com/v1`). It needs an `OLLAMA_API_KEY` repository secret; until that exists every step is skipped with a notice instead of failing. The model is the `OPENWIKI_MODEL_ID` repository variable, defaulting to `kimi-k2.7-code`. Pull requests opened by the workflow's `GITHUB_TOKEN` don't trigger CI, so the admin merges them by bypassing the required checks (they only touch `openwiki/`).

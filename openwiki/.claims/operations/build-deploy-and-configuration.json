@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d48aa6627314b23e3febaaf2af659cf8bbd800f6e093004339899d8f3c814be9",
+  "pageVersion": "sha256:23cd848e1cd44c1733d203a13d8571d7f50b3d58ab88481c90d8144c9ee76a2c",
   "claims": [
     {
       "id": "claim_ef1b1fedf37544eba6ce52d3bce5fcbe",
@@ -66,21 +66,25 @@
     },
     {
       "id": "claim_a57406e6bd1541ca8c16c54b94ebe112",
-      "statement": "A scheduled GitHub Actions workflow runs OpenWiki daily (and on demand), removes transient run state, and opens a pull request with the wiki changes, failing the job if OpenWiki failed.",
+      "statement": "A scheduled GitHub Actions workflow runs OpenWiki daily at 08:00 UTC (and on demand), uses a concurrency group `openwiki-update` with `cancel-in-progress: false`, delegates cleanup and PR staging to `.github/scripts/prepare-openwiki-update.sh`, opens a pull request with durable wiki changes, and fails the job if OpenWiki itself failed.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L94",
-          "version": "repo-lines-v1:sha256:c845cbc0d5a61ab3f5819d9040cc7bc27c85c03a86b1cfc82eafb7cddf6a0a3e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/scripts/prepare-openwiki-update.sh#L1-L41",
+          "version": "repo-lines-v1:sha256:1ed97be979a107c6acfb5ad315365e8ccb43bf8e41bde63de7407311b7eb3e5b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NjlkMjM3Y2Q0MjBiOWQzOGI5ODFhMGE0ZjY3NzAxOTBhNGE4M2RjYTFmZTU2YzRmNWJhMWUyY2JjMGVmNzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L95",
+          "version": "repo-lines-v1:sha256:c1b36faedbfbf387896303151490c613490bb438a02fa056782cf9d6c26a8214:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
     {
       "id": "claim_b2f299c51e0b497daf6fd5943b577cb4",
-      "statement": "The OpenWiki workflow uses Ollama Cloud through the OpenAI-compatible provider with the OLLAMA_API_KEY secret and an OPENWIKI_MODEL_ID repository variable defaulting to kimi-k2.7-code, and skips every step with a notice when the key is not set.",
+      "statement": "The OpenWiki workflow uses Ollama Cloud through the OpenAI-compatible provider with the `OLLAMA_API_KEY` secret and an `OPENWIKI_MODEL_ID` repository variable defaulting to `kimi-k2.7-code`, and skips every step with a notice when the key is not set.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L12-L57",
-          "version": "repo-lines-v1:sha256:6cec92ddff0d60ddd8429329c7992ccd9def9258d1e2cf537b16276e6b40e975:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzYjA2NzUzNmJhYTc4YWQwMWNmYjFlYWM1MWU2OWZlNmM1ZjRkZTVhYzI2M2NlOGIwNDM0NGQ2N2IxYWIxNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MTQ3YTkzYWIxMzA1ZDEzN2E0MjdjZTNjNzM4MWZlM2NhY2VmYzkyYzFkOGJmNmVhZWVlOThiMDc5Y2U5MTcifQ"
+          "resource": "repo://.github/workflows/openwiki-update.yml#L17-L59",
+          "version": "repo-lines-v1:sha256:4d661fcdcf15bf86e8e19d9dd9e40370215ff9c01c47d79ce7e959b0a8e2d8bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiY2ZmMGQ0OGMxODNlMmNjZmM0NjVhYjcxYTU0NDVjNTdmOTIyZTRlZGE0NTI1OWMxZTFjMzhmZWY0ZGExMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYjhiYzEzOWY5MDM0NjIzYzI4N2JmZjE1ZWNiNjFmZDAwYmZjODdiYjIzNjAwZWQxODJiODc2NGQwYTA2MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZjdkMzdmYjI5NzM5OWZlYTJhNWNlZjFjYzQwMjhjODk5NzlhOTA1MGE5Mjg1NmYwZDk2ZTFjMThiYTE5YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NmU4YmI2OWNkNWQ5OWI2MTg5Yzk0NmJhNjQwNmFmYTE5ZTljZDAwN2UwMWZiOTMwYzFiYzVkYTYyNTFkNTcifQ"
         }
       ]
     },
@@ -128,17 +132,31 @@
     },
     {
       "id": "claim_c8328e4990854219815e4854772bce8b",
-      "statement": "The `.dev.vars`, `.prod.vars` and `.frame.vars` environment files are gitignored so secrets and frame-specific values are never committed.",
+      "statement": "The `.dev.vars`, `.prod.vars`, `.frame.vars`, and `.ollama.vars` environment files are gitignored so secrets and frame-specific values are never committed.",
       "evidence": [
         {
-          "resource": "repo://.gitignore#L10-L13",
-          "version": "repo-lines-v1:sha256:9c0a8eb3d54e0d31c7bf665949cf6703014110821b266ea68817b38f18c60e2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1N2I4ZWE4Y2FhOTBlODczNmJlNzkzNGI4ZTVhMzhmYzk3NTNkOWQ4OWE3ZmM5YTIzZWE2ZWI4NmQ2YTFmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiJ9"
+          "resource": "repo://.gitignore#L10-L14",
+          "version": "repo-lines-v1:sha256:68dfc50327658533170cfc121c3deb2158701863abbecda5d0e5566963fb1aae:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA1YzUyMjRiNmE0YjMyMDk2MDRlNzU4MjU0YWFlZGMwYjNmZWQzNWFkMGZlNjg2ZGVlM2IyODlhZDBlMGJhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY3NzcwNDAzZmQ0ZTk2YmNiNWJlNjc5M2E3M2E1OTU1YWI2N2E2NjRjOTBmMmY1YTgwMzI1NzRhZWZhMjUxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDhhMmYxYmM0MjIwNjk5YTdhMDg5NGQ3MTcxNDQ4NjYwZGU2NGQ1NmRjOTRmMjU2ODU4MDA1NTc2ZjkxNGU5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad4400ed7c2d4462906775b878dbeb19",
+      "statement": "The `.github/scripts/prepare-openwiki-update.sh` script removes `openwiki/.run.json`, stages `openwiki/`, `AGENTS.md`, the workflow, and `CLAUDE.md` when present, and only publishes when there are durable changes; it preserves partial page/claim/manifest progress from a failed OpenWiki run and discards runs whose only effect is unsuccessful metadata.",
+      "evidence": [
+        {
+          "resource": "repo://.github/scripts/prepare-openwiki-update.sh#L1-L41",
+          "version": "repo-lines-v1:sha256:1ed97be979a107c6acfb5ad315365e8ccb43bf8e41bde63de7407311b7eb3e5b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NjlkMjM3Y2Q0MjBiOWQzOGI5ODFhMGE0ZjY3NzAxOTBhNGE4M2RjYTFmZTU2YzRmNWJhMWUyY2JjMGVmNzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://.github/scripts/test-prepare-openwiki-update.py#L55-L131",
+          "version": "repo-lines-v1:sha256:034c8a7c80068de1d3bae1523c32098b77eeefaa5f559b3bde6b24951bcf0e49:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMWI3ZmEyOWM0ZDdlNDg3MmNlNWUyODE0NTFiZDBmNzQ4ZjAyOTA0MDVlOWVhNzMyZjdmOTczMmFmZTcxYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkMTJjOTA0ZDhjNDg3ODMyMWFkYWI1MGE2YmYzOGNlNmUxMzNhNWEyOWFhYmNmZjMzZGY4NDhkMzY1ZDk5YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmZGNjNzc1MzgxYWRhYjJlOWM0ODFhZDUwYTE3ODU5ZjBmN2YxYmY3MjdhZGE0OGVhYWViZjFjODkzM2U3ZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwMjY5NzZiOTI4ZmJjYjU3NjJhZDBiZWYyYzM4MTViNDMyNDRiZDlkMDYwZGRkMjhiM2U5NWNjZmIyNTQxYzEifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-27T18:01:53.396Z"
   }
 }

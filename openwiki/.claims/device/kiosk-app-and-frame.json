@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9d868c32f37dbac908c178d8ee4a2e762b3bf23ebe40953242ec0c6d5df54d14",
+  "pageVersion": "sha256:788a3849b7bbe59f010f686058c07ed5e940fb60285d78d3c3e0d1699e2fa080",
   "claims": [
     {
       "id": "claim_abd5dc23e14b4102a7964b7e81071730",
@@ -132,11 +132,15 @@
     },
     {
       "id": "claim_a41129cab3d24ebf8d9416542dd7890d",
-      "statement": "Continuous integration builds the kiosk APK on every pull request and push to main and uploads it as an artifact.",
+      "statement": "The CI kiosk job runs the same build on every pull request and every push to main, then uploads kiosk/build/frame.apk as artifact frame-apk (retained for 14 days).",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L1-L49",
-          "version": "repo-lines-v1:sha256:3330166a489243657bae1eab88fbea485453bc63c3d495568311819fe12a3747:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2NmQwNGZhNzkyMDQxYWEwNGMxY2ZmYjZkN2IxNWFkYTc1N2UxZGU4OTFlNDY2MzFmYmZmYzU2YTFhZThmNjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/ci.yml#L3-L6",
+          "version": "repo-lines-v1:sha256:2c0e0549d6301cba7847d5549dead9ccdfad54550451c0fee075aecd3167663d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTk2ZGM0ODE0OWY1YTgzZDFlZDZkYmIzOWJiYzdlMmI5MDJhYTNkMzRkNmJkNWFlNGIyOTFiNjhkZjBjYTc5YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTAxOGZiYzc4YjI2OTQyNTRjMzA2ZGM3ZDdlMTI1OTNmYjYxNzUwYzljNDRhOTAxNzRjMDAwYTlhYmYxMjk2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWJjYjQ0MzQyMjVkOWMyNThjZTE5NTEzZjgxNTJiYzhhZDljYzExMzE3MzdmMjc1ZjAzMDNlOGU0MjA2MzNiNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2UyNzQyMjRlOTgyODgxZDk4MWI4YWRkZmRkYzk4ODBiMmYxZDA3ODAzMTVkNzBkNWQ1MTkxYzc1Zjk1YTViMiJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/ci.yml#L41-L57",
+          "version": "repo-lines-v1:sha256:3ba240342e3e8bdd677907015bb8347f3a5fbf91e8096b8293678dceb1aecea7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjMWYzYTBhMmM0ZTU2YzExNmRhYzAxOGY4ZmZmZmI2MWZkNjU2MWIzNjIzYTI0ZTY3MTcxOTZhODc0NTA4MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2NmQwNGZhNzkyMDQxYWEwNGMxY2ZmYjZkN2IxNWFkYTc1N2UxZGU4OTFlNDY2MzFmYmZmYzU2YTFhZThmNjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5ZmQ5NTlkZmUyNDJlNWI5Y2I2ZmY2ODBlY2VhMjRmNWQ4NGY3ODk2ZTBkN2Y0ZjRmZmFjM2M3ZGViNzQ4MGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -153,6 +157,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-13T17:09:19.129Z"
+    "at": "2026-11-27T18:01:53.396Z"
   }
 }

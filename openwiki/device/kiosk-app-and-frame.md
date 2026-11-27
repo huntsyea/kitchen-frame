@@ -5,7 +5,7 @@ description: The Pastigio FRAME156 photo frame the dashboard runs on, and the sm
 tags: [kiosk, android, webview, device, adb, frame156]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-13T17:09:19.129Z
+    at: 2026-11-27T18:01:53.396Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -19,7 +19,7 @@ sources:
     resource: repo://kiosk/build.sh
   - id: openwiki-source-b73a7f32e78736cbd3e31ddc
     resource: repo://kiosk/src/com/huntsyea/frame/MainActivity.java
-generated: { by: "openwiki/0.7.2", at: "2026-10-13T17:09:19.129Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-27T18:01:53.396Z" }
 ---
 
 # Kiosk app and the frame device
@@ -38,7 +38,7 @@ it). The facts that shape the code:
 | --- | --- | --- |
 | Android / WebView | 8.1 (API 27), WebView 106 | The web app targets Chrome 106 (no `oklch`, `color-mix`, CSS nesting, `:has`); see [views and design system](../frontend/views-components-and-design-system.md). |
 | SoC / RAM | Rockchip RK3326, 32-bit, ~951 MB | Slow JS and image decoding; the app avoids big DOMs, shadows and blur. |
-| Screen | 1920×1080 at 170 dpi | The page uses a 1280px-wide viewport, so it renders at 1280×720 CSS px at 1.5×. |
+| Screen | 1920×1080 at 170 dpi | The dashboard was designed for 1280×800 and adapted to a 1280 px-wide viewport, so it renders at 1280×720 CSS px on this frame (1.5×). |
 | Clock | No battery-backed RTC | Every power-up starts at 2008-12-31 until Wi-Fi time sync, so the first HTTPS load fails certificate checks. |
 | Trust store | Lacks DigiCert Global Root G2 | The frame can't fetch Apple's photo servers directly; the Worker proxies photos (see [photos](../feeds/photos-and-slideshow.md)). |
 | Root | `su` works without a prompt | Anything installed on the frame can get root; the Home Assistant token stored on it is therefore sensitive. |
@@ -76,9 +76,9 @@ The script runs the plain SDK toolchain in order:
 4. `zipalign -f 4` produces `aligned.apk`.
 5. `apksigner sign` signs it with `~/.android/debug.keystore`, creating `kiosk/build/frame.apk`.
 
-The resulting APK targets SDK 27 with min SDK 23, version name 1.3, version code 4. CI builds the
-same APK on every pull request and every push to `main` and uploads it as an artifact
-(`frame-apk`).
+The resulting APK targets SDK 27 with min SDK 23, version name 1.3, version code 4. The CI `kiosk`
+job runs the same build on every pull request and every push to `main`, then uploads
+`kiosk/build/frame.apk` as artifact `frame-apk` (retained for 14 days).
 
 ### Install
 
